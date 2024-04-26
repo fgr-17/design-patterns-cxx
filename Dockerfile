@@ -13,3 +13,6 @@ RUN apt install -y clang
 RUN apt install -y clang-format
 
 RUN apt install -y git
+
+RUN printf "\nalias ls='ls --color=auto'\n" >> ~/.bashrc
+RUN printf "\nalias ll='ls -alF'\n" >> ~/.bashrc

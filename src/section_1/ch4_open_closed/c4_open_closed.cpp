@@ -78,6 +78,11 @@ struct ProductFilter {
 
 template <typename T> struct Specification {
     virtual bool is_satisfied(T*item) = 0;
+
+    // adding this to avoid concatenating many specs: This does not work due to cross dependencies!
+    // AndSpecification<T> operator&& (Specification<T>&& other) {
+    //   return AndSpecification<T> (*this, other);
+    // }
   };
 
 template <typename T> struct Filter {

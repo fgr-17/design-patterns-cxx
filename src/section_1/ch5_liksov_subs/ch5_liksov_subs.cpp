@@ -11,29 +11,41 @@
 #define BOLD        "\e[1m"
 #define NON_BOLD    "\e[0m"
 
-// class Rectangle {
-// protected:
-//   int width, height;
-// public:
-//   Rectangle(int width, height): width(width), height(height) {}
+class Rectangle {
 
-//   int getWidth() {
-//     return width;
-//   }
+protected:
+  int width, height;
 
-//   void setWidth(int width) {
-//     Rectangle::width = width;
-//   }
+public:
+  Rectangle(int width, int height): width(width), height(height) {}
 
-//  int getHeight() {
-//     return height;
-//   }
+  int getWidth() {
+    return width;
+  }
 
-//   void setWidth(int height) {
-//     Rectangle::height = height;
-//   }
-// }
+  void setWidth(int width) {
+    Rectangle::width = width;
+  }
 
+ int getHeight() {
+    return height;
+  }
+
+  void setHeight(int height) {
+    Rectangle::height = height;
+  }
+
+  int area() const {return width*height;}
+};
+
+
+void process(Rectangle& r) {
+  int w = r.getWidth();
+  r.setHeight(10);
+
+  std::cout << "expected area = " << (w*10)
+            << ", got: " << r.area() << std::endl;
+}
 
 /**
  *   @fn print_title
@@ -53,8 +65,12 @@ static int print_tilte(void) {
  */
 
 int main(void) {
-
   print_tilte();
+
+  Rectangle r{3, 4};
+  process(r);
+
+
 
   return 0;
 }

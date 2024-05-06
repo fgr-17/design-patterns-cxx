@@ -23,7 +23,7 @@ public:
     return width;
   }
 
-  void setWidth(int width) {
+  virtual void setWidth(int width) {
     Rectangle::width = width;
   }
 
@@ -31,13 +31,27 @@ public:
     return height;
   }
 
-  void setHeight(int height) {
+  virtual void setHeight(int height) {
     Rectangle::height = height;
   }
 
   int area() const {return width*height;}
 };
 
+
+class Square : public Rectangle {
+  public:
+
+  Square(int size): Rectangle(size, size) {}
+
+  void setWidth(int width) override {
+    this->width = this->height = width;
+  }
+
+  void setHeight(int width) override {
+    this->width = this->height = width;
+  }
+};
 
 void process(Rectangle& r) {
   int w = r.getWidth();
@@ -70,6 +84,9 @@ int main(void) {
   Rectangle r{3, 4};
   process(r);
 
+  Square sq{5};
+  process(sq);
+  // the function "process" does not aligns with Liksov subs principle as the argument of process() of type Rectangle cannot be substituted by a child class
 
 
   return 0;

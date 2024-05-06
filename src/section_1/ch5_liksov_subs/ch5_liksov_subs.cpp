@@ -69,9 +69,15 @@ void process(Rectangle& r) {
 static int print_tilte(void) {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
-  std::cout << "\e[1mChapter 4:\e[0m Liksov Substitution Principle" << std::endl;
+  std::cout << "\e[1mChapter 5:\e[0m Liksov Substitution Principle" << std::endl;
   return 0;
-}
+};
+
+struct RectangleFactory {
+  static Rectangle create_rectangle(int w, int h);
+  static Rectangle create_square(int s);
+};
+
 
 /**
  *   @fn main

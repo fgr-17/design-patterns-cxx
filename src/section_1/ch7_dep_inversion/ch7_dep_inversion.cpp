@@ -1,6 +1,8 @@
 /**
  *    @file main.cpp
- *    @brief Interface Segregation Principle: not create interfaces that are too large
+ *    @brief Dependency Inversion Principle: 
+ *    @brief A. High-level modules should not depend on low-level modules
+ *    @brief B. Abstractions should not depend on details. Details should depend on abstractions
  *    @author rouxfederico@gmail.com
  * 
  */

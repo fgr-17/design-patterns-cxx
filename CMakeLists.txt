@@ -16,5 +16,7 @@ add_subdirectory(src/section_1/ch3_single_resp)
 add_subdirectory(src/section_1/ch4_open_closed)
 add_subdirectory(src/section_1/ch5_liksov_subs)
 add_subdirectory(src/section_1/ch6_interface_segregation)
+add_subdirectory(src/section_1/ch7_dep_inversion)
+
 
 # add_subdirectory(test)

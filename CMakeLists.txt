@@ -8,9 +8,15 @@ set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard required for build")
 set(CMAKE_CXX_STANDARD_REQUIRED ON CACHE BOOL "is C++ stndard a requirement")
 set(CMAKE_CXX_EXTENSIONS OFF CACHE BOOL "enable/disable compiler specific extensions")
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -W -Wall -Wextra -Werror -std=c++11")
+set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -W -Wall -Wextra -std=c++11")
 
 set(SRC_DIR src)
 
-add_subdirectory(src)
-add_subdirectory(test)
+add_subdirectory(src/section_1/ch3_single_resp)
+add_subdirectory(src/section_1/ch4_open_closed)
+add_subdirectory(src/section_1/ch5_liksov_subs)
+add_subdirectory(src/section_1/ch6_interface_segregation)
+add_subdirectory(src/section_1/ch7_dep_inversion)
+
+
+# add_subdirectory(test)

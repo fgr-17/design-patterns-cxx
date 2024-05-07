@@ -117,6 +117,8 @@ int main(void) {
   relationships.add_parent_and_child(parent, child1);
   relationships.add_parent_and_child(parent, child2);
 
+
+  // research class is connected to an abstract class, but it can be implemented using the concrete class
   Research _(relationships);
 
 

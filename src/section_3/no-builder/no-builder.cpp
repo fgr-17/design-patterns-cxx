@@ -1,8 +1,7 @@
 /**
  *    @file builder.cpp
- *    @brief Dependency Inversion Principle: 
- *    @brief A. High-level modules should not depend on low-level modules. Both should depend on abstractions
- *    @brief B. Abstractions should not depend on details. Details should depend on abstractions
+ *    @brief Life without buidlers
+ *    @brief showing string concatenation for html from a non-OO perspective: does not scale
  *    @author rouxfederico@gmail.com
  * 
  */
@@ -30,10 +29,32 @@ static int print_tilte(void) {
  */
 
 int main(void) {
-  
+
   print_tilte();
 
+  auto text = "hello";
 
+
+  // first example:
+  std::string output;
+
+  output += "<p>";
+  output += text;
+  output += "</p>";
+
+  std::cout << output << std::endl;
+
+  // 2nd example:
+
+  std::string words[] = {"hello", "world"};
+  std::ostringstream oss;
+
+  
+  oss << "<ul>";
+  for (auto w: words)
+    oss << "  <li>" << w << "</li>";
+  oss << "</ul>";
+  std::cout << oss.str() << std::endl;
 
   return 0;
 }

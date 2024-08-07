@@ -18,7 +18,6 @@ add_subdirectory(src/section_2/ch5_liksov_subs)
 add_subdirectory(src/section_2/ch6_interface_segregation)
 add_subdirectory(src/section_2/ch7_dep_inversion)
 
-add_subdirectory(src/section_3/no-builder)
+add_subdirectory(src/section_3/ch11-no-builder)
 
-
-# add_subdirectory(test)
+include(${CMAKE_SOURCE_DIR}/cpplint.cmake)

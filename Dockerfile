@@ -13,6 +13,9 @@ RUN apt install -y clang
 RUN apt install -y clang-format
 
 RUN apt install -y git
+RUN apt install -y python3 python3-pip
+RUN pip install cpplint
+
 
 RUN printf "\nalias ls='ls --color=auto'\n" >> ~/.bashrc
 RUN printf "\nalias ll='ls -alF'\n" >> ~/.bashrc

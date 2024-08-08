@@ -50,26 +50,26 @@ struct Document;
 // };
 
 struct IPrinter {
-  virtual void print(Document&doc) = 0;
+  virtual void print(const Document&doc) const = 0;
 };
 
 struct IScanner {
-  virtual void scan(Document&doc) = 0;
+  virtual void scan(const Document&doc) const = 0;
 };
 
 struct IFax {
-  virtual void fax(Document&doc) = 0;
+  virtual void fax(const Document&doc) const = 0;
 };
 
 
 struct Printer: IPrinter {
-  void print(Document&doc) override {
+  void print(const Document&) const override {
     return;
   }
 };
 
 struct Scanner: IScanner {
-  void scan(Document&doc) override {
+  void scan(const Document&) const override {
     return;
   }
 };
@@ -78,15 +78,15 @@ struct Scanner: IScanner {
 struct IMachine: IPrinter, IScanner {};
 
 struct Machine: IMachine {
-  IPrinter& printer;
-  IScanner& scanner;
+  const IPrinter& printer;
+  const IScanner& scanner;
 
-  Machine(IPrinter&printer, IScanner&scanner): printer(printer), scanner(scanner) {}
+  Machine(const IPrinter&printer, const IScanner&scanner): printer(printer), scanner(scanner) {}
 
-  void print(Document&doc) override {
+  void print(const Document&doc) const {
     printer.print(doc);
   }
-  void scan(Document&doc) override {
+  void scan(const Document&doc) const {
     scanner.scan(doc);
   }
 };

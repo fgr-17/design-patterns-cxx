@@ -12,14 +12,13 @@
 #define NON_BOLD    "\e[0m"
 
 class Rectangle {
-
-protected:
+ protected:
   int width, height;
 
-public:
+ public:
   Rectangle(int width, int height): width(width), height(height) {}
 
-  int getWidth() {
+  int getWidth() const {
     return width;
   }
 
@@ -27,7 +26,7 @@ public:
     Rectangle::width = width;
   }
 
- int getHeight() {
+  int getHeight() const {
     return height;
   }
 
@@ -40,9 +39,8 @@ public:
 
 
 class Square : public Rectangle {
-  public:
-
-  Square(int size): Rectangle(size, size) {}
+ public:
+  explicit Square(int size): Rectangle(size, size) {}
 
   void setWidth(int width) override {
     this->width = this->height = width;
@@ -53,12 +51,12 @@ class Square : public Rectangle {
   }
 };
 
-void process(Rectangle& r) {
-  int w = r.getWidth();
-  r.setHeight(10);
+void process(Rectangle* r) {
+  int w = r->getWidth();
+  r->setHeight(10);
 
   std::cout << "expected area = " << (w*10)
-            << ", got: " << r.area() << std::endl;
+            << ", got: " << r->area() << std::endl;
 }
 
 /**
@@ -71,7 +69,7 @@ static int print_tilte(void) {
   std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
   std::cout << "\e[1mChapter 5:\e[0m Liksov Substitution Principle" << std::endl;
   return 0;
-};
+}
 
 struct RectangleFactory {
   static Rectangle create_rectangle(int w, int h);
@@ -88,10 +86,10 @@ int main(void) {
   print_tilte();
 
   Rectangle r{3, 4};
-  process(r);
+  process(&r);
 
   Square sq{5};
-  process(sq);
+  process(&sq);
   // the function "process" does not aligns with Liksov subs principle as the argument of process() of type Rectangle cannot be substituted by a child class
 
 

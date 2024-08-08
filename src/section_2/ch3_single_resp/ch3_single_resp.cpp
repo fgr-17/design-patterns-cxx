@@ -11,21 +11,18 @@
 #include <vector>
 #include <fstream>
 
-using namespace std;
-
 #define BOLD        "\e[1m"
 #define NON_BOLD    "\e[0m"
 
 struct Journal {
-  
-  string title;
-  vector<string> entries;
+  std::string title;
+  std::vector<std::string> entries;
 
-  Journal(const string &title): title(title) {}
+  explicit Journal(const std::string &title): title(title) {}
 
-  void add_entry(const string& entry) {
+  void add_entry(const std::string& entry) {
       static int count = 1;
-      entries.push_back(to_string(count) + ": " + entry);
+      entries.push_back(std::to_string(count) + ": " + entry);
   }
 
   // this method would violate single resp principle:
@@ -39,15 +36,13 @@ struct Journal {
 
 
 struct PersistenceManager {
-
   // in this site, it shouldn't break the single resp principle:
-  void save(const Journal& j, const string& filename) {
-    ofstream ofs(filename);
-    for (auto& e: j.entries) {
-      ofs << e << endl;
+  void save(const Journal& j, const std::string& filename) {
+    std::ofstream ofs(filename);
+    for (auto& e : j.entries) {
+      ofs << e << std::endl;
     }
   }
-
 };
 
 /**
@@ -56,7 +51,6 @@ struct PersistenceManager {
  */
 
 int main(void) {
-
   Journal journal{"Dear diary"};
   journal.add_entry("I ate a bug");
   journal.add_entry("I cried today");
@@ -65,9 +59,9 @@ int main(void) {
 
   pm.save(journal, "diary.txt");
 
-  cout << "\e[1mDesign Patterns in Modern C++\e[0m" << endl;
-  cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << endl;
-  cout << "\e[1mChapter 3:\e[0m Single Responsibility Principle" << endl;
+  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+  std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
+  std::cout << "\e[1mChapter 3:\e[0m Single Responsibility Principle" << std::endl;
 
   return 0;
 }

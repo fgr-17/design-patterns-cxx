@@ -17,7 +17,7 @@
 #define NON_BOLD    "\e[0m"
 
 enum class Relationship {
-  parent, 
+  parent,
   child,
   sibling
 };
@@ -53,7 +53,7 @@ struct Person {
 // to avoid connecting Research (high level module) to Relationships (low level), a new abstraction should be created:
 
 struct RelationshipBrowser {
-  virtual std::vector<Person> find_all_children_of(const std::string& name) = 0;
+  virtual std::vector<Person> find_all_children_of(const std::string& name) const = 0;
 };
 
 struct Relationships: RelationshipBrowser {    // low-level module
@@ -64,29 +64,23 @@ struct Relationships: RelationshipBrowser {    // low-level module
     relations.push_back({child, Relationship::child, parent});
   }
 
-  std::vector<Person> find_all_children_of(const std::string &name) override
-  {
+  std::vector<Person> find_all_children_of(const std::string &name) const override{
     std::vector<Person> result;
-    for (auto&& [first, rel, second] : relations)
-    {
-      if (first.name == name && rel == Relationship::parent)
-      {
+    for (auto&& [first, rel, second] : relations) {
+      if (first.name == name && rel == Relationship::parent) {
         result.push_back(second);
       }
     }
     return result;
   }
-
 };
 
 // solid version
 struct Research {  // high-level
-
-  Research(RelationshipBrowser& browser) { // <<<< this offends the deps inversion principle
-    for(auto&child: browser.find_all_children_of("John")) {
+  explicit Research(const RelationshipBrowser& browser) {  // <<<< this offends the deps inversion principle
+    for (auto&child : browser.find_all_children_of("John")) {
       std::cout << "John has a child called " << child.name << std::endl;
     }
-
   }
 };
 

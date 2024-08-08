@@ -16,7 +16,12 @@
 #include <memory>
 
 
-static int print_tilte(void) {
+/**
+ *   @fn main
+ *   @brief main program
+ */
+
+static int print_title(void) {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 3:\e[0m Builder" << std::endl;
   std::cout << "\e[1mChapter 11:\e[0m Life Without Builders" << std::endl;
@@ -29,8 +34,7 @@ static int print_tilte(void) {
  */
 
 int main(void) {
-
-  print_tilte();
+  print_title();
 
   auto text = "hello";
 
@@ -49,9 +53,8 @@ int main(void) {
   std::string words[] = {"hello", "world"};
   std::ostringstream oss;
 
-  
   oss << "<ul>";
-  for (auto w: words)
+  for (auto w : words)
     oss << "  <li>" << w << "</li>";
   oss << "</ul>";
   std::cout << oss.str() << std::endl;

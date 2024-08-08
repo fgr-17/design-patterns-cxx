@@ -15,6 +15,9 @@
 #include <sstream>
 #include <memory>
 
+// forward declaration due to cross ref
+struct HtmlBuilder;
+
 /**
  *   @struct HtmlElement
  *   @brief Html builder
@@ -45,21 +48,66 @@ struct HtmlElement{
     oss << i << "</" << name << ">" << std::endl;
     return oss.str();
   }
+
+  static HtmlBuilder build(std::string root_name);
+
+  static std::unique_ptr<HtmlBuilder> build_2(std::string root_name);
 };
 
+/**
+ * @brief HtmlBuilder
+ * 
+ */
 
 struct HtmlBuilder{
   HtmlElement root;
 
   explicit HtmlBuilder(std::string root_name) : root(root_name) {}
 
-  void add_child(std::string child_name, std::string child_text) {
+  HtmlBuilder& add_child(std::string child_name, std::string child_text) {
     HtmlElement e{child_name, child_text};
     root.elements.push_back(e);
+    return *this;
+  }
+
+  // return pointer instead of ref
+  HtmlBuilder* add_child_2(std::string child_name, std::string child_text) {
+    HtmlElement e{child_name, child_text};
+    root.elements.push_back(e);
+    return this;
   }
 
   std::string str() const { return root.str(); }
+
+  operator HtmlElement() const {
+    // returns copy of the op
+    // return root;
+
+    return std::move(root);
+  }
 };
+
+/**
+ * @brief definition of build method outside the class due to cross ref
+ * 
+ * @param root_name 
+ * @return HtmlBuilder 
+ */
+HtmlBuilder HtmlElement::build(std::string root_name) {
+  return HtmlBuilder{root_name};
+}
+
+/**
+ * @brief another example of builders using unique pointers
+ * 
+ * @param root_name 
+ * @return HtmlBuilder 
+ */
+std::unique_ptr<HtmlBuilder> HtmlElement::build_2(std::string root_name) {
+  return std::make_unique<HtmlBuilder>(HtmlBuilder{root_name});
+}
+
+
 
 /**
  *   @fn main
@@ -105,9 +153,17 @@ int main(void) {
   // OO struct for builder
 
   HtmlBuilder builder{"ul"};
-  builder.add_child("li", "hello");
-  builder.add_child("li", "world");
+  builder.add_child("li", "hello").add_child("li", "world");
   std::cout << builder.str() << std::endl;
+
+  auto builder2 = HtmlElement::build("ul").add_child("li", "hello").add_child("li", "world");
+  std::cout << builder2.str() << std::endl;
+
+  HtmlElement builder3 = HtmlElement::build("ul").add_child("li", "hello").add_child("li", "world");
+  std::cout << builder3.str() << std::endl;
+
+  HtmlElement builder4 = HtmlElement::build("ul").add_child_2("li", "hello")->add_child("li", "world");
+  std::cout << builder4.str() << std::endl;
 
   return 0;
 }

@@ -21,5 +21,6 @@ add_subdirectory(src/section_2/ch7_dep_inversion)
 add_subdirectory(src/section_3/ch11-no-builder)
 add_subdirectory(src/section_3/ch12-builder)
 add_subdirectory(src/section_3/ch13-fluent-builder)
+add_subdirectory(src/section_3/ch14-groovy-style-builder)
 
 include(${CMAKE_SOURCE_DIR}/cpplint.cmake)

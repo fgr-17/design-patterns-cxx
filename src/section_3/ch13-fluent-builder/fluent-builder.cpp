@@ -1,9 +1,9 @@
 /**
  *    @file builder.cpp
- *    @brief Chapter 12: Builders
- *    @brief showing string concatenation for html from a non-OO perspective: does not scale
+ *    @brief Chapter 13: Fluent builders
+ *    @brief adding fluency to builders
  *    @author rouxfederico@gmail.com
- * 
+ *
  */
 
 #include <iostream>
@@ -57,7 +57,7 @@ class HtmlElement{
 
 /**
  * @brief HtmlBuilder
- * 
+ *
  */
 
 // struct HtmlBuilder{
@@ -96,9 +96,9 @@ class HtmlBuilder{
 
 /**
  * @brief definition of create method outside the class due to cross ref
- * 
- * @param root_name 
- * @return HtmlBuilder 
+ *
+ * @param root_name
+ * @return HtmlBuilder
  */
 HtmlBuilder HtmlElement::create(std::string root_name) {
   return HtmlBuilder{root_name};
@@ -106,9 +106,9 @@ HtmlBuilder HtmlElement::create(std::string root_name) {
 
 /**
  * @brief another example of builders using unique pointers
- * 
- * @param root_name 
- * @return HtmlBuilder 
+ *
+ * @param root_name
+ * @return HtmlBuilder
  */
 std::unique_ptr<HtmlBuilder> HtmlElement::build_2(std::string root_name) {
   return std::make_unique<HtmlBuilder>(HtmlBuilder{root_name});

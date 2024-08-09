@@ -16,6 +16,13 @@
 #include <memory>
 
 
+struct Tag {
+  std::string name, text;
+  std::vector<Tag> children;
+  std::vector<std::pair<std::string, std::string>> attributes;
+};
+
+
 /**
  *   @fn main
  *   @brief main program

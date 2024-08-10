@@ -36,33 +36,33 @@ struct Product {
 
 struct ProductFilter {
   // needs a new function for each filter requested <<< this is not closed for modification
-  std::vector <Product*> by_color(std::vector<Product*> items, Color color) {
+  static std::vector <Product*> by_color(const std::vector<Product*>& items, Color color) {
     std::vector <Product*> result;
-    for (auto&i : items) {
+    for (const auto&i : items) {
       if (i->color == color) result.push_back(i);
     }
     return result;
   }
 
-  std::vector <Product*> by_size(std::vector<Product*> items, Size size) {
+  static std::vector <Product*> by_size(const std::vector<Product*>& items, const Size size) {
     std::vector <Product*> result;
-    for (auto&i : items) {
+    for (const auto&i : items) {
       if (i->size == size) result.push_back(i);
     }
     return result;
   }
 
-  std::vector <Product*> by_size_and_color(std::vector<Product*> items, Color color, Size size) {
+  static std::vector <Product*> by_size_and_color(const std::vector<Product*>& items, const Color color, const Size size) {
     std::vector <Product*> result;
-    for (auto&i : items) {
+    for (const auto&i : items) {
       if ((i->color == color) && (i->size == size)) result.push_back(i);
     }
     return result;
   }
   /////////////////////////////////////
 
-  int print_output(std::vector<Product*> items) {
-    for (auto& i : items) {
+  static int print_output(const std::vector<Product*>& items) {
+    for (const auto& i : items) {
       std::cout << i->name << " - color: " << color_string[i->color] << " - size: " << size_string[i->size] << std::endl;
     }
 
@@ -150,10 +150,9 @@ int main(void) {
 
   std::vector<Product*> items {&apple, &tree, &house};
 
-  ProductFilter pf;
-  auto green_things = pf.by_color(items, Color::green);
+  auto green_things = ProductFilter::by_color(items, Color::green);
 
-  pf.print_output(green_things);
+  ProductFilter::print_output(green_things);
 
   BetterFilter bf;
   ColorSpecification green(Color::green);

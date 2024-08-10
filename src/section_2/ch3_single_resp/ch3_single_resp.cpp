@@ -2,17 +2,13 @@
  *    @file main.cpp
  *    @brief main file
  *    @author rouxfederico@gmail.com
- *    
+ *
  */
 
 
-#include <cassert>
 #include <iostream>
 #include <vector>
 #include <fstream>
-
-#define BOLD        "\e[1m"
-#define NON_BOLD    "\e[0m"
 
 struct Journal {
   std::string title;
@@ -37,9 +33,9 @@ struct Journal {
 
 struct PersistenceManager {
   // in this site, it shouldn't break the single resp principle:
-  void save(const Journal& j, const std::string& filename) {
+  static void save(const Journal& j, const std::string& filename) {
     std::ofstream ofs(filename);
-    for (auto& e : j.entries) {
+    for (const auto& e : j.entries) {
       ofs << e << std::endl;
     }
   }
@@ -55,9 +51,7 @@ int main(void) {
   journal.add_entry("I ate a bug");
   journal.add_entry("I cried today");
 
-  PersistenceManager pm;
-
-  pm.save(journal, "diary.txt");
+  PersistenceManager::save(journal, "diary.txt");
 
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;

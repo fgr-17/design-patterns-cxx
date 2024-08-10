@@ -7,13 +7,14 @@
  */
 
 #include <iostream>
-#include <cstdio>
+// #include <cstdio>
 #include <string>
 #include <vector>
-#include <fstream>
-#include <tuple>
-#include <sstream>
-#include <memory>
+// #include <fstream>
+// #include <tuple>
+// #include <sstream>
+// #include <memory>
+#include <utility>
 
 
 struct Tag {
@@ -28,7 +29,7 @@ struct Tag {
  *   @brief main program
  */
 
-static int print_title(void) {
+static int printTitle(void) {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 3:\e[0m Builder" << std::endl;
   std::cout << "\e[1mChapter 14:\e[0m Groovy-Style Builder" << std::endl;
@@ -41,7 +42,7 @@ static int print_title(void) {
  */
 
 int main(void) {
-  print_title();
+  printTitle();
 
   return 0;
 }

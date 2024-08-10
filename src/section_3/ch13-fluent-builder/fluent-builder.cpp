@@ -14,9 +14,11 @@
 #include <tuple>
 #include <sstream>
 #include <memory>
+#include <array>
+
 
 // forward declaration due to cross ref
-struct HtmlBuilder;
+class HtmlBuilder;
 
 /**
  *   @struct HtmlElement
@@ -30,12 +32,12 @@ class HtmlElement{
   std::vector<HtmlElement> elements;
   const size_t indent_size = 2;
 
-  HtmlElement() {}
-  explicit HtmlElement(const std::string&name) : name(name) {}
-  HtmlElement(const std::string&name, const std::string&text) : name(name), text(text) {}
+  HtmlElement() = default;
+  explicit HtmlElement(const std::string name) : name(std::move(name)) {}
+  HtmlElement(const std::string name, const std::string text) : name(std::move(name)), text(std::move(text)) {}
 
  public:
-  std::string str(int indent = 0) const {
+  [[nodiscard]] std::string str(int indent = 0) const {
     std::ostringstream oss;
     std::string i(indent_size*indent, ' ');
     oss << i << "<" << name << ">" << std::endl;
@@ -84,7 +86,7 @@ class HtmlBuilder{
   // small method to close the builder process
   HtmlElement build() {return root;}
 
-  std::string str() const { return root.str(); }
+  [[nodiscard]] std::string str() const { return root.str(); }
 
   operator HtmlElement() const {
     // returns copy of the op
@@ -121,7 +123,7 @@ std::unique_ptr<HtmlBuilder> HtmlElement::build_2(std::string root_name) {
  *   @brief main program
  */
 
-static int print_title(void) {
+static int print_tiTle() {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 3:\e[0m Builder" << std::endl;
   std::cout << "\e[1mChapter 13:\e[0m Fluent Builder" << std::endl;
@@ -133,8 +135,8 @@ static int print_title(void) {
  *   @brief main program
  */
 
-int main(void) {
-  print_title();
+int main() {
+  print_tiTle();
 
   auto text = "hello";
   // first example:
@@ -148,7 +150,7 @@ int main(void) {
 
   // 2nd example:
 
-  std::string words[] = {"hello", "world"};
+  std::array<std::string, 2> words = {"hello", "world"};
   std::ostringstream oss;
 
   oss << "<ul>";

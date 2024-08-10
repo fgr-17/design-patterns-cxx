@@ -3,25 +3,24 @@
  *    @brief Life without buidlers
  *    @brief showing string concatenation for html from a non-OO perspective: does not scale
  *    @author rouxfederico@gmail.com
- * 
+ *
  */
 
+#include <array>
+#include <fstream>  // IWYU pragma: keep
 #include <iostream>
-#include <cstdio>
 #include <string>
-#include <vector>
-#include <fstream>
-#include <tuple>
-#include <sstream>
-#include <memory>
-
+// #include <vector>
+// #include <tuple>
+// #include <sstream>
+// #include <memory>
 
 /**
  *   @fn main
  *   @brief main program
  */
 
-static int print_title(void) {
+static int print_title() {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 3:\e[0m Builder" << std::endl;
   std::cout << "\e[1mChapter 11:\e[0m Life Without Builders" << std::endl;
@@ -33,7 +32,7 @@ static int print_title(void) {
  *   @brief main program
  */
 
-int main(void) {
+int main() {
   print_title();
 
   auto text = "hello";
@@ -50,7 +49,7 @@ int main(void) {
 
   // 2nd example:
 
-  std::string words[] = {"hello", "world"};
+  std::array<std::string, 2> words = {"hello", "world"};
   std::ostringstream oss;
 
   oss << "<ul>";

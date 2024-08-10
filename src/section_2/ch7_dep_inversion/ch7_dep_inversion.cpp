@@ -1,20 +1,17 @@
 /**
  *    @file main.cpp
- *    @brief Dependency Inversion Principle: 
+ *    @brief Dependency Inversion Principle:
  *    @brief A. High-level modules should not depend on low-level modules. Both should depend on abstractions
  *    @brief B. Abstractions should not depend on details. Details should depend on abstractions
  *    @author rouxfederico@gmail.com
- * 
+ *
  */
 
-#include <cassert>
 #include <iostream>
 #include <string>
-#include <vector>
 #include <tuple>
-
-#define BOLD        "\e[1m"
-#define NON_BOLD    "\e[0m"
+#include <type_traits>
+#include <vector>
 
 enum class Relationship {
   parent,
@@ -53,18 +50,18 @@ struct Person {
 // to avoid connecting Research (high level module) to Relationships (low level), a new abstraction should be created:
 
 struct RelationshipBrowser {
-  virtual std::vector<Person> find_all_children_of(const std::string& name) const = 0;
+  [[nodiscard]] virtual std::vector<Person> find_all_children_of(const std::string& name) const = 0;
 };
 
 struct Relationships: RelationshipBrowser {    // low-level module
   std::vector<std::tuple<Person, Relationship, Person>> relations;
 
   void add_parent_and_child(const Person&parent, const Person& child) {
-    relations.push_back({parent, Relationship::parent, child});
-    relations.push_back({child, Relationship::child, parent});
+    relations.emplace_back(parent, Relationship::parent, child);
+    relations.emplace_back(child, Relationship::child, parent);
   }
 
-  std::vector<Person> find_all_children_of(const std::string &name) const override{
+  [[nodiscard]] std::vector<Person> find_all_children_of(const std::string &name) const override{
     std::vector<Person> result;
     for (auto&& [first, rel, second] : relations) {
       if (first.name == name && rel == Relationship::parent) {
@@ -89,7 +86,7 @@ struct Research {  // high-level
  *   @brief show the title, section and chapter
  */
 
-static int print_tilte(void) {
+static int print_tilte() {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
   std::cout << "\e[1mChapter 7:\e[0m Dependency Inversion Principle" << std::endl;
@@ -101,7 +98,7 @@ static int print_tilte(void) {
  *   @brief main program
  */
 
-int main(void) {
+int main() {
   print_tilte();
 
   Person parent{"John"};

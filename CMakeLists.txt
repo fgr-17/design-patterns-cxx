@@ -11,10 +11,8 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -W -Wall -Wextra -std=c++11")
 
 set(CMAKE_CXX_CPPLINT "cpplint")
-# set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=*,-export-fixes='clang-tidy-output.txt',-format-style='llvm',-llvmlibc-restrict-system-libc-headers")
-# set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-*,clang-diagnostic-*,-clang-diagnostic-unused-value,clang-analyzer-*,-*,bugprone-*,performance-*,readability-*,-readability-magic-numbers,-readability-braces-around-statements,-readability-inconsistent-declaration-parameter-name,-readability-named-parameter")
 set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
-# set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "iwyu")
+set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "iwyu")
 
 set(SRC_DIR src)
 

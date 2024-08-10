@@ -8,13 +8,15 @@
 
 #include <iostream>
 #include <vector>
-#include <fstream>
+#include <fstream>  // IWYU pragma: keep
+#include <string>
+#include <utility>
 
 struct Journal {
   std::string title;
   std::vector<std::string> entries;
 
-  explicit Journal(const std::string &title): title(title) {}
+  explicit Journal(const std::string title): title(std::move(title)) {}
 
   void add_entry(const std::string& entry) {
       static int count = 1;
@@ -46,7 +48,7 @@ struct PersistenceManager {
  *   @brief main program
  */
 
-int main(void) {
+int main() {
   Journal journal{"Dear diary"};
   journal.add_entry("I ate a bug");
   journal.add_entry("I cried today");

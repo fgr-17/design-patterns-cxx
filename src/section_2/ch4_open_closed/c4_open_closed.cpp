@@ -4,25 +4,21 @@
  *    @author rouxfederico@gmail.com
  */
 
-#include <cassert>
 #include <iostream>
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
-
-#define BOLD        "\e[1m"
-#define NON_BOLD    "\e[0m"
 
 enum class Color {red, green, blue};
 enum class Size  {small, medium, large};
 
-std::map<Color, std::string> color_string = {
+const std::map<Color, std::string> color_string = {
   {Color::red, "red"},
   {Color::green, "green"},
   {Color::blue, "blue"}
 };
 
-std::map<Size, std::string> size_string = {
+const std::map<Size, std::string> size_string = {
   {Size::small, "small"},
   {Size::medium, "medium"},
   {Size::large, "large"}
@@ -63,7 +59,7 @@ struct ProductFilter {
 
   static int print_output(const std::vector<Product*>& items) {
     for (const auto& i : items) {
-      std::cout << i->name << " - color: " << color_string[i->color] << " - size: " << size_string[i->size] << std::endl;
+      std::cout << i->name << " - color: " << color_string.at(i->color) << " - size: " << size_string.at(i->size) << std::endl;
     }
 
     return 0;
@@ -129,7 +125,7 @@ struct SizeSpecification: Specification<Product> {
  *   @brief show the title, section and chapter
  */
 
-static int print_tilte(void) {
+static int print_tilte() {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
   std::cout << "\e[1mChapter 4:\e[0m Open-Closed Principle" << std::endl;
@@ -141,7 +137,7 @@ static int print_tilte(void) {
  *   @brief main program
  */
 
-int main(void) {
+int main() {
   print_tilte();
 
   Product apple {"Apple", Color::green, Size::small};

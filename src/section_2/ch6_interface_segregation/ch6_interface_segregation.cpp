@@ -2,14 +2,10 @@
  *    @file main.cpp
  *    @brief Interface Segregation Principle: not create interfaces that are too large
  *    @author rouxfederico@gmail.com
- * 
+ *
  */
 
-#include <cassert>
 #include <iostream>
-
-#define BOLD        "\e[1m"
-#define NON_BOLD    "\e[0m"
 
 struct Document;
 
@@ -83,10 +79,10 @@ struct Machine: IMachine {
 
   Machine(const IPrinter&printer, const IScanner&scanner): printer(printer), scanner(scanner) {}
 
-  void print(const Document&doc) const {
+  void print(const Document&doc) const override {
     printer.print(doc);
   }
-  void scan(const Document&doc) const {
+  void scan(const Document&doc) const override {
     scanner.scan(doc);
   }
 };
@@ -97,7 +93,7 @@ struct Machine: IMachine {
  *   @brief show the title, section and chapter
  */
 
-static int print_tilte(void) {
+static int print_tilte() {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
   std::cout << "\e[1mChapter 6:\e[0m Interface Segregation Principle" << std::endl;
@@ -109,7 +105,7 @@ static int print_tilte(void) {
  *   @brief main program
  */
 
-int main(void) {
+int main() {
   print_tilte();
 
   return 0;

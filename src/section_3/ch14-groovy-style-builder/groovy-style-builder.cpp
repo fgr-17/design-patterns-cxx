@@ -29,7 +29,7 @@ struct Tag {
  *   @brief main program
  */
 
-static int printTitle(void) {
+static int printTitle() {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 3:\e[0m Builder" << std::endl;
   std::cout << "\e[1mChapter 14:\e[0m Groovy-Style Builder" << std::endl;
@@ -41,7 +41,7 @@ static int printTitle(void) {
  *   @brief main program
  */
 
-int main(void) {
+int main() {
   printTitle();
 
   return 0;

@@ -93,7 +93,7 @@ struct Machine: IMachine {
  *   @brief show the title, section and chapter
  */
 
-static int print_tilte() {
+static int printTitle() {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
   std::cout << "\e[1mChapter 6:\e[0m Interface Segregation Principle" << std::endl;
@@ -106,7 +106,7 @@ static int print_tilte() {
  */
 
 int main() {
-  print_tilte();
+  printTitle();
 
   return 0;
 }

@@ -11,6 +11,9 @@
 #include <string>
 #include <vector>
 #include <fstream>  // IWYU pragma: keep
+#include <sstream>  // IWYU pragma: keep
+#include <utility>
+#include <array>
 
 
 /**
@@ -23,13 +26,13 @@ struct HtmlElement{
   std::vector<HtmlElement> elements;
   const size_t indent_size = 2;
 
-  HtmlElement() {}
+  HtmlElement() = default;
 
-  explicit HtmlElement(const std::string&name) : name(name) {}
+  explicit HtmlElement(const std::string name) : name(std::move(name)) {}
 
-  HtmlElement(const std::string&name, const std::string&text) : name(name), text(text) {}
+  HtmlElement(const std::string name, const std::string text) : name(std::move(name)), text(std::move(text)) {}
 
-  std::string str(int indent = 0) const {
+  [[nodiscard]] std::string str(int indent = 0) const {
     std::ostringstream oss;
     std::string i(indent_size*indent, ' ');
     oss << i << "<" << name << ">" << std::endl;
@@ -47,16 +50,16 @@ struct HtmlElement{
 
 
 struct HtmlBuilder{
-  HtmlElement root;
+  HtmlElement root_;
 
-  explicit HtmlBuilder(std::string root_name) : root(root_name) {}
+  explicit HtmlBuilder(std::string root__name) : root_(root__name) {}
 
-  void add_child(std::string child_name, std::string child_text) {
+  void addChild(std::string child_name, std::string child_text) {
     HtmlElement e{child_name, child_text};
-    root.elements.push_back(e);
+    root_.elements.push_back(e);
   }
 
-  std::string str() const { return root.str(); }
+  [[nodiscard]] std::string str() const { return root_.str(); }
 };
 
 /**
@@ -64,7 +67,7 @@ struct HtmlBuilder{
  *   @brief main program
  */
 
-static int print_title(void) {
+static int printTitle() {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 3:\e[0m Builder" << std::endl;
   std::cout << "\e[1mChapter 12:\e[0m Builders" << std::endl;
@@ -76,8 +79,8 @@ static int print_title(void) {
  *   @brief main program
  */
 
-int main(void) {
-  print_title();
+int main() {
+  printTitle();
 
   auto text = "hello";
   // first example:
@@ -91,7 +94,7 @@ int main(void) {
 
   // 2nd example:
 
-  std::string words[] = {"hello", "world"};
+  std::array<std::string, 2> words = {"hello", "world"};
   std::ostringstream oss;
 
   oss << "<ul>";
@@ -103,8 +106,8 @@ int main(void) {
   // OO struct for builder
 
   HtmlBuilder builder{"ul"};
-  builder.add_child("li", "hello");
-  builder.add_child("li", "world");
+  builder.addChild("li", "hello");
+  builder.addChild("li", "world");
   std::cout << builder.str() << std::endl;
 
   return 0;

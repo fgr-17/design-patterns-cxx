@@ -6,21 +6,18 @@
  *
  */
 
-#include <array>
-#include <fstream>  // IWYU pragma: keep
 #include <iostream>
 #include <string>
-// #include <vector>
-// #include <tuple>
-// #include <sstream>
-// #include <memory>
+#include <fstream>  // IWYU pragma: keep
+#include <array>
+#include <sstream>  // IWYU pragma: keep
 
 /**
  *   @fn main
  *   @brief main program
  */
 
-static int print_title() {
+static int printTitle() {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 3:\e[0m Builder" << std::endl;
   std::cout << "\e[1mChapter 11:\e[0m Life Without Builders" << std::endl;
@@ -33,7 +30,7 @@ static int print_title() {
  */
 
 int main() {
-  print_title();
+  printTitle();
 
   auto text = "hello";
 

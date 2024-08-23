@@ -18,7 +18,7 @@ struct Journal {
 
   explicit Journal(const std::string title): title(std::move(title)) {}
 
-  void add_entry(const std::string& entry) {
+  void addEntry(const std::string& entry) {
       static int count = 1;
       entries.push_back(std::to_string(count) + ": " + entry);
   }
@@ -50,8 +50,8 @@ struct PersistenceManager {
 
 int main() {
   Journal journal{"Dear diary"};
-  journal.add_entry("I ate a bug");
-  journal.add_entry("I cried today");
+  journal.addEntry("I ate a bug");
+  journal.addEntry("I cried today");
 
   PersistenceManager::save(journal, "diary.txt");
 

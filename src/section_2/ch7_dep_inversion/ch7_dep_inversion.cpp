@@ -26,7 +26,7 @@ struct Person {
 // struct Relationships {    // low-level module
 //   std::vector<std::tuple<Person, Relationship, Person>> relations;
 
-//   void add_parent_and_child(const Person&parent, const Person& child) {
+//   void addParentAndChild(const Person&parent, const Person& child) {
 //     relations.push_back({parent, Relationship::parent, child});
 //     relations.push_back({child, Relationship::child, parent});
 //   }
@@ -50,18 +50,18 @@ struct Person {
 // to avoid connecting Research (high level module) to Relationships (low level), a new abstraction should be created:
 
 struct RelationshipBrowser {
-  [[nodiscard]] virtual std::vector<Person> find_all_children_of(const std::string& name) const = 0;
+  [[nodiscard]] virtual std::vector<Person> findAllChildrenOf(const std::string& name) const = 0;
 };
 
 struct Relationships: RelationshipBrowser {    // low-level module
   std::vector<std::tuple<Person, Relationship, Person>> relations;
 
-  void add_parent_and_child(const Person&parent, const Person& child) {
+  void addParentAndChild(const Person&parent, const Person& child) {
     relations.emplace_back(parent, Relationship::parent, child);
     relations.emplace_back(child, Relationship::child, parent);
   }
 
-  [[nodiscard]] std::vector<Person> find_all_children_of(const std::string &name) const override{
+  [[nodiscard]] std::vector<Person> findAllChildrenOf(const std::string &name) const override{
     std::vector<Person> result;
     for (auto&& [first, rel, second] : relations) {
       if (first.name == name && rel == Relationship::parent) {
@@ -75,7 +75,7 @@ struct Relationships: RelationshipBrowser {    // low-level module
 // solid version
 struct Research {  // high-level
   explicit Research(const RelationshipBrowser& browser) {  // <<<< this offends the deps inversion principle
-    for (auto&child : browser.find_all_children_of("John")) {
+    for (auto&child : browser.findAllChildrenOf("John")) {
       std::cout << "John has a child called " << child.name << std::endl;
     }
   }
@@ -86,7 +86,7 @@ struct Research {  // high-level
  *   @brief show the title, section and chapter
  */
 
-static int print_tilte() {
+static int printTitle() {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
   std::cout << "\e[1mChapter 7:\e[0m Dependency Inversion Principle" << std::endl;
@@ -99,14 +99,14 @@ static int print_tilte() {
  */
 
 int main() {
-  print_tilte();
+  printTitle();
 
   Person parent{"John"};
   Person child1{"Chris"}, child2{"Matt"};
 
   Relationships relationships;
-  relationships.add_parent_and_child(parent, child1);
-  relationships.add_parent_and_child(parent, child2);
+  relationships.addParentAndChild(parent, child1);
+  relationships.addParentAndChild(parent, child2);
 
 
   // research class is connected to an abstract class, but it can be implemented using the concrete class

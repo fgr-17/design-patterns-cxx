@@ -10,28 +10,28 @@
 
 class Rectangle {
  private:
-  int width, height;
+  int width_, height_;
 
  public:
-  Rectangle(int width, int height): width(width), height(height) {}
+  Rectangle(int width, int height): width_(width), height_(height) {}
 
   [[nodiscard]] int getWidth() const {
-    return width;
+    return width_;
   }
 
   virtual void setWidth(int width) {
-    Rectangle::width = width;
+    Rectangle::width_ = width;
   }
 
   [[nodiscard]] int getHeight() const {
-    return height;
+    return height_;
   }
 
   virtual void setHeight(int height) {
-    Rectangle::height = height;
+    Rectangle::height_ = height;
   }
 
-  [[nodiscard]] int area() const {return width*height;}
+  [[nodiscard]] int area() const {return width_*height_;}
 };
 
 
@@ -51,11 +51,11 @@ class Square : public Rectangle {
 };
 
 void process(Rectangle* r) {
-  const int magic_number = 10;
+  const int magicNumber = 10;
   int w = r->getWidth();
-  r->setHeight(magic_number);
+  r->setHeight(magicNumber);
 
-  std::cout << "expected area = " << (w * magic_number)
+  std::cout << "expected area = " << (w * magicNumber)
             << ", got: " << r->area() << std::endl;
 }
 
@@ -64,7 +64,7 @@ void process(Rectangle* r) {
  *   @brief show the title, section and chapter
  */
 
-static int print_tilte() {
+static int printTitle() {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
   std::cout << "\e[1mChapter 5:\e[0m Liksov Substitution Principle" << std::endl;
@@ -72,8 +72,8 @@ static int print_tilte() {
 }
 
 struct RectangleFactory {
-  static Rectangle create_rectangle(int w, int h);
-  static Rectangle create_square(int s);
+  static Rectangle createRectangle(int w, int h);
+  static Rectangle createSquare(int s);
 };
 
 
@@ -86,7 +86,7 @@ int main() {
   const int side1 = 3, side2 = 4;
   const int side3 = 5;
 
-  print_tilte();
+  printTitle();
 
   Rectangle r{side1, side2};
   process(&r);

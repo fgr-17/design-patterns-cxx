@@ -1,24 +1,13 @@
 /**
  *    @file builder.cpp
- *    @brief Chapter 13: Groovy-Style Builders
- *    @brief
+ *    @brief Chapter 15: Builder Facets
  *    @author rouxfederico@gmail.com
- *
  */
 
 #include <iostream>
-// // #include <cstdio>
-// #include <ostream>   // IWYU pragma: keep
-// #include <sstream>   // IWYU pragma: keep
-// #include <string>
-// #include <vector>
-// // #include <fstream>
-// // #include <tuple>
-// // #include <sstream>
-// // #include <memory>
-// #include <utility>
-// #include <initializer_list>
-// #include <type_traits>
+#include <string>
+#include "person.h"
+#include "person-builder.h"
 
 
 /**
@@ -41,5 +30,12 @@ static int printTitle() {
 int main() {
     printTitle();
 
+    const int earning = 10e6;
+
+    Person p = Person::create()
+        .lives().at("123 London Road").withPostcode("SW1 1GB").in("London")
+        .works().at("PragmaSoft").asA("Consultant").earning(earning);
+
+    std::cout << p << std::endl;
     return 0;
 }

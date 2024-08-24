@@ -8,6 +8,8 @@
 #include <string>
 #include "person.h"
 #include "person-builder.h"
+#include "person-address-builder.h"
+#include "person-job-builder.h"
 
 
 /**

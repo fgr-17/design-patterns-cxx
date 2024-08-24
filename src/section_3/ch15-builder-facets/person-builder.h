@@ -7,17 +7,18 @@
 #pragma once
 
 #include <utility>
-#include "person-address-builder.h"
-#include "person-job-builder.h"
+#include "person.h"
 
+class PersonAddressBuilder;
+class PersonJobBuilder;
 
 class PersonBuilderBase {
  protected:
     // the base class has a reference of the object to avoid replicating it
     Person& person;
- public:
-    explicit PersonBuilderBase(PersonBuilder &person);
+    explicit PersonBuilderBase(Person &person) : person{person} {}
 
+ public:
     operator Person() const {
         return std::move(person);
     }
@@ -28,10 +29,8 @@ class PersonBuilderBase {
 
 class PersonBuilder : public PersonBuilderBase{
  public:
-    PersonBuilder();
+    PersonBuilder(): PersonBuilderBase{p} {}
  private:
     // the builder class has the object itself
     Person p;
-
-
 };

@@ -1,25 +1,27 @@
-#pragma once
+/**
+ *    @file person-job-builder.h
+ *    @brief Chapter 15: Builder Facets
+ *    @author rouxfederico@gmail.com
+ */
 
-#include <string>
 #include "person-builder.h"
-#include "person.h"
 
 class PersonJobBuilder : public PersonBuilderBase {
 
  public:
-    PersonJobBuilder(Person &person) : PersonBuilderBase(person) {}
+    explicit PersonJobBuilder(Person &person) : PersonBuilderBase(person) {}
 
     PersonJobBuilder& at(std::string companyName) {
         person.companyName = companyName;
         return *this;
     }
 
-    PersonAddressBuilder& asA(std::string position) {
+    PersonJobBuilder& asA(std::string position) {
         person.position = position;
         return *this;
     }
 
-    PersonAddressBuilder& earning(int annualIncome) {
+    PersonJobBuilder& earning(int annualIncome) {
         person.annualIncome = annualIncome;
         return *this;
     }

@@ -4,13 +4,12 @@
  *    @author rouxfederico@gmail.com
  */
 
-#include "person.h"
 #include "person-builder.h"
 #include "person-address-builder.h"
 #include "person-job-builder.h"
 
 
-PersonBuilderBase::PersonBuilderBase(Person&person) : person(person) {}
+// PersonBuilderBase::PersonBuilderBase(Person&person) : person(person) {}
 
 PersonAddressBuilder PersonBuilderBase::lives() const {
      return PersonAddressBuilder{person};
@@ -20,4 +19,4 @@ PersonJobBuilder PersonBuilderBase::works() const {
     return PersonJobBuilder{person};
 }
 
-PersonBuilder::PersonBuilder() : PersonBuilderBase(p) {}
+// PersonBuilder::PersonBuilder() : PersonBuilderBase(p) {}

@@ -4,12 +4,12 @@
  *    @author rouxfederico@gmail.com
  */
 
-#pragma once
-
 #include <string>
 #include <ostream>
-#include "person-builder.h"
 
+#pragma once
+
+class PersonBuilder;
 
 class Person {
     // address info
@@ -18,7 +18,6 @@ class Person {
     std::string companyName, position;
     int annualIncome{0};
 
-
  public:
     static PersonBuilder create();
 
@@ -26,5 +25,14 @@ class Person {
     friend class PersonAddressBuilder;
     friend class PersonJobBuilder;
 
-    std::ostream &operator<< (std::ostream&os, const Person &person) {}
+    friend std::ostream& operator<< (std::ostream&os, const Person &person) {
+        os  << "street address: "   << person.streetAddress
+            << "post code: "        << person.postCode
+            << "city: "             << person.city
+            << "Company name: "     << person.companyName
+            << "Position: "         << person.position
+            << "Annual income: "    << person.annualIncome;
+
+        return os;
+    }
 };

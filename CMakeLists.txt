@@ -29,3 +29,5 @@ add_subdirectory(src/section_3/ch13-fluent-builder)
 add_subdirectory(src/section_3/ch14-groovy-style-builder)
 add_subdirectory(src/section_3/ch15-builder-facets)
 add_subdirectory(src/section_3/builder-coding-excercise)
+
+add_subdirectory(src/section_4/ch18-point-example)

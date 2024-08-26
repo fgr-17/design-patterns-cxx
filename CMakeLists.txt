@@ -31,3 +31,4 @@ add_subdirectory(src/section_3/ch15-builder-facets)
 add_subdirectory(src/section_3/builder-coding-excercise)
 
 add_subdirectory(src/section_4/ch18-point-example)
+add_subdirectory(src/section_4/ch19-factory-method)

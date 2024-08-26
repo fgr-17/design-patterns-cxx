@@ -52,7 +52,7 @@ struct Point {
 static int printTitle() {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 4:\e[0m Factories" << std::endl;
-  std::cout << "\e[1mChapter 18:\e[0m Point example" << std::endl;
+  std::cout << "\e[1mChapter 19:\e[0m Factory Method" << std::endl;
   return 0;
 }
 

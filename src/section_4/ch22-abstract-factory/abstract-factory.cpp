@@ -1,17 +1,35 @@
 /**
  *    @file factory.cpp
- *    @brief Chapter 13: Groovy-Style Builders
+ *    @brief Chapter 22 : Abstract Factory
  *    @brief
  *    @author rouxfederico@gmail.com
- *
  */
 
 #define _USE_MATH_DEFINES
-#include <iostream>
 #include <cmath>        // IWYU pragma: keep
+#include <iostream>
+#include <memory>
 #include <ostream>      // IWYU pragma: keep
 #include <sstream>      // IWYU pragma: keep
+#include <string>
 
+#include "hot-drink.h"
+#include "drink-factory.h"
+
+
+std::unique_ptr<HotDrink> makeDrink(std::string type) {
+    std::unique_ptr<HotDrink> drink;
+    const auto vol = 200;
+
+    if (type == "tea") {
+        drink = std::make_unique<Tea>();
+        drink->prepare(vol);
+    } else {
+        drink = std::make_unique<Coffee>();
+        drink->prepare(vol);
+    }
+    return drink;
+}
 
 /**
  *   @fn printTitle
@@ -32,6 +50,12 @@ static int printTitle() {
 
 int main() {
     printTitle();
+
+    auto d = makeDrink("Coffee");
+
+    DrinkFactory df;
+    auto c = df.makeDrink("tea");
+
 
     return 0;
 }

@@ -56,6 +56,9 @@ int main() {
     DrinkFactory df;
     auto c = df.makeDrink("tea");
 
+    DrinkWithVolumeFactory dwvf;
+    auto e = dwvf.makeDrink("coffee");
+
 
     return 0;
 }

@@ -8,8 +8,11 @@
  #pragma once
 
 
- #include <map>
+#include <algorithm>
+#include <map>
 #include <string>
+#include <functional>
+
 #include "hot-drink-factory.h"
 
 class DrinkFactory {
@@ -29,4 +32,28 @@ class DrinkFactory {
         return drink;
     }
 
+};
+
+class DrinkWithVolumeFactory {
+    std::map<std::string, std::function<std::unique_ptr<HotDrink>()>> factories;
+ public:
+    DrinkWithVolumeFactory() {
+        factories["tea"] = [] {
+          auto vol = 200;
+          auto tea = std::make_unique<Tea>();
+          tea->prepare(vol);
+          return tea;
+        };
+
+        factories["coffee"] = [] {
+          auto vol = 200;
+          auto coffee = std::make_unique<Coffee>();
+          coffee->prepare(vol);
+          return coffee;
+        };
+    }
+
+    std::unique_ptr<HotDrink> makeDrink(const std::string& name) {
+        return factories[name]();
+    }
 };

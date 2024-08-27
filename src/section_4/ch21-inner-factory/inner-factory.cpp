@@ -51,7 +51,7 @@ class Point {
     //     }
     // };
 
-    const static Factory factory;
+    static const Factory factory;
 
     friend std::ostream& operator<<(std::ostream& os, const Point&p) {
         os << "P(x, y) = (" << p.x_ << ", " << p.y_ << ")";

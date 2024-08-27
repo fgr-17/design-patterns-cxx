@@ -35,25 +35,23 @@ class DrinkFactory {
 };
 
 class DrinkWithVolumeFactory {
-    std::map<std::string, std::function<std::unique_ptr<HotDrink>()>> factories;
+    std::map<std::string, std::function<std::unique_ptr<HotDrink>(const int&)>> factories;
  public:
     DrinkWithVolumeFactory() {
-        factories["tea"] = [] {
-          auto vol = 200;
+        factories["tea"] = [] (const int& vol){
           auto tea = std::make_unique<Tea>();
           tea->prepare(vol);
           return tea;
         };
 
-        factories["coffee"] = [] {
-          auto vol = 200;
+        factories["coffee"] = [] (const int& vol) {
           auto coffee = std::make_unique<Coffee>();
           coffee->prepare(vol);
           return coffee;
         };
     }
 
-    std::unique_ptr<HotDrink> makeDrink(const std::string& name) {
-        return factories[name]();
+    std::unique_ptr<HotDrink> makeDrink(const std::string& name, const int& vol) {
+        return factories[name](vol);
     }
 };

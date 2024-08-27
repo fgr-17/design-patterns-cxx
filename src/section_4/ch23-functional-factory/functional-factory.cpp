@@ -57,7 +57,8 @@ int main() {
     auto c = df.makeDrink("tea");
 
     DrinkWithVolumeFactory dwvf;
-    auto e = dwvf.makeDrink("coffee");
+    const auto vol = 500;
+    auto e = dwvf.makeDrink("coffee", vol);
 
 
     return 0;

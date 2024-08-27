@@ -1,5 +1,5 @@
 /**
- *    @file builder.cpp
+ *    @file point-example.cpp
  *    @brief Chapter 13: Groovy-Style Builders
  *    @brief
  *    @author rouxfederico@gmail.com

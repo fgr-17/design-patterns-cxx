@@ -1,5 +1,5 @@
 /**
- *    @file factory-method.cpp
+ *    @file factory.cpp
  *    @brief Chapter 13: Groovy-Style Builders
  *    @brief
  *    @author rouxfederico@gmail.com
@@ -47,7 +47,7 @@ class Point {
 static int printTitle() {
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 4:\e[0m Factories" << std::endl;
-  std::cout << "\e[1mChapter 19:\e[0m Factory Method" << std::endl;
+  std::cout << "\e[1mChapter 20:\e[0m Factory" << std::endl;
   return 0;
 }
 

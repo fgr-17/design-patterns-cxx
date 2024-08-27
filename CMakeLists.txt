@@ -32,3 +32,4 @@ add_subdirectory(src/section_3/builder-coding-excercise)
 
 add_subdirectory(src/section_4/ch18-point-example)
 add_subdirectory(src/section_4/ch19-factory-method)
+add_subdirectory(src/section_4/ch20-factory)

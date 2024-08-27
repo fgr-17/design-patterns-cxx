@@ -18,13 +18,30 @@ enum class PointType {
     polar
 };
 
+/**
+ *   @fn Point
+ *   @brief
+ */
 
 class Point {
+    friend struct PointFactory;                 // hits on OCP
     Point(float x, float y) : x(x), y(y) {}
 
  public:
     float x, y;
 
+    friend std::ostream& operator<<(std::ostream& os, const Point&p) {
+        os << "P(x, y) = (" << p.x << ", " << p.y << ")";
+        return os;
+    }
+};
+
+/**
+ *   @fn PointFactory
+ *   @brief
+ */
+
+struct PointFactory {
     static Point newCartesian(float x, float y) {
         return {x, y};
     }
@@ -32,12 +49,8 @@ class Point {
     static Point newPolar(float r, float theta) {
         return {r*std::cos(theta), r*std::sin(theta)};
     }
-
-    friend std::ostream& operator<<(std::ostream& os, const Point&p) {
-        os << "P(x, y) = (" << p.x << ", " << p.y << ")";
-        return os;
-    }
 };
+
 
 /**
  *   @fn printTitle
@@ -62,8 +75,8 @@ int main() {
     const float x = 3.3, y = 3.2;
     const float rho = 5.0, th = M_PI_4;
 
-    auto p0 = Point::newCartesian(x, y);
-    auto p1 = Point::newPolar(rho, th);
+    auto p0 = PointFactory::newCartesian(x, y);
+    auto p1 = PointFactory::newPolar(rho, th);
 
     std::cout << p0 << std::endl;
     std::cout << p1 << std::endl;

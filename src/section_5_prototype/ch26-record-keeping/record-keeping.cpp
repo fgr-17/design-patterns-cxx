@@ -41,6 +41,20 @@ struct Contact {
 };
 
 
+struct Contact2 {
+    std::string name;
+    Address* address;
+
+    Contact2(const std::string name, Address* address): name(std::move(name)), address(address) {}
+
+    friend std::ostream& operator<<(std::ostream&os, const Contact2& c) {
+        os << "Name: " << c.name << "\n";
+        os << *c.address;
+        return os;
+    }
+};
+
+
 /**
  *   @fn printTitle
  *   @brief chapter title
@@ -78,9 +92,21 @@ int main() {
     // another way to construct Jane
 
     Contact jane2 = john;
-    jane.name = "Jane";
-    jane.address.suite = janeAddressNo;
+    jane2.name = "Jane";
+    jane2.address.suite = janeAddressNo;
     std::cout << jane2 << std::endl;
+
+
+    // using a pointer for the address
+    Contact2 john2{"John Doe", new Address{"123 East Dr", "London", johnAddressNo}};
+    std::cout << john2 << std::endl;
+
+    Contact2 jane3 = john2;
+    jane3.name = "Jane";
+    jane3.address->suite = janeAddressNo;
+    std::cout << jane3 << std::endl;
+    // shows Jane's suite instead of John's
+    std::cout << john2 << std::endl;
 
 
     return 0;

@@ -40,3 +40,4 @@ add_subdirectory(src/section_4_factories/ch23-functional-factory)
 add_subdirectory(src/section_4_factories/factory-coding-excercise)
 
 add_subdirectory(src/section_5_prototype/ch26-record-keeping)
+add_subdirectory(src/section_5_prototype/ch27-prototype)

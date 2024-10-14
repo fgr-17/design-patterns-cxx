@@ -20,6 +20,7 @@ RUN apt install -y python3 python3-pip
 RUN pip install cpplint
 
 
-
 RUN printf "\nalias ls='ls --color=auto'\n" >> ~/.bashrc
 RUN printf "\nalias ll='ls -alF'\n" >> ~/.bashrc
+
+WORKDIR /workspace

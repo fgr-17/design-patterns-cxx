@@ -6,6 +6,7 @@
  *
  */
 
+#include <cstdlib>
 #include <iostream>
 #include <cmath>        // IWYU pragma: keep
 #include <ostream>      // IWYU pragma: keep
@@ -47,6 +48,19 @@ struct Contact2 {
 
     Contact2(const std::string name, Address* address): name(std::move(name)), address(address) {}
 
+    Contact2(const Contact2& other) : name{other.name},
+        address{new Address {other.address->street, other.address->city, other.address->suite}} {}
+
+
+    // for clang-tidy check: if having a copy constructor, needs to define:
+    // ---------------------------------------------------------------------
+
+    Contact2(const Contact2&&) = delete;                // move constructor
+    Contact2& operator=(const Contact2&) = delete;      // copy assignment operator
+    Contact2& operator=(const Contact2&&) = delete;     // move assignment operator
+
+    ~Contact2() {free(address);}
+    // ---------------------------------------------------------------------
     friend std::ostream& operator<<(std::ostream&os, const Contact2& c) {
         os << "Name: " << c.name << "\n";
         os << *c.address;
@@ -90,7 +104,7 @@ int main() {
     std::cout << juan << std::endl;
 
     // another way to construct Jane
-
+    // resusing the object John
     Contact jane2 = john;
     jane2.name = "Jane";
     jane2.address.suite = janeAddressNo;
@@ -101,6 +115,7 @@ int main() {
     Contact2 john2{"John Doe", new Address{"123 East Dr", "London", johnAddressNo}};
     std::cout << john2 << std::endl;
 
+    // shallow copy: does not copy the memory pointed
     Contact2 jane3 = john2;
     jane3.name = "Jane";
     jane3.address->suite = janeAddressNo;

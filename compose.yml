@@ -1,7 +1,7 @@
 services:
-  cxx-template:
+  design-patterns:
     build: .
-    container_name: cxx-template
+    container_name: design-patterns
     volumes:
       - .:/workspace
     stdin_open: true

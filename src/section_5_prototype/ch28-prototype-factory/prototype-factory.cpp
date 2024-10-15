@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <cmath>        // IWYU pragma: keep
+#include <memory>
 #include <ostream>      // IWYU pragma: keep
 #include <sstream>      // IWYU pragma: keep
 #include <string>
@@ -51,6 +52,22 @@ struct Contact2 {
         os << "Name: " << c.name << "\n";
         os << *c.address;
         return os;
+    }
+};
+
+struct EmployeeFactory {
+
+    static std::unique_ptr<Contact2> newMainOfficeEmployee(const std::string&name, const int suite) {
+        static Contact2 p{"", new Address{"123 East Dr", "London", 0}};
+        return newEmployee(name, suite, p);
+    }
+
+ private:
+    static std::unique_ptr<Contact2> newEmployee(const std::string&name, const int suite, const Contact2& prototype) {
+        auto result = std::make_unique<Contact2> (prototype);
+        result->name = name;
+        result->address->suite = suite;
+        return result;
     }
 };
 
@@ -107,6 +124,12 @@ int main() {
     std::cout << jane3 << std::endl;
     // shows Jane's suite instead of John's
     std::cout << john2 << std::endl;
+
+    // Creating contacts from factory
+
+    auto john3 = EmployeeFactory::newMainOfficeEmployee("John",johnAddressNo);
+    std::cout << "Employees from factory\n";
+    std::cout << *john3 << std::endl;
 
 
     return 0;

@@ -1,6 +1,6 @@
 /**
  *    @file record-keeping.cpp
- *    @brief Chapter 27: Prototype
+ *    @brief Chapter 28: Prototype Factory
  *    @brief
  *    @author rouxfederico@gmail.com
  *
@@ -64,7 +64,7 @@ static int printTitle() {
   std::cout << "=========================================" << std::endl;
   std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
   std::cout << "\e[1mSection 5:\e[0m Prototype" << std::endl;
-  std::cout << "\e[1mChapter 27:\e[0m Prototype" << std::endl;
+  std::cout << "\e[1mChapter 28:\e[0m Prototype Factory" << std::endl;
   std::cout << "=========================================" << std::endl;
   return 0;
 }

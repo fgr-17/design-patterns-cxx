@@ -20,6 +20,15 @@ struct Address {
 
     Address(const std::string street, const std::string city, int suite) : street(std::move(street)), city(std::move(city)), suite(suite) {}
 
+    Address(const Address&other) = default;
+    // for clang-tidy check: if having a copy constructor, needs to define:
+    // ---------------------------------------------------------------------
+    ~Address() = default;                                   // dtor
+    Address& operator=(const Address&other) = default;      // copy assignment operator
+    Address(Address&&other) = default;                      // move ctor
+    Address& operator=(Address&&other) = default;           // move assignment operator
+    // ---------------------------------------------------------------------
+
     friend std::ostream& operator<<(std::ostream&os, const Address& a) {
         os << a.street << "\n";
         os << a.city << "\n";
@@ -57,6 +66,19 @@ struct Contact2 {
     Address* address;
 
     Contact2(const std::string name, Address* address): name(std::move(name)), address(address) {}
+
+    // Contact2(const Contact2& other) : name{other.name},
+        // address{new Address {other.address->street, other.address->city, other.address->suite}} {}
+    Contact2(const Contact2& other) : name{other.name}, address{new Address{*other.address}} {}
+
+    // for clang-tidy check: if having a copy constructor, needs to define:
+    // ---------------------------------------------------------------------
+    Contact2(Contact2&&) = default;                         // move constructor
+    Contact2& operator=(const Contact2&) = default;         // copy assignment operator
+    Contact2& operator=(Contact2&&) = default;              // move assignment operator
+    ~Contact2() = default;                                  // default dtor
+    // ---------------------------------------------------------------------
+
 
     friend std::ostream& operator<<(std::ostream& os, const Contact2& contact) {
         os << contact.name << "\n";

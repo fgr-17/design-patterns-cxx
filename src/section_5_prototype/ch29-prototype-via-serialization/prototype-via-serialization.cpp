@@ -21,11 +21,20 @@ struct Address {
     Address(const std::string street, const std::string city, int suite) : street(std::move(street)), city(std::move(city)), suite(suite) {}
 
     friend std::ostream& operator<<(std::ostream&os, const Address& a) {
-        os << "Street: " << a.street << "\n";
-        os << "City: " << a.city << "\n";
-        os << "Suite: " << a.suite << "\n";
+        os << a.street << "\n";
+        os << a.city << "\n";
+        os << a.suite << "\n";
         return os;
     }
+
+    friend std::istream& operator>>(std::istream& is, Address& address) {
+        std::getline(is, address.street);
+        std::getline(is, address.city);
+        is >> address.suite;
+        is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return is;
+    }
+
 };
 
 struct Contact {
@@ -39,6 +48,7 @@ struct Contact {
         os << c.address;
         return os;
     }
+
 };
 
 
@@ -48,10 +58,19 @@ struct Contact2 {
 
     Contact2(const std::string name, Address* address): name(std::move(name)), address(address) {}
 
-    friend std::ostream& operator<<(std::ostream&os, const Contact2& c) {
-        os << "Name: " << c.name << "\n";
-        os << *c.address;
+    friend std::ostream& operator<<(std::ostream& os, const Contact2& contact) {
+        os << contact.name << "\n";
+        if (contact.address) {
+            os << *contact.address;
+        }
         return os;
+    }
+
+    friend std::istream& operator>>(std::istream& is, Contact2& contact) {
+        std::getline(is, contact.name);
+        contact.address = new Address();  // Allocate memory for the address
+        is >> *contact.address;           // Deserialize into the Address object
+        return is;
     }
 };
 
@@ -96,40 +115,20 @@ int main() {
     const int janeAddressNo = 103;
     const int juanAddressNo = 124;
 
-    // problem: many contacts with the same address
-    Contact john{"John Doe", Address{"123 East Dr", "London", johnAddressNo}};
-    Contact jane{"Jane Smith", Address{"123 East Dr", "London", janeAddressNo}};
-    Contact juan{"Juan Valdez", Address{"123 East Dr", "London", juanAddressNo}};
+    auto clone = [] (const Contact2& c) {
+        std::ostringstream oss;
+        oss << c;
+        std::string s = oss.str();
+        std::cout << s << std::endl;
 
-    std::cout << john << std::endl;
-    std::cout << jane << std::endl;
-    std::cout << juan << std::endl;
+        std::istringstream iss;
+        Contact2 result;
+        iss >> result;
+        return result;
+    };
 
-    // another way to construct Jane
-
-    Contact jane2 = john;
-    jane2.name = "Jane";
-    jane2.address.suite = janeAddressNo;
-    std::cout << jane2 << std::endl;
-
-
-    // using a pointer for the address
-    Contact2 john2{"John Doe", new Address{"123 East Dr", "London", johnAddressNo}};
-    std::cout << john2 << std::endl;
-
-    Contact2 jane3 = john2;
-    jane3.name = "Jane";
-    jane3.address->suite = janeAddressNo;
-    std::cout << jane3 << std::endl;
-    // shows Jane's suite instead of John's
-    std::cout << john2 << std::endl;
-
-    // Creating contacts from factory
-
-    auto john3 = EmployeeFactory::newMainOfficeEmployee("John", johnAddressNo);
-    std::cout << "Employees from factory\n";
-    std::cout << *john3 << std::endl;
-
+    auto john = EmployeeFactory::newMainOfficeEmployee("john", johnAddressNo);
+    auto jane = clone(john);
 
     return 0;
 }

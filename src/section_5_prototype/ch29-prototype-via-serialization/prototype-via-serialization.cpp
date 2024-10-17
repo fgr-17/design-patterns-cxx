@@ -13,14 +13,16 @@
 #include <sstream>      // IWYU pragma: keep
 #include <string>
 #include <utility>
+#include <limits>
 
 struct Address {
-    std::string street, city;
-    int suite;
+    std::string street{""}, city{""};
+    int suite{0};
 
     Address(const std::string street, const std::string city, int suite) : street(std::move(street)), city(std::move(city)), suite(suite) {}
 
     Address(const Address&other) = default;
+    Address() = default;
     // for clang-tidy check: if having a copy constructor, needs to define:
     // ---------------------------------------------------------------------
     ~Address() = default;                                   // dtor
@@ -43,7 +45,12 @@ struct Address {
         is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         return is;
     }
+};
 
+struct AddressFactory {
+    static std::unique_ptr<Address> newAddress(std::string street, std::string city, const int&suite) {
+        return std::make_unique<Address> (std::move(street), std::move(city), suite);
+    }
 };
 
 struct Contact {
@@ -57,24 +64,23 @@ struct Contact {
         os << c.address;
         return os;
     }
-
 };
 
 
 struct Contact2 {
-    std::string name;
-    Address* address;
+    std::string name{""};
+    std::unique_ptr<Address> address;
 
-    Contact2(const std::string name, Address* address): name(std::move(name)), address(address) {}
+    Contact2(std::string name, Address* address): name(std::move(name)), address(address ? std::make_unique<Address>(*address) : nullptr) {}
 
     // Contact2(const Contact2& other) : name{other.name},
         // address{new Address {other.address->street, other.address->city, other.address->suite}} {}
-    Contact2(const Contact2& other) : name{other.name}, address{new Address{*other.address}} {}
-
+    Contact2(const Contact2& other) : name{other.name}, address(other.address ? std::make_unique<Address>(*other.address) : nullptr) {}
+    Contact2() = default;
     // for clang-tidy check: if having a copy constructor, needs to define:
     // ---------------------------------------------------------------------
     Contact2(Contact2&&) = default;                         // move constructor
-    Contact2& operator=(const Contact2&) = default;         // copy assignment operator
+    Contact2& operator=(const Contact2&) = delete;         // copy assignment operator
     Contact2& operator=(Contact2&&) = default;              // move assignment operator
     ~Contact2() = default;                                  // default dtor
     // ---------------------------------------------------------------------
@@ -90,11 +96,12 @@ struct Contact2 {
 
     friend std::istream& operator>>(std::istream& is, Contact2& contact) {
         std::getline(is, contact.name);
-        contact.address = new Address();  // Allocate memory for the address
-        is >> *contact.address;           // Deserialize into the Address object
+        contact.address = std::make_unique<Address>();
+        is >> *contact.address;
         return is;
     }
 };
+
 
 struct EmployeeFactory {
     static std::unique_ptr<Contact2> newMainOfficeEmployee(const std::string&name, const int suite) {
@@ -134,23 +141,24 @@ static int printTitle() {
 int main() {
     printTitle();
     const int johnAddressNo = 123;
-    const int janeAddressNo = 103;
-    const int juanAddressNo = 124;
 
     auto clone = [] (const Contact2& c) {
         std::ostringstream oss;
         oss << c;
         std::string s = oss.str();
-        std::cout << s << std::endl;
+        std::cout << "serialized contact\n" << c << std::endl;
 
-        std::istringstream iss;
+        std::istringstream iss{s};
         Contact2 result;
         iss >> result;
         return result;
     };
 
     auto john = EmployeeFactory::newMainOfficeEmployee("john", johnAddressNo);
-    auto jane = clone(john);
+    auto jane = clone(*john);
+    jane.name = "Jane";
 
+    std::cout << *john << std::endl;
+    std::cout << jane << std::endl;
     return 0;
 }

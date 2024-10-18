@@ -8,8 +8,11 @@
 
 #include <iostream>
 #include <cmath>        // IWYU pragma: keep
+#include <memory>
 #include <ostream>      // IWYU pragma: keep
 #include <sstream>      // IWYU pragma: keep
+#include <utility>
+
 
 /**
  *   @fn printTitle
@@ -32,34 +35,45 @@ static int printTitle() {
  *   @brief Beware memory leaks!
  */
 
- struct Point {
-   int x{0}, y{0};
+struct Point {
+     int x{0}, y{0};
+     Point() = default;
+     Point(const int x, const int y) : x{x}, y{y} {}
 
-   Point(){}
+     friend std::ostream& operator<< (std::ostream&oss, const Point&p){
+         oss << "P(" << p.x << "," << p.y << ")";
+         return oss;
+     }
+};
 
-   Point(const int x, const int y) : x{x}, y{y} {}
- };
+struct Line {
+     std::unique_ptr<Point> start, end;
 
- struct Line {
-   Point *start, *end;
+     Line(std::unique_ptr<Point> start, std::unique_ptr<Point> end): start(std::move(start)), end(std::move(end)) {}
 
-   Line(Point* const start, Point* const end)
-     : start(start), end(end) {
+     [[nodiscard]] Line deepCopy() const {
+         auto startNew = std::make_unique<Point>(start->x, start->y);
+         auto endNew = std::make_unique<Point>(end->x, end->y);
+         return Line{std::move(startNew), std::move(endNew)};
+     }
 
-   }
-
-   ~Line() {
-     delete start;
-     delete end;
-   }
-
-   Line deep_copy() const
-   {
-     // TODO
-   }
- };
+     friend std::ostream& operator<< (std::ostream&oss, const Line&l){
+         oss << *l.start << "->" << *l.end;
+         return oss;
+     }
+};
 
 int main() {
     printTitle();
+
+    auto p1 = std::make_unique<Point>(3, 2);
+    std::cout << "p1 = " << *p1 << std::endl;
+
+    auto p2 = std::make_unique<Point>(4, 4);
+    std::cout << "p2 = " << *p2 << std::endl;
+
+    auto l1 = Line(std::move(p1), std::move(p2));
+    std::cout << "line: " << l1 << std::endl;
+
     return 0;
 }

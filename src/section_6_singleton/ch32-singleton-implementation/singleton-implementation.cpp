@@ -14,7 +14,6 @@
 
 
 class SingletonDatabase {
- public:
     SingletonDatabase() {
         std::cout << "Initializing db" << std::endl;
         std::ifstream ifs("/workspace/src/section_6_singleton/ch32-singleton-implementation/capitals");
@@ -24,13 +23,34 @@ class SingletonDatabase {
         while (getline(ifs, cityLine)) {
             getline(ifs, populationLine);
             int pop = std::stoi(populationLine);
-            capitals[cityLine] = pop;
+            capitals_[cityLine] = pop;
         }
     }
-    std::map<std::string, int> capitals;
+    std::map<std::string, int> capitals_;
+
+ public:
+    // deleting copy constructor and assignment:
+    SingletonDatabase(SingletonDatabase const&) = delete;
+    SingletonDatabase& operator=(SingletonDatabase const&) = delete;
+
+    // for clang-tidy compliance:
+    SingletonDatabase(SingletonDatabase&&) = default;
+    SingletonDatabase& operator=(SingletonDatabase&&) = default;
+    ~SingletonDatabase() = default;
+
+
+    static SingletonDatabase& get() {
+        static SingletonDatabase db;
+        return db;
+    }
+
+    int getPopulation(const std::string& city) {
+        return capitals_[city];
+    }
+
 
     void print() {
-        for (auto const&capital : capitals) {
+        for (auto const&capital : capitals_) {
             std::cout << capital.first << ": " << capital.second << std::endl;
         }
     }
@@ -59,8 +79,9 @@ static int printTitle() {
 int main() {
     printTitle();
 
-    SingletonDatabase db;
-    db.print();
+    std::string city = "Tokyo";
 
+    SingletonDatabase::get().print();
+    std::cout << "\n" << city << " has population of " << SingletonDatabase::get().getPopulation(city) << std::endl;
     return 0;
 }

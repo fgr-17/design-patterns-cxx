@@ -44,3 +44,5 @@ add_subdirectory(src/section_5_prototype/ch27-prototype)
 add_subdirectory(src/section_5_prototype/ch28-prototype-factory)
 add_subdirectory(src/section_5_prototype/ch29-prototype-via-serialization)
 add_subdirectory(src/section_5_prototype/prototype-coding-excercise)
+
+add_subdirectory(src/section_6_singleton/ch32-singleton-implementation)

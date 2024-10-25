@@ -1,18 +1,33 @@
-set(TEST_NAME test_suite)
+unset(CMAKE_CXX_CPPLINT)
+unset(CMAKE_CXX_CLANG_TIDY)
+unset(CMAKE_CXX_INCLUDE_WHAT_YOU_USE)
 
-set(LIB_DIR lib)
-set(FAKEIT_DIR FakeIt)
-
-include_directories(
-  ${CMAKE_SOURCE_DIR}/${LIB_DIR}/${FAKEIT_DIR}
+# --------------------------------------------------------------------------------------
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/df1544bcee0c7ce35cd5ea0b3eb8cc81855a4140.zip
 )
-  
-set(Sources 
+FetchContent_MakeAvailable(googletest)
+# --------------------------------------------------------------------------------------
+
+
+set(testapp_name main_test)
+
+target_include_directories(${testapp_name}
+ ../src/section_6_singleton/ch33-testeability-issues)
+
+enable_testing()
+
+add_executable(
+  ${testapp_name}
   main_test.cpp
 )
 
-## Testing 
-find_package(Catch2 3 REQUIRED)
+target_link_libraries(
+  ${testapp_name}
+  GTest::gtest_main
+)
 
-add_executable(${TEST_NAME} ${Sources})
-target_link_libraries(${TEST_NAME} PRIVATE Catch2::Catch2WithMain)
+include(GoogleTest)
+gtest_discover_tests(${testapp_name})

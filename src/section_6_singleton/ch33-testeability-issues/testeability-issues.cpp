@@ -11,7 +11,7 @@
 #include <sstream>      // IWYU pragma: keep
 #include <string>
 #include <utility>
-
+#include <vector>
 
 class SingletonDatabase {
     SingletonDatabase() {
@@ -56,6 +56,15 @@ class SingletonDatabase {
     }
 };
 
+struct SingletonRecordFinder {
+    int totalPopulation(std::vector<std::string> cities) {
+        int result{0};
+        for (auto& city : cities) {
+            result += SingletonDatabase::get().getPopulation(city);
+        }
+        return result;;
+    }
+};
 
 /**
  *   @fn printTitle

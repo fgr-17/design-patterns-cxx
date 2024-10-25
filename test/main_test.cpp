@@ -1,9 +1,7 @@
-#include <catch2/catch_test_macros.hpp>
-#include <fakeit.hpp>
+#include <gtest/gtest.h>
 
-TEST_CASE("dummy test", "[C++ Template]") {
-  int i = 0;
+#include <testeability-issues.cpp>
 
-  INFO("Basic info from test app: " << i);
-  REQUIRE(true);
+TEST(HelloTest, BasicAssertions) {
+  EXPECT_EQ(7 * 6, 42);
 }

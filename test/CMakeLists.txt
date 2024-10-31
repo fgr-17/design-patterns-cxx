@@ -15,11 +15,11 @@ FetchContent_MakeAvailable(googletest)
 
 set(testapp_name main_test)
 
-message(${CMAKE_SOURCE_DIR}/src/section_6_singleton/ch33-testeability-issues)
 
 add_executable(
   ${testapp_name}
   main_test.cpp
+  ${CMAKE_SOURCE_DIR}/src/section_6_singleton/ch33-testeability-issues/singleton-database.cpp
 )
 
 target_include_directories(${testapp_name} PUBLIC

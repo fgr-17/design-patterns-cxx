@@ -15,6 +15,8 @@
 
 #include "singleton-database.h"
 
+
+
 SingletonDatabase::SingletonDatabase() {
     std::cout << "Initializing db" << std::endl;
     std::ifstream ifs("/workspace/src/section_6_singleton/ch32-singleton-implementation/capitals");
@@ -49,4 +51,12 @@ int SingletonRecordFinder::totalPopulation(std::vector<std::string> cities) {
         result += SingletonDatabase::get().getPopulation(city);
     }
     return result;;
+}
+
+int ConfigurableRecordFinder::totalPopulation(std::vector<std::string> cities) {
+    int result{0};
+    for (auto& city : cities) {
+        result+= db.getPopulation(city);
+    }
+    return result;
 }

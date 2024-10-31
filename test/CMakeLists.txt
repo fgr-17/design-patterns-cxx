@@ -12,21 +12,47 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 # --------------------------------------------------------------------------------------
 
-
-set(testapp_name main_test)
-
+set(testapp_name ch33_main_test)
+set(source_dir ${CMAKE_SOURCE_DIR}/src/section_6_singleton/ch33-testeability-issues)
 
 add_executable(
   ${testapp_name}
-  main_test.cpp
-  ${CMAKE_SOURCE_DIR}/src/section_6_singleton/ch33-testeability-issues/singleton-database.cpp
+  ch33-main-test.cpp
+  ${source_dir}/singleton-database.cpp
 )
 
 target_include_directories(${testapp_name} PUBLIC
- ${CMAKE_SOURCE_DIR}/src/section_6_singleton/ch33-testeability-issues)
+ ${source_dir})
 
 enable_testing()
 
+target_link_libraries(
+  ${testapp_name}
+  GTest::gtest_main
+)
+
+include(GoogleTest)
+gtest_discover_tests(${testapp_name})
+
+# --------------------------------------------------------------------------------------
+
+unset(testapp_name)
+unset(source_dir)
+
+set(testapp_name ch34_main_test)
+set(source_dir ${CMAKE_SOURCE_DIR}/src/section_6_singleton/ch34-singleton-dep-injection)
+
+add_executable(
+  ${testapp_name}
+  ch34-main-test.cpp
+  ${source_dir}/singleton-database.cpp
+)
+
+target_include_directories(${testapp_name} PUBLIC
+  ${source_dir}
+)
+
+enable_testing()
 
 target_link_libraries(
   ${testapp_name}

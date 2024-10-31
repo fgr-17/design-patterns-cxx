@@ -13,7 +13,13 @@
 #include <string>
 #include <vector>
 
-class SingletonDatabase {
+class Database {
+ public:
+    virtual int getPopulation(const std::string& city) = 0;
+};
+
+
+class SingletonDatabase : public Database {
 
  private:
     SingletonDatabase();
@@ -31,7 +37,7 @@ class SingletonDatabase {
 
     static SingletonDatabase& get();
 
-    int getPopulation(const std::string& city);
+    int getPopulation(const std::string& city) override;
 
 
     void print();
@@ -40,3 +46,11 @@ class SingletonDatabase {
 struct SingletonRecordFinder {
     int totalPopulation(std::vector<std::string> cities);
 };
+
+struct ConfigurableRecordFinder {
+    Database& db;
+
+    ConfigurableRecordFinder(Database& db) : db(db) {}
+    int totalPopulation(std::vector<std::string> city);
+};
+

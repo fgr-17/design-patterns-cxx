@@ -6,65 +6,11 @@
 
 #include <fstream>      // IWYU pragma: keep
 #include <iostream>
-#include <map>
 #include <ostream>      // IWYU pragma: keep
 #include <sstream>      // IWYU pragma: keep
 #include <string>
-#include <utility>
-#include <vector>
 
-class SingletonDatabase {
-    SingletonDatabase() {
-        std::cout << "Initializing db" << std::endl;
-        std::ifstream ifs("/workspace/src/section_6_singleton/ch32-singleton-implementation/capitals");
-
-        std::string cityLine, populationLine;
-
-        while (getline(ifs, cityLine)) {
-            getline(ifs, populationLine);
-            int pop = std::stoi(populationLine);
-            capitals_[cityLine] = pop;
-        }
-    }
-    std::map<std::string, int> capitals_;
-
- public:
-    // deleting copy constructor and assignment:
-    SingletonDatabase(SingletonDatabase const&) = delete;
-    SingletonDatabase& operator=(SingletonDatabase const&) = delete;
-
-    // for clang-tidy compliance:
-    SingletonDatabase(SingletonDatabase&&) = default;
-    SingletonDatabase& operator=(SingletonDatabase&&) = default;
-    ~SingletonDatabase() = default;
-
-
-    static SingletonDatabase& get() {
-        static SingletonDatabase db;
-        return db;
-    }
-
-    int getPopulation(const std::string& city) {
-        return capitals_[city];
-    }
-
-
-    void print() {
-        for (auto const&capital : capitals_) {
-            std::cout << capital.first << ": " << capital.second << std::endl;
-        }
-    }
-};
-
-struct SingletonRecordFinder {
-    int totalPopulation(std::vector<std::string> cities) {
-        int result{0};
-        for (auto& city : cities) {
-            result += SingletonDatabase::get().getPopulation(city);
-        }
-        return result;;
-    }
-};
+#include <singleton-database.h>
 
 /**
  *   @fn printTitle

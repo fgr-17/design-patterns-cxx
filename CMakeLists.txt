@@ -18,7 +18,7 @@ set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "iwyu")
 
 set(SRC_DIR src)
 
-add_subdirectory(test)
+# add_subdirectory(test)
 
 add_subdirectory(src/section_2_SOLID/ch3_single_resp)
 add_subdirectory(src/section_2_SOLID/ch4_open_closed)

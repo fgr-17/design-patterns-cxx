@@ -1,3 +1,4 @@
+# disable quality tools to avoid analyzing google test lib
 unset(CMAKE_CXX_CPPLINT)
 unset(CMAKE_CXX_CLANG_TIDY)
 unset(CMAKE_CXX_INCLUDE_WHAT_YOU_USE)
@@ -14,15 +15,18 @@ FetchContent_MakeAvailable(googletest)
 
 set(testapp_name main_test)
 
-target_include_directories(${testapp_name}
- ../src/section_6_singleton/ch33-testeability-issues)
-
-enable_testing()
+message(${CMAKE_SOURCE_DIR}/src/section_6_singleton/ch33-testeability-issues)
 
 add_executable(
   ${testapp_name}
   main_test.cpp
 )
+
+target_include_directories(${testapp_name} PUBLIC
+ ${CMAKE_SOURCE_DIR}/src/section_6_singleton/ch33-testeability-issues)
+
+enable_testing()
+
 
 target_link_libraries(
   ${testapp_name}

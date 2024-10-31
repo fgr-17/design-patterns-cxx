@@ -1,5 +1,5 @@
 /**
- *    @file testeability-issues.cpp
+ *    @file singleton-database.cpp
  *    @brief Chapter 33: Testeability Issues
  *    @author rouxfederico@gmail.com
  */
@@ -16,23 +16,22 @@
 #include "singleton-database.h"
 
 SingletonDatabase::SingletonDatabase() {
-        std::cout << "Initializing db" << std::endl;
-        std::ifstream ifs("/workspace/src/section_6_singleton/ch32-singleton-implementation/capitals");
+    std::cout << "Initializing db" << std::endl;
+    std::ifstream ifs("/workspace/src/section_6_singleton/ch32-singleton-implementation/capitals");
 
-        std::string cityLine, populationLine;
+    std::string cityLine, populationLine;
 
-        while (getline(ifs, cityLine)) {
-            getline(ifs, populationLine);
-            int pop = std::stoi(populationLine);
-            capitals_[cityLine] = pop;
-        }
+    while (getline(ifs, cityLine)) {
+        getline(ifs, populationLine);
+        int pop = std::stoi(populationLine);
+        capitals_[cityLine] = pop;
     }
-    std::map<std::string, int> capitals_;
+}
 
 SingletonDatabase& SingletonDatabase::get() {
-        static SingletonDatabase db;
-        return db;
-    }
+    static SingletonDatabase db;
+    return db;
+}
 
 int SingletonDatabase::getPopulation(const std::string& city) {
     return capitals_[city];

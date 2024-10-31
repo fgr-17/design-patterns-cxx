@@ -1,8 +1,10 @@
 /**
- *    @file testeability-issues.cpp
+ *    @file singleton-database.h
  *    @brief Chapter 33: Testeability Issues
  *    @author rouxfederico@gmail.com
  */
+
+#pragma once
 
 #include <fstream>      // IWYU pragma: keep
 #include <map>
@@ -12,6 +14,8 @@
 #include <vector>
 
 class SingletonDatabase {
+
+ private:
     SingletonDatabase();
     std::map<std::string, int> capitals_;
 

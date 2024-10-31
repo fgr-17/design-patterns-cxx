@@ -4,13 +4,13 @@
  *    @author rouxfederico@gmail.com
  */
 
+#include <singleton-database.h>
 #include <fstream>      // IWYU pragma: keep
 #include <iostream>
 #include <ostream>      // IWYU pragma: keep
 #include <sstream>      // IWYU pragma: keep
 #include <string>
 
-#include <singleton-database.h>
 
 /**
  *   @fn printTitle

@@ -22,7 +22,6 @@ class DummyDatabase : public Database {
   }
 };
 
-
 TEST(RecordFinderTests, DependantTotalPopulationTest) {
   
   DummyDatabase db;

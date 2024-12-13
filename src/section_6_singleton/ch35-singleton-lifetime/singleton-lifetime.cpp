@@ -10,6 +10,30 @@
 #include <sstream>      // IWYU pragma: keep
 #include <string>
 
+
+class IFoo {
+  virtual std::string name() = 0;
+};
+
+class Foo : IFoo {
+ private:
+  static int id;
+ 
+ public: 
+  Foo() { ++id; }
+
+  std::string name() override {
+    return "foo " + std::to_string(id);
+  }
+};
+
+int Foo::id = 0;
+
+struct Bar {
+  std::shared_ptr<IFoo> foo;
+};
+
+
 /**
  *   @fn printTitle
  *   @brief chapter title

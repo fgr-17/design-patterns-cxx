@@ -15,6 +15,7 @@ RUN apt install -y clang-format
 RUN apt install -y git
 RUN apt install -y clang-tidy
 RUN apt install -y iwyu
+RUN apt install -y libboost-all-dev
 
 RUN apt install -y python3 python3-pip
 RUN pip install cpplint

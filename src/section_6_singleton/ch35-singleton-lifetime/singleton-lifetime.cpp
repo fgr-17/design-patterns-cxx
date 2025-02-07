@@ -9,6 +9,9 @@
 #include <ostream>      // IWYU pragma: keep
 #include <sstream>      // IWYU pragma: keep
 #include <string>
+#include <memory>
+
+#include <boost/di.hpp>  // IWYU pragma: keep
 
 
 class IFoo {

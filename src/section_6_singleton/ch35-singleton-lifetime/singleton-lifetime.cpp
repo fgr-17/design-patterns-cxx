@@ -14,15 +14,14 @@
 #include <boost/di.hpp>  // IWYU pragma: keep
 
 
-class IFoo {
+struct IFoo {
   virtual std::string name() = 0;
+  virtual ~IFoo() = default;  // Virtual destructor
 };
 
-class Foo : IFoo {
- private:
+struct Foo : IFoo {
+
   static int id;
- 
- public: 
   Foo() { ++id; }
 
   std::string name() override {
@@ -58,5 +57,11 @@ static int printTitle() {
 
 int main() {
     printTitle();
+
+    auto injector = boost::di::make_injector(boost::di::bind<IFoo>().to<Foo>().in(boost::di::singleton));
+
+    // auto bar1 = injector.create<std::shared_ptr<Bar>>();
+    // auto bar2 = injector.create<std::shared_ptr<Bar>>();
+
     return 0;
 }

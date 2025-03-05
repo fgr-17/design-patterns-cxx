@@ -16,26 +16,30 @@
 
 struct IFoo {
   virtual std::string name() = 0;
-  virtual ~IFoo() = default;  // Virtual destructor
+  IFoo() = default;
+  virtual ~IFoo() = default;
 
-  // IFoo(IFoo&) = default;
-  // IFoo(IFoo&&) = default;
-  // IFoo& operator=(const IFoo&) = default;
-  // IFoo& operator=(IFoo&&) = default;
+
+  IFoo(const IFoo&) = delete;
+  IFoo& operator=(const IFoo&) = delete;
+  IFoo(IFoo&&) = delete;
+  IFoo& operator=(IFoo&&) = delete;
 };
 
 struct Foo : IFoo {
  private:
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
   static int id;
 
  public:
-  Foo() : IFoo() { ++id; }
+  Foo() { ++id; }
 
   std::string name() override {
     return "foo " + std::to_string(id);
   }
 };
 
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
 int Foo::id = 0;
 
 struct Bar {

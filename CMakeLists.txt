@@ -18,6 +18,8 @@ set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "iwyu")
 
 set(SRC_DIR src)
 
+add_subdirectory(test)
+
 add_subdirectory(src/section_2_SOLID/ch3_single_resp)
 add_subdirectory(src/section_2_SOLID/ch4_open_closed)
 add_subdirectory(src/section_2_SOLID/ch5_liksov_subs)
@@ -44,3 +46,11 @@ add_subdirectory(src/section_5_prototype/ch27-prototype)
 add_subdirectory(src/section_5_prototype/ch28-prototype-factory)
 add_subdirectory(src/section_5_prototype/ch29-prototype-via-serialization)
 add_subdirectory(src/section_5_prototype/prototype-coding-excercise)
+
+add_subdirectory(src/section_6_singleton/ch32-singleton-implementation)
+add_subdirectory(src/section_6_singleton/ch33-testeability-issues)
+add_subdirectory(src/section_6_singleton/ch34-singleton-dep-injection)
+add_subdirectory(src/section_6_singleton/ch35-singleton-lifetime)
+add_subdirectory(src/section_6_singleton/ch36-monostate)
+add_subdirectory(src/section_6_singleton/ch37-multiton)
+add_subdirectory(src/section_6_singleton/coding-excercise)

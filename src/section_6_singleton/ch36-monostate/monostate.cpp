@@ -9,6 +9,16 @@
 #include <ostream>      // IWYU pragma: keep
 #include <sstream>      // IWYU pragma: keep
 
+class Printer{
+  // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
+  static int id;
+
+ public:
+  [[nodiscard]] int getId() const {return id;}
+  void setId(const int val) {id = val;}
+};
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
+int Printer::id = 0;
 
 /**
  *   @fn printTitle
@@ -31,5 +41,12 @@ static int printTitle() {
 
 int main() {
     printTitle();
+    const int magicNumber = 6;
+
+    Printer p0, p1;
+
+    p1.setId(magicNumber);
+    std::cout << "p0::id: " << p0.getId() << "\n";
+
     return 0;
 }

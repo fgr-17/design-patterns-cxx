@@ -32,9 +32,15 @@ struct Rectangle {
 
 struct SquareToRectangleAdapter : Rectangle {
   explicit SquareToRectangleAdapter(const Square& square) {
-      // todo
+      width_ = square.side;
+      height_ = square.side;
   }
-  // todo
+
+  int width_;
+  int height_;
+
+  [[nodiscard]] int width() const override { return width_; };
+  [[nodiscard]] int height() const override { return height_; };
 };
 
 /**

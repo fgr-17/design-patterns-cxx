@@ -53,4 +53,6 @@ add_subdirectory(src/section_6_singleton/ch34-singleton-dep-injection)
 add_subdirectory(src/section_6_singleton/ch35-singleton-lifetime)
 add_subdirectory(src/section_6_singleton/ch36-monostate)
 add_subdirectory(src/section_6_singleton/ch37-multiton)
-add_subdirectory(src/section_6_singleton/coding-excercise)
+add_subdirectory(src/section_6_singleton/singleton-coding-excercise)
+
+add_subdirectory(src/section_7_adapter/adapter-coding-excercise)

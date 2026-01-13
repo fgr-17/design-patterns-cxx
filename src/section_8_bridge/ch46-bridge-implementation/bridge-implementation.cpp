@@ -1,6 +1,6 @@
 /**
- *    @file shrink-wrapped-pimpl.cpp
- *    @brief Shrink Wrapped Pimpl idiom
+ *    @file bridge-implementation.cpp
+ *    @brief Bridge implementation
  *    @author rouxfederico@gmail.com
  */
 

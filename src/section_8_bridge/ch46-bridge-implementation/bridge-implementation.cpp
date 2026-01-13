@@ -1,6 +1,6 @@
 /**
- *    @file shrink-wrapped-pimpl.cpp
- *    @brief Shrink Wrapped Pimpl idiom
+ *    @file bridge-implementation.cpp
+ *    @brief Bridge implementation
  *    @author rouxfederico@gmail.com
  */
 
@@ -25,12 +25,48 @@ struct Renderer {
 
 struct VectorRenderer : Renderer {
   void renderCircle(Point center, float r) override {
+    std::cout << "vectorizing circle of r = " << r <<
+                 " center: {" << center.x << ", " << center.y << "}"
+                 << std::endl;
+  }
+};
+
+struct RasterRenderer : Renderer {
+  void renderCircle(Point center, float r) override {
     std::cout << "rasterizing circle of r = " << r <<
                  " center: {" << center.x << ", " << center.y << "}"
                  << std::endl;
   }
 };
 
+struct Shape {
+ private:
+  Renderer& renderer_;
+ protected:
+  explicit Shape(Renderer& renderer): renderer_(renderer) {}
+  [[nodiscard]] Renderer& getRenderer() const {
+    return renderer_;
+  }
+
+ public:
+  virtual void draw() = 0;
+  virtual void resize(float factor) = 0;
+};
+
+struct Circle: Shape {
+  Circle(Renderer&renderer, float x, float y, float r): Shape(renderer), center{x, y}, radius{r} {}
+
+  Point center;
+  float radius;
+
+  void draw() override {
+    getRenderer().renderCircle(center, radius);
+  }
+
+  void resize(float factor) override {
+    radius = radius*factor;
+  }
+};
 
 
 /**
@@ -53,6 +89,23 @@ static int printTitle() {
  */
 
 int main() {
+  const float r = 5.0;
+  const float x = 1.0, y = 2.0;
+  RasterRenderer rr;
+  VectorRenderer vr;
+
+  Circle rasterCircle{rr, x, y, r};
+  Circle vectorCircle{vr, x, y, r};
+
   printTitle();
+
+  rasterCircle.draw();
+  rasterCircle.resize(3);
+  rasterCircle.draw();
+
+  vectorCircle.draw();
+  vectorCircle.resize(2);
+  vectorCircle.draw();
+
   return 0;
 }

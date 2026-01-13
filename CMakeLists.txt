@@ -50,9 +50,13 @@ add_subdirectory(src/section_5_prototype/prototype-coding-excercise)
 add_subdirectory(src/section_6_singleton/ch32-singleton-implementation)
 add_subdirectory(src/section_6_singleton/ch33-testeability-issues)
 add_subdirectory(src/section_6_singleton/ch34-singleton-dep-injection)
-add_subdirectory(src/section_6_singleton/ch35-singleton-lifetime)
+# add_subdirectory(src/section_6_singleton/ch35-singleton-lifetime) // needs internet connectivity to download boost DI
 add_subdirectory(src/section_6_singleton/ch36-monostate)
 add_subdirectory(src/section_6_singleton/ch37-multiton)
 add_subdirectory(src/section_6_singleton/singleton-coding-excercise)
 
 add_subdirectory(src/section_7_adapter/adapter-coding-excercise)
+
+add_subdirectory(src/section_8_bridge/ch44-pimpl-idiom)
+add_subdirectory(src/section_8_bridge/ch45-shrink-wrapped-pimpl)
+add_subdirectory(src/section_8_bridge/ch46-bridge-implementation)

@@ -61,3 +61,5 @@ add_subdirectory(src/section_8_bridge/ch44-pimpl-idiom)
 add_subdirectory(src/section_8_bridge/ch45-shrink-wrapped-pimpl)
 add_subdirectory(src/section_8_bridge/ch46-bridge-implementation)
 add_subdirectory(src/section_8_bridge/bridge-excercise)
+
+add_subdirectory(src/section_9_composite/ch49-geometric-shapes)

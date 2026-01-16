@@ -63,3 +63,4 @@ add_subdirectory(src/section_8_bridge/ch46-bridge-implementation)
 add_subdirectory(src/section_8_bridge/bridge-excercise)
 
 add_subdirectory(src/section_9_composite/ch49-geometric-shapes)
+add_subdirectory(src/section_9_composite/ch50-neural-networks)

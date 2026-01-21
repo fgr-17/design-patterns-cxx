@@ -66,3 +66,5 @@ add_subdirectory(src/section_9_composite/ch49-geometric-shapes)
 add_subdirectory(src/section_9_composite/ch50-neural-networks)
 add_subdirectory(src/section_9_composite/ch51-array-backed-properties)
 add_subdirectory(src/section_9_composite/composite-excercise)
+
+add_subdirectory(src/section_10_decorator/ch54-dynamic-decorator)

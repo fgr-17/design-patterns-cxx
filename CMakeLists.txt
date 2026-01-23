@@ -5,11 +5,11 @@ project(CXX_PROJECT)
 
 ### C++
 enable_language(CXX)
-set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard required for build")
+set(CMAKE_CXX_STANDARD 20 CACHE STRING "C++ standard required for build")
 set(CMAKE_CXX_STANDARD_REQUIRED ON CACHE BOOL "is C++ stndard a requirement")
 set(CMAKE_CXX_EXTENSIONS OFF CACHE BOOL "enable/disable compiler specific extensions")
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -W -Wall -Wextra -std=c++11")
+set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -W -Wall -Wextra")
 
 set(CMAKE_CXX_CPPLINT "cpplint")
 set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
@@ -68,3 +68,4 @@ add_subdirectory(src/section_9_composite/ch51-array-backed-properties)
 add_subdirectory(src/section_9_composite/composite-excercise)
 
 add_subdirectory(src/section_10_decorator/ch54-dynamic-decorator)
+add_subdirectory(src/section_10_decorator/ch55-static-decorator)

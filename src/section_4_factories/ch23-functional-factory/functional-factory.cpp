@@ -6,16 +6,15 @@
  */
 
 #define _USE_MATH_DEFINES
-#include <cmath>        // IWYU pragma: keep
+#include <cmath>  // IWYU pragma: keep
 #include <iostream>
 #include <memory>
-#include <ostream>      // IWYU pragma: keep
-#include <sstream>      // IWYU pragma: keep
+#include <ostream>  // IWYU pragma: keep
+#include <sstream>  // IWYU pragma: keep
 #include <string>
 
-#include "hot-drink.h"
 #include "drink-factory.h"
-
+#include "hot-drink.h"
 
 std::unique_ptr<HotDrink> makeDrink(std::string type) {
     std::unique_ptr<HotDrink> drink;
@@ -37,10 +36,10 @@ std::unique_ptr<HotDrink> makeDrink(std::string type) {
  */
 
 static int printTitle() {
-  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
-  std::cout << "\e[1mSection 4:\e[0m Factories" << std::endl;
-  std::cout << "\e[1mChapter 23:\e[0m Functional Factory" << std::endl;
-  return 0;
+    std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+    std::cout << "\e[1mSection 4:\e[0m Factories" << std::endl;
+    std::cout << "\e[1mChapter 23:\e[0m Functional Factory" << std::endl;
+    return 0;
 }
 
 /**
@@ -59,7 +58,6 @@ int main() {
     DrinkWithVolumeFactory dwvf;
     const auto vol = 500;
     auto e = dwvf.makeDrink("coffee", vol);
-
 
     return 0;
 }

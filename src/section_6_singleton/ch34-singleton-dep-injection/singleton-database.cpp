@@ -4,18 +4,16 @@
  *    @author rouxfederico@gmail.com
  */
 
-#include <fstream>      // IWYU pragma: keep
+#include "singleton-database.h"
+
+#include <fstream>  // IWYU pragma: keep
 #include <iostream>
 #include <map>
-#include <ostream>      // IWYU pragma: keep
-#include <sstream>      // IWYU pragma: keep
+#include <ostream>  // IWYU pragma: keep
+#include <sstream>  // IWYU pragma: keep
 #include <string>
 #include <utility>
 #include <vector>
-
-#include "singleton-database.h"
-
-
 
 SingletonDatabase::SingletonDatabase() {
     std::cout << "Initializing db" << std::endl;
@@ -40,7 +38,7 @@ int SingletonDatabase::getPopulation(const std::string& city) {
 }
 
 void SingletonDatabase::print() {
-    for (auto const&capital : capitals_) {
+    for (auto const& capital : capitals_) {
         std::cout << capital.first << ": " << capital.second << std::endl;
     }
 }
@@ -50,13 +48,14 @@ int SingletonRecordFinder::totalPopulation(std::vector<std::string> cities) {
     for (auto& city : cities) {
         result += SingletonDatabase::get().getPopulation(city);
     }
-    return result;;
+    return result;
+    ;
 }
 
 int ConfigurableRecordFinder::totalPopulation(std::vector<std::string> cities) {
     int result{0};
     for (auto& city : cities) {
-        result+= db.getPopulation(city);
+        result += db.getPopulation(city);
     }
     return result;
 }

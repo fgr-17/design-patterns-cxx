@@ -5,14 +5,14 @@
  */
 
 #include "person-builder.h"
+
 #include "person-address-builder.h"
 #include "person-job-builder.h"
-
 
 // PersonBuilderBase::PersonBuilderBase(Person&person) : person(person) {}
 
 PersonAddressBuilder PersonBuilderBase::lives() const {
-     return PersonAddressBuilder{person};
+    return PersonAddressBuilder{person};
 }
 
 PersonJobBuilder PersonBuilderBase::works() const {

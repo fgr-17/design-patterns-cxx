@@ -10,9 +10,10 @@
 #include <algorithm>
 #include <memory>
 #include <type_traits>
+
 #include "hot-drink.h"
 
-struct HotDrinkFactory {    // abstract factory
+struct HotDrinkFactory {  // abstract factory
     virtual std::unique_ptr<HotDrink> make() const = 0;
 };
 

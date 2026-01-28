@@ -6,32 +6,33 @@
  *
  */
 
+#include <cmath>  // IWYU pragma: keep
 #include <iostream>
-#include <cmath>        // IWYU pragma: keep
-#include <ostream>      // IWYU pragma: keep
-#include <sstream>      // IWYU pragma: keep
+#include <ostream>  // IWYU pragma: keep
+#include <sstream>  // IWYU pragma: keep
 #include <string>
 #include <utility>
 
 struct Person {
-  int id;
-  std::string name;
+    int id;
+    std::string name;
 
-  Person(int id, std::string name) : id(id), name(std::move(name)) {}
+    Person(int id, std::string name) : id(id), name(std::move(name)) {}
 
-  friend std::ostream& operator<<(std::ostream& os, Person&p) {
-      os << p.name << " - id : " << p.id;
-      return os;
-  }
+    friend std::ostream& operator<<(std::ostream& os, Person& p) {
+        os << p.name << " - id : " << p.id;
+        return os;
+    }
 };
 
 class PersonFactory {
     int index_ = 0;
- public:
-  Person createPerson(const std::string& name) {
-    Person p{index_++, name};
-    return p;
-  }
+
+   public:
+    Person createPerson(const std::string& name) {
+        Person p{index_++, name};
+        return p;
+    }
 };
 
 /**
@@ -40,10 +41,10 @@ class PersonFactory {
  */
 
 static int printTitle() {
-  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
-  std::cout << "\e[1mSection 4:\e[0m Factories" << std::endl;
-  std::cout << "\e[1mCoding Excercise\e[0m" << std::endl;
-  return 0;
+    std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+    std::cout << "\e[1mSection 4:\e[0m Factories" << std::endl;
+    std::cout << "\e[1mCoding Excercise\e[0m" << std::endl;
+    return 0;
 }
 
 /**

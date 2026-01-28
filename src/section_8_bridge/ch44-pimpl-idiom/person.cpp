@@ -8,20 +8,22 @@
  */
 
 #include <person.h>
-#include <iostream>   // IWYU pragma: keep
+
+#include <iostream>  // IWYU pragma: keep
 #include <string>
 #include <utility>
 
 class Person::PersonImpl {
- public:
+   public:
     void greet(const Person* p) const {
         std::cout << "hello I'm " << p->name << "\n";
     }
- private:
+
+   private:
     void secretStuff();
 };
 
-Person::Person(const std::string name): name(std::move(name)), impl(new PersonImpl) {}
+Person::Person(const std::string name) : name(std::move(name)), impl(new PersonImpl) {}
 
 Person::~Person() {
     delete impl;

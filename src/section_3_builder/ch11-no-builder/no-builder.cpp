@@ -6,11 +6,11 @@
  *
  */
 
-#include <iostream>
-#include <string>
-#include <fstream>  // IWYU pragma: keep
 #include <array>
+#include <fstream>  // IWYU pragma: keep
+#include <iostream>
 #include <sstream>  // IWYU pragma: keep
+#include <string>
 
 /**
  *   @fn main
@@ -18,10 +18,10 @@
  */
 
 static int printTitle() {
-  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
-  std::cout << "\e[1mSection 3:\e[0m Builder" << std::endl;
-  std::cout << "\e[1mChapter 11:\e[0m Life Without Builders" << std::endl;
-  return 0;
+    std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+    std::cout << "\e[1mSection 3:\e[0m Builder" << std::endl;
+    std::cout << "\e[1mChapter 11:\e[0m Life Without Builders" << std::endl;
+    return 0;
 }
 
 /**
@@ -30,30 +30,28 @@ static int printTitle() {
  */
 
 int main() {
-  printTitle();
+    printTitle();
 
-  auto text = "hello";
+    auto text = "hello";
 
+    // first example:
+    std::string output;
 
-  // first example:
-  std::string output;
+    output += "<p>";
+    output += text;
+    output += "</p>";
 
-  output += "<p>";
-  output += text;
-  output += "</p>";
+    std::cout << output << std::endl;
 
-  std::cout << output << std::endl;
+    // 2nd example:
 
-  // 2nd example:
+    std::array<std::string, 2> words = {"hello", "world"};
+    std::ostringstream oss;
 
-  std::array<std::string, 2> words = {"hello", "world"};
-  std::ostringstream oss;
+    oss << "<ul>";
+    for (auto w : words) oss << "  <li>" << w << "</li>";
+    oss << "</ul>";
+    std::cout << oss.str() << std::endl;
 
-  oss << "<ul>";
-  for (auto w : words)
-    oss << "  <li>" << w << "</li>";
-  oss << "</ul>";
-  std::cout << oss.str() << std::endl;
-
-  return 0;
+    return 0;
 }

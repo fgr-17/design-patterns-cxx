@@ -6,10 +6,10 @@
  *
  */
 
+#include <cmath>  // IWYU pragma: keep
 #include <iostream>
-#include <cmath>        // IWYU pragma: keep
-#include <ostream>      // IWYU pragma: keep
-#include <sstream>      // IWYU pragma: keep
+#include <ostream>  // IWYU pragma: keep
+#include <sstream>  // IWYU pragma: keep
 #include <string>
 #include <utility>
 
@@ -17,9 +17,10 @@ struct Address {
     std::string street, city;
     int suite;
 
-    Address(const std::string street, const std::string city, int suite) : street(std::move(street)), city(std::move(city)), suite(suite) {}
+    Address(const std::string street, const std::string city, int suite)
+        : street(std::move(street)), city(std::move(city)), suite(suite) {}
 
-    friend std::ostream& operator<<(std::ostream&os, const Address& a) {
+    friend std::ostream& operator<<(std::ostream& os, const Address& a) {
         os << "Street: " << a.street << "\n";
         os << "City: " << a.city << "\n";
         os << "Suite: " << a.suite << "\n";
@@ -31,29 +32,28 @@ struct Contact {
     std::string name;
     Address address;
 
-    Contact(const std::string name, const Address address): name(std::move(name)), address(std::move(address)) {}
+    Contact(const std::string name, const Address address)
+        : name(std::move(name)), address(std::move(address)) {}
 
-    friend std::ostream& operator<<(std::ostream&os, const Contact& c) {
+    friend std::ostream& operator<<(std::ostream& os, const Contact& c) {
         os << "Name: " << c.name << "\n";
         os << c.address;
         return os;
     }
 };
 
-
 struct Contact2 {
     std::string name;
     Address* address;
 
-    Contact2(const std::string name, Address* address): name(std::move(name)), address(address) {}
+    Contact2(const std::string name, Address* address) : name(std::move(name)), address(address) {}
 
-    friend std::ostream& operator<<(std::ostream&os, const Contact2& c) {
+    friend std::ostream& operator<<(std::ostream& os, const Contact2& c) {
         os << "Name: " << c.name << "\n";
         os << *c.address;
         return os;
     }
 };
-
 
 /**
  *   @fn printTitle
@@ -61,12 +61,12 @@ struct Contact2 {
  */
 
 static int printTitle() {
-  std::cout << "=========================================" << std::endl;
-  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
-  std::cout << "\e[1mSection 5:\e[0m Prototype" << std::endl;
-  std::cout << "\e[1mChapter 27:\e[0m Prototype" << std::endl;
-  std::cout << "=========================================" << std::endl;
-  return 0;
+    std::cout << "=========================================" << std::endl;
+    std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+    std::cout << "\e[1mSection 5:\e[0m Prototype" << std::endl;
+    std::cout << "\e[1mChapter 27:\e[0m Prototype" << std::endl;
+    std::cout << "=========================================" << std::endl;
+    return 0;
 }
 
 /**
@@ -96,7 +96,6 @@ int main() {
     jane2.address.suite = janeAddressNo;
     std::cout << jane2 << std::endl;
 
-
     // using a pointer for the address
     Contact2 john2{"John Doe", new Address{"123 East Dr", "London", johnAddressNo}};
     std::cout << john2 << std::endl;
@@ -107,7 +106,6 @@ int main() {
     std::cout << jane3 << std::endl;
     // shows Jane's suite instead of John's
     std::cout << john2 << std::endl;
-
 
     return 0;
 }

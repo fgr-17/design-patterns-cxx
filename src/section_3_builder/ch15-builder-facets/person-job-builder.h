@@ -7,9 +7,8 @@
 #include "person-builder.h"
 
 class PersonJobBuilder : public PersonBuilderBase {
-
- public:
-    explicit PersonJobBuilder(Person &person) : PersonBuilderBase(person) {}
+   public:
+    explicit PersonJobBuilder(Person& person) : PersonBuilderBase(person) {}
 
     PersonJobBuilder& at(std::string companyName) {
         person.companyName = companyName;

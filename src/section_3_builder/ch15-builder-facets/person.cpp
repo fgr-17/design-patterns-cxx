@@ -5,8 +5,8 @@
  */
 
 #include "person.h"
-#include "person-builder.h"
 
+#include "person-builder.h"
 
 PersonBuilder Person::create() {
     return PersonBuilder();

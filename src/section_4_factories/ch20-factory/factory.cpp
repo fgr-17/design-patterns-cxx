@@ -7,16 +7,12 @@
  */
 
 #define _USE_MATH_DEFINES
+#include <cmath>  // IWYU pragma: keep
 #include <iostream>
-#include <cmath>        // IWYU pragma: keep
-#include <ostream>      // IWYU pragma: keep
-#include <sstream>      // IWYU pragma: keep
+#include <ostream>  // IWYU pragma: keep
+#include <sstream>  // IWYU pragma: keep
 
-
-enum class PointType {
-    cartesian,
-    polar
-};
+enum class PointType { cartesian, polar };
 
 /**
  *   @fn Point
@@ -24,13 +20,13 @@ enum class PointType {
  */
 
 class Point {
-    friend struct PointFactory;                 // hits on OCP
+    friend struct PointFactory;  // hits on OCP
     Point(float x, float y) : x(x), y(y) {}
 
- public:
+   public:
     float x, y;
 
-    friend std::ostream& operator<<(std::ostream& os, const Point&p) {
+    friend std::ostream& operator<<(std::ostream& os, const Point& p) {
         os << "P(x, y) = (" << p.x << ", " << p.y << ")";
         return os;
     }
@@ -47,10 +43,9 @@ struct PointFactory {
     }
 
     static Point newPolar(float r, float theta) {
-        return {r*std::cos(theta), r*std::sin(theta)};
+        return {r * std::cos(theta), r * std::sin(theta)};
     }
 };
-
 
 /**
  *   @fn printTitle
@@ -58,10 +53,10 @@ struct PointFactory {
  */
 
 static int printTitle() {
-  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
-  std::cout << "\e[1mSection 4:\e[0m Factories" << std::endl;
-  std::cout << "\e[1mChapter 20:\e[0m Factory" << std::endl;
-  return 0;
+    std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+    std::cout << "\e[1mSection 4:\e[0m Factories" << std::endl;
+    std::cout << "\e[1mChapter 20:\e[0m Factory" << std::endl;
+    return 0;
 }
 
 /**

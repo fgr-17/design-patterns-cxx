@@ -5,18 +5,17 @@
  *    @author rouxfederico@gmail.com
  */
 
- #pragma once
+#pragma once
 
-
- #include <map>
+#include <map>
 #include <string>
+
 #include "hot-drink-factory.h"
 
 class DrinkFactory {
-   std::map<std::string, std::unique_ptr<HotDrinkFactory>> hotFactories;
+    std::map<std::string, std::unique_ptr<HotDrinkFactory>> hotFactories;
 
- public:
-
+   public:
     DrinkFactory() {
         hotFactories["coffee"] = std::make_unique<CoffeeFactory>();
         hotFactories["tea"] = std::make_unique<TeaFactory>();
@@ -28,5 +27,4 @@ class DrinkFactory {
         drink->prepare(vol);
         return drink;
     }
-
 };

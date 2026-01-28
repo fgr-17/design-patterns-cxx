@@ -6,17 +6,12 @@
  *
  */
 
+#include <cmath>  // IWYU pragma: keep
 #include <iostream>
-#include <cmath>        // IWYU pragma: keep
-#include <ostream>      // IWYU pragma: keep
-#include <sstream>      // IWYU pragma: keep
+#include <ostream>  // IWYU pragma: keep
+#include <sstream>  // IWYU pragma: keep
 
-
-enum class PointType {
-    cartesian,
-    polar
-};
-
+enum class PointType { cartesian, polar };
 
 struct Point {
     // initialize with cartesian coordinates
@@ -31,12 +26,12 @@ struct Point {
             x = a;
             y = b;
         } else {
-            x = a*std::cos(b);
-            y = a*std::sin(b);
+            x = a * std::cos(b);
+            y = a * std::sin(b);
         }
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const Point&p) {
+    friend std::ostream& operator<<(std::ostream& os, const Point& p) {
         os << "P(x, y) = (" << p.x << ", " << p.y << ")";
         return os;
     }
@@ -50,10 +45,10 @@ struct Point {
  */
 
 static int printTitle() {
-  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
-  std::cout << "\e[1mSection 4:\e[0m Factories" << std::endl;
-  std::cout << "\e[1mChapter 18:\e[0m Point example" << std::endl;
-  return 0;
+    std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+    std::cout << "\e[1mSection 4:\e[0m Factories" << std::endl;
+    std::cout << "\e[1mChapter 18:\e[0m Point example" << std::endl;
+    return 0;
 }
 
 /**

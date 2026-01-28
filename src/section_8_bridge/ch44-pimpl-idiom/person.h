@@ -3,14 +3,11 @@
  *   @brief person class define
  */
 #pragma once
+#include <iostream>  // IWYU pragma: keep
 #include <string>
-#include <iostream> // IWYU pragma: keep
-
 
 class Person {
-
- public:
-
+   public:
     std::string name;
 
     class PersonImpl;
@@ -21,7 +18,7 @@ class Person {
 
     void greet() const;
 
-// secret stuff goes inside cpp
-//  private:
-//     void secretFun();
+    // secret stuff goes inside cpp
+    //  private:
+    //     void secretFun();
 };

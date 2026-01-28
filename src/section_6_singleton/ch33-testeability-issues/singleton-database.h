@@ -6,20 +6,19 @@
 
 #pragma once
 
-#include <fstream>      // IWYU pragma: keep
+#include <fstream>  // IWYU pragma: keep
 #include <map>
-#include <ostream>      // IWYU pragma: keep
-#include <sstream>      // IWYU pragma: keep
+#include <ostream>  // IWYU pragma: keep
+#include <sstream>  // IWYU pragma: keep
 #include <string>
 #include <vector>
 
 class SingletonDatabase {
-
- private:
+   private:
     SingletonDatabase();
     std::map<std::string, int> capitals_;
 
- public:
+   public:
     // deleting copy constructor and assignment:
     SingletonDatabase(SingletonDatabase const&) = delete;
     SingletonDatabase& operator=(SingletonDatabase const&) = delete;
@@ -32,7 +31,6 @@ class SingletonDatabase {
     static SingletonDatabase& get();
 
     int getPopulation(const std::string& city);
-
 
     void print();
 };

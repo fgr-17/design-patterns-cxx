@@ -5,42 +5,40 @@
  *
  */
 
-
-#include <iostream>
-#include <vector>
 #include <fstream>  // IWYU pragma: keep
+#include <iostream>
 #include <string>
 #include <utility>
+#include <vector>
 
 struct Journal {
-  std::string title;
-  std::vector<std::string> entries;
+    std::string title;
+    std::vector<std::string> entries;
 
-  explicit Journal(const std::string title): title(std::move(title)) {}
+    explicit Journal(const std::string title) : title(std::move(title)) {}
 
-  void addEntry(const std::string& entry) {
-      static int count = 1;
-      entries.push_back(std::to_string(count) + ": " + entry);
-  }
+    void addEntry(const std::string& entry) {
+        static int count = 1;
+        entries.push_back(std::to_string(count) + ": " + entry);
+    }
 
-  // this method would violate single resp principle:
-  // void save(const string& filename) {
-  //   ofstream ofs(filename);
-  //   for (auto& e: entries) {
-  //     ofs << e << endl;
-  //   }
-  // }
+    // this method would violate single resp principle:
+    // void save(const string& filename) {
+    //   ofstream ofs(filename);
+    //   for (auto& e: entries) {
+    //     ofs << e << endl;
+    //   }
+    // }
 };
 
-
 struct PersistenceManager {
-  // in this site, it shouldn't break the single resp principle:
-  static void save(const Journal& j, const std::string& filename) {
-    std::ofstream ofs(filename);
-    for (const auto& e : j.entries) {
-      ofs << e << std::endl;
+    // in this site, it shouldn't break the single resp principle:
+    static void save(const Journal& j, const std::string& filename) {
+        std::ofstream ofs(filename);
+        for (const auto& e : j.entries) {
+            ofs << e << std::endl;
+        }
     }
-  }
 };
 
 /**
@@ -49,15 +47,15 @@ struct PersistenceManager {
  */
 
 int main() {
-  Journal journal{"Dear diary"};
-  journal.addEntry("I ate a bug");
-  journal.addEntry("I cried today");
+    Journal journal{"Dear diary"};
+    journal.addEntry("I ate a bug");
+    journal.addEntry("I cried today");
 
-  PersistenceManager::save(journal, "diary.txt");
+    PersistenceManager::save(journal, "diary.txt");
 
-  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
-  std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
-  std::cout << "\e[1mChapter 3:\e[0m Single Responsibility Principle" << std::endl;
+    std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+    std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
+    std::cout << "\e[1mChapter 3:\e[0m Single Responsibility Principle" << std::endl;
 
-  return 0;
+    return 0;
 }

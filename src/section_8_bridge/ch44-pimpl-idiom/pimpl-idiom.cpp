@@ -5,10 +5,11 @@
  */
 
 #include <person.h>
-#include <fstream>      // IWYU pragma: keep
+
+#include <fstream>  // IWYU pragma: keep
 #include <iostream>
-#include <ostream>      // IWYU pragma: keep
-#include <sstream>      // IWYU pragma: keep
+#include <ostream>  // IWYU pragma: keep
+#include <sstream>  // IWYU pragma: keep
 #include <string>
 
 /**
@@ -17,12 +18,12 @@
  */
 
 static int printTitle() {
-  std::cout << "=========================================" << std::endl;
-  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
-  std::cout << "\e[1mSection 8:\e[0m Bridge" << std::endl;
-  std::cout << "\e[1mCH44: Pimpl idiom\e[0m" << std::endl;
-  std::cout << "=========================================" << std::endl;
-  return 0;
+    std::cout << "=========================================" << std::endl;
+    std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+    std::cout << "\e[1mSection 8:\e[0m Bridge" << std::endl;
+    std::cout << "\e[1mCH44: Pimpl idiom\e[0m" << std::endl;
+    std::cout << "=========================================" << std::endl;
+    return 0;
 }
 
 /**
@@ -31,9 +32,9 @@ static int printTitle() {
  */
 
 int main() {
-  Person p("fede");
-  printTitle();
+    Person p("fede");
+    printTitle();
 
-  p.greet();
-  return 0;
+    p.greet();
+    return 0;
 }

@@ -15,7 +15,6 @@ struct Document;
 //   virtual void fax(Document&doc) = 0;
 // };
 
-
 // struct MultiFunctionPrinter: IMachine {
 //   void print(Document&doc) override {
 //     // ok
@@ -46,47 +45,45 @@ struct Document;
 // };
 
 struct IPrinter {
-  virtual void print(const Document&doc) const = 0;
+    virtual void print(const Document& doc) const = 0;
 };
 
 struct IScanner {
-  virtual void scan(const Document&doc) const = 0;
+    virtual void scan(const Document& doc) const = 0;
 };
 
 struct IFax {
-  virtual void fax(const Document&doc) const = 0;
+    virtual void fax(const Document& doc) const = 0;
 };
 
-
-struct Printer: IPrinter {
-  void print(const Document&) const override {
-    return;
-  }
+struct Printer : IPrinter {
+    void print(const Document&) const override {
+        return;
+    }
 };
 
-struct Scanner: IScanner {
-  void scan(const Document&) const override {
-    return;
-  }
+struct Scanner : IScanner {
+    void scan(const Document&) const override {
+        return;
+    }
 };
 
+struct IMachine : IPrinter, IScanner {};
 
-struct IMachine: IPrinter, IScanner {};
+struct Machine : IMachine {
+    const IPrinter& printer;
+    const IScanner& scanner;
 
-struct Machine: IMachine {
-  const IPrinter& printer;
-  const IScanner& scanner;
+    Machine(const IPrinter& printer, const IScanner& scanner)
+        : printer(printer), scanner(scanner) {}
 
-  Machine(const IPrinter&printer, const IScanner&scanner): printer(printer), scanner(scanner) {}
-
-  void print(const Document&doc) const override {
-    printer.print(doc);
-  }
-  void scan(const Document&doc) const override {
-    scanner.scan(doc);
-  }
+    void print(const Document& doc) const override {
+        printer.print(doc);
+    }
+    void scan(const Document& doc) const override {
+        scanner.scan(doc);
+    }
 };
-
 
 /**
  *   @fn print_title
@@ -94,10 +91,10 @@ struct Machine: IMachine {
  */
 
 static int printTitle() {
-  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
-  std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
-  std::cout << "\e[1mChapter 6:\e[0m Interface Segregation Principle" << std::endl;
-  return 0;
+    std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+    std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
+    std::cout << "\e[1mChapter 6:\e[0m Interface Segregation Principle" << std::endl;
+    return 0;
 }
 
 /**
@@ -106,7 +103,7 @@ static int printTitle() {
  */
 
 int main() {
-  printTitle();
+    printTitle();
 
-  return 0;
+    return 0;
 }

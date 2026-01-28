@@ -6,11 +6,11 @@
 
 #include <iostream>
 #include <string>
-#include "person.h"
-#include "person-builder.h"
-#include "person-address-builder.h"
-#include "person-job-builder.h"
 
+#include "person-address-builder.h"
+#include "person-builder.h"
+#include "person-job-builder.h"
+#include "person.h"
 
 /**
  *   @fn printTitle
@@ -18,10 +18,10 @@
  */
 
 static int printTitle() {
-  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
-  std::cout << "\e[1mSection 3:\e[0m Builder" << std::endl;
-  std::cout << "\e[1mChapter 15:\e[0m Builder Facets" << std::endl;
-  return 0;
+    std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+    std::cout << "\e[1mSection 3:\e[0m Builder" << std::endl;
+    std::cout << "\e[1mChapter 15:\e[0m Builder Facets" << std::endl;
+    return 0;
 }
 
 /**
@@ -35,8 +35,14 @@ int main() {
     const int earning = 10e6;
 
     Person p = Person::create()
-        .lives().at("123 London Road").withPostcode("SW1 1GB").in("London")
-        .works().at("PragmaSoft").asA("Consultant").earning(earning);
+                   .lives()
+                   .at("123 London Road")
+                   .withPostcode("SW1 1GB")
+                   .in("London")
+                   .works()
+                   .at("PragmaSoft")
+                   .asA("Consultant")
+                   .earning(earning);
 
     std::cout << p << std::endl;
     return 0;

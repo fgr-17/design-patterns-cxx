@@ -8,8 +8,8 @@
 
 #include <iostream>
 // // #include <cstdio>
-#include <ostream>   // IWYU pragma: keep
-#include <sstream>   // IWYU pragma: keep
+#include <ostream>  // IWYU pragma: keep
+#include <sstream>  // IWYU pragma: keep
 // #include <string>
 // #include <vector>
 // // #include <fstream>
@@ -28,24 +28,25 @@ class CodeBuilder {
     using field = std::pair<std::string, std::string>;
     std::vector<field> fields_;
     std::string className_;
- public:
-  explicit CodeBuilder(const std::string className) : className_{std::move(className)} {}
 
-  CodeBuilder& addField(const std::string name, const std::string type) {
-    fields_.emplace_back(std::make_pair(type, name));
-    return *this;
-  }
+   public:
+    explicit CodeBuilder(const std::string className) : className_{std::move(className)} {}
 
-  friend std::ostream& operator<<(std::ostream& os, const CodeBuilder& obj) {
-      os << "class " << obj.className_ << std::endl;
-      os << "{" << std::endl;
+    CodeBuilder& addField(const std::string name, const std::string type) {
+        fields_.emplace_back(std::make_pair(type, name));
+        return *this;
+    }
 
-      for (auto& field : obj.fields_) {
-          os << "  " << field.first << " " << field.second << ";" << std::endl;
-      }
-      os << "};" << std::endl;
-      return os;
-  }
+    friend std::ostream& operator<<(std::ostream& os, const CodeBuilder& obj) {
+        os << "class " << obj.className_ << std::endl;
+        os << "{" << std::endl;
+
+        for (auto& field : obj.fields_) {
+            os << "  " << field.first << " " << field.second << ";" << std::endl;
+        }
+        os << "};" << std::endl;
+        return os;
+    }
 };
 
 /**
@@ -54,10 +55,10 @@ class CodeBuilder {
  */
 
 static int printTitle() {
-  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
-  std::cout << "\e[1mSection 3:\e[0m Builder" << std::endl;
-  std::cout << "\e[1mCoding exercise\e[0m" << std::endl;
-  return 0;
+    std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+    std::cout << "\e[1mSection 3:\e[0m Builder" << std::endl;
+    std::cout << "\e[1mCoding exercise\e[0m" << std::endl;
+    return 0;
 }
 
 /**

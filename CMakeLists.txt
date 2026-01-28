@@ -11,12 +11,22 @@ set(CMAKE_CXX_EXTENSIONS OFF CACHE BOOL "enable/disable compiler specific extens
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -W -Wall -Wextra")
 
-set(CMAKE_CXX_CPPLINT "cpplint")
 set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
-# set(CMAKE_CXX_CLANG_FORMAT "clang-format")
+set(CMAKE_CXX_CLANG_FORMAT "clang-format")
 set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "iwyu")
 
 set(SRC_DIR src)
+
+file(GLOB_RECURSE ALL_SOURCE_FILES 
+    ${CMAKE_SOURCE_DIR}/src/*.cpp 
+    ${CMAKE_SOURCE_DIR}/src/*.c
+    ${CMAKE_SOURCE_DIR}/src/*.h
+)
+
+add_custom_target(fix
+    COMMAND clang-format -i ${ALL_SOURCE_FILES}
+    COMMENT "Running clang-format to fix formatting..."
+)
 
 add_subdirectory(test)
 

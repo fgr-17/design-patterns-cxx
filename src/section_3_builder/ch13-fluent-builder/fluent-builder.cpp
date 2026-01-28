@@ -30,7 +30,6 @@ class HtmlBuilder;
 
 // test.cpp
 
-
 class HtmlElement {
     friend class HtmlBuilder;
     std::string name_, text_;
@@ -39,9 +38,10 @@ class HtmlElement {
 
     HtmlElement() = default;
     explicit HtmlElement(const std::string name) : name_(std::move(name)) {}
-    HtmlElement(const std::string name, const std::string text) : name_(std::move(name)), text_(std::move(text)) {}
+    HtmlElement(const std::string name, const std::string text)
+        : name_(std::move(name)), text_(std::move(text)) {}
 
- public:
+   public:
     [[nodiscard]] std::string str(int indent = 0) const {
         std::ostringstream oss;
         std::string i(indentSize_ * indent, ' ');
@@ -71,7 +71,7 @@ class HtmlElement {
 class HtmlBuilder {
     HtmlElement root_;
 
- public:
+   public:
     explicit HtmlBuilder(std::string root_name) : root_(root_name) {}
 
     HtmlBuilder& addChild(std::string child_name, std::string child_text) {

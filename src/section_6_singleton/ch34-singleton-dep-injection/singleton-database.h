@@ -6,26 +6,24 @@
 
 #pragma once
 
-#include <fstream>      // IWYU pragma: keep
+#include <fstream>  // IWYU pragma: keep
 #include <map>
-#include <ostream>      // IWYU pragma: keep
-#include <sstream>      // IWYU pragma: keep
+#include <ostream>  // IWYU pragma: keep
+#include <sstream>  // IWYU pragma: keep
 #include <string>
 #include <vector>
 
 class Database {
- public:
+   public:
     virtual int getPopulation(const std::string& city) = 0;
 };
 
-
 class SingletonDatabase : public Database {
-
- private:
+   private:
     SingletonDatabase();
     std::map<std::string, int> capitals_;
 
- public:
+   public:
     // deleting copy constructor and assignment:
     SingletonDatabase(SingletonDatabase const&) = delete;
     SingletonDatabase& operator=(SingletonDatabase const&) = delete;
@@ -38,7 +36,6 @@ class SingletonDatabase : public Database {
     static SingletonDatabase& get();
 
     int getPopulation(const std::string& city) override;
-
 
     void print();
 };
@@ -53,4 +50,3 @@ struct ConfigurableRecordFinder {
     ConfigurableRecordFinder(Database& db) : db(db) {}
     int totalPopulation(std::vector<std::string> city);
 };
-

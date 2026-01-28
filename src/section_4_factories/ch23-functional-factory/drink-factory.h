@@ -5,21 +5,19 @@
  *    @author rouxfederico@gmail.com
  */
 
- #pragma once
-
+#pragma once
 
 #include <algorithm>
+#include <functional>
 #include <map>
 #include <string>
-#include <functional>
 
 #include "hot-drink-factory.h"
 
 class DrinkFactory {
-   std::map<std::string, std::unique_ptr<HotDrinkFactory>> hotFactories;
+    std::map<std::string, std::unique_ptr<HotDrinkFactory>> hotFactories;
 
- public:
-
+   public:
     DrinkFactory() {
         hotFactories["coffee"] = std::make_unique<CoffeeFactory>();
         hotFactories["tea"] = std::make_unique<TeaFactory>();
@@ -31,23 +29,23 @@ class DrinkFactory {
         drink->prepare(vol);
         return drink;
     }
-
 };
 
 class DrinkWithVolumeFactory {
     std::map<std::string, std::function<std::unique_ptr<HotDrink>(const int&)>> factories;
- public:
+
+   public:
     DrinkWithVolumeFactory() {
-        factories["tea"] = [] (const int& vol){
-          auto tea = std::make_unique<Tea>();
-          tea->prepare(vol);
-          return tea;
+        factories["tea"] = [](const int& vol) {
+            auto tea = std::make_unique<Tea>();
+            tea->prepare(vol);
+            return tea;
         };
 
-        factories["coffee"] = [] (const int& vol) {
-          auto coffee = std::make_unique<Coffee>();
-          coffee->prepare(vol);
-          return coffee;
+        factories["coffee"] = [](const int& vol) {
+            auto coffee = std::make_unique<Coffee>();
+            coffee->prepare(vol);
+            return coffee;
         };
     }
 

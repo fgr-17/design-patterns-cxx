@@ -4,39 +4,37 @@
  *    @author rouxfederico@gmail.com
  */
 
-#include <fstream>      // IWYU pragma: keep
+#include <fstream>  // IWYU pragma: keep
 #include <iostream>
-#include <ostream>      // IWYU pragma: keep
-#include <sstream>      // IWYU pragma: keep
-#include <string>    // for string
-#include <utility>   // for move
+#include <ostream>  // IWYU pragma: keep
+#include <sstream>  // IWYU pragma: keep
+#include <string>   // for string
+#include <utility>  // for move
 #include <vector>
 
-
 struct GraphicObject {
-  virtual void draw() const = 0;
+    virtual void draw() const = 0;
 };
 
-struct Circle: GraphicObject {
-  void draw() const override {
-    std::cout << "Circle" << std::endl;
-  }
-};
-
-struct Group: GraphicObject {
-  std::string name;
-  std::vector<GraphicObject*> objects;
-
-  explicit Group(const std::string name): name(std::move(name)) {}
-
-  void draw() const override {
-    std::cout << "Group " << name.c_str() << " contains: " << std::endl;
-    for (const auto& o : objects) {
-      o->draw();
+struct Circle : GraphicObject {
+    void draw() const override {
+        std::cout << "Circle" << std::endl;
     }
-  }
 };
 
+struct Group : GraphicObject {
+    std::string name;
+    std::vector<GraphicObject*> objects;
+
+    explicit Group(const std::string name) : name(std::move(name)) {}
+
+    void draw() const override {
+        std::cout << "Group " << name.c_str() << " contains: " << std::endl;
+        for (const auto& o : objects) {
+            o->draw();
+        }
+    }
+};
 
 /**
  *   @fn printTitle
@@ -44,12 +42,12 @@ struct Group: GraphicObject {
  */
 
 static int printTitle() {
-  std::cout << "=========================================" << std::endl;
-  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
-  std::cout << "\e[1mSection 9:\e[0m Composition" << std::endl;
-  std::cout << "\e[1mCH49: Geometric shapes\e[0m" << std::endl;
-  std::cout << "=========================================" << std::endl;
-  return 0;
+    std::cout << "=========================================" << std::endl;
+    std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+    std::cout << "\e[1mSection 9:\e[0m Composition" << std::endl;
+    std::cout << "\e[1mCH49: Geometric shapes\e[0m" << std::endl;
+    std::cout << "=========================================" << std::endl;
+    return 0;
 }
 
 /**
@@ -58,21 +56,21 @@ static int printTitle() {
  */
 
 int main() {
-  Circle c1, c2;
-  Group g{"root"};
-  Group sg("subgroup");
-  printTitle();
+    Circle c1, c2;
+    Group g{"root"};
+    Group sg("subgroup");
+    printTitle();
 
-  c1.draw();
-  c2.draw();
+    c1.draw();
+    c2.draw();
 
-  g.objects.push_back(&c1);
-  g.draw();
+    g.objects.push_back(&c1);
+    g.draw();
 
-  sg.objects.push_back(&c2); 
-  g.objects.push_back(&sg);
-  sg.draw();
-  g.draw();
+    sg.objects.push_back(&c2);
+    g.objects.push_back(&sg);
+    sg.draw();
+    g.draw();
 
-  return 0;
+    return 0;
 }

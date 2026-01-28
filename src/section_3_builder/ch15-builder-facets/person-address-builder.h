@@ -2,10 +2,11 @@
 
 #include <string>
 
-class PersonAddressBuilder : public PersonBuilderBase {
+#include "person-builder.h"
 
- public:
-    explicit PersonAddressBuilder(Person &person) : PersonBuilderBase(person) {}
+class PersonAddressBuilder : public PersonBuilderBase {
+   public:
+    explicit PersonAddressBuilder(Person& person) : PersonBuilderBase(person) {}
 
     PersonAddressBuilder& at(std::string streetAddress) {
         person.streetAddress = streetAddress;

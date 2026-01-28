@@ -1,7 +1,8 @@
 /**
  *    @file main.cpp
  *    @brief Dependency Inversion Principle:
- *    @brief A. High-level modules should not depend on low-level modules. Both should depend on abstractions
+ *    @brief A. High-level modules should not depend on low-level modules. Both should depend on
+ * abstractions
  *    @brief B. Abstractions should not depend on details. Details should depend on abstractions
  *    @author rouxfederico@gmail.com
  *
@@ -13,14 +14,10 @@
 #include <type_traits>
 #include <vector>
 
-enum class Relationship {
-  parent,
-  child,
-  sibling
-};
+enum class Relationship { parent, child, sibling };
 
 struct Person {
-  std::string name;
+    std::string name;
 };
 
 // struct Relationships {    // low-level module
@@ -47,38 +44,40 @@ struct Person {
 //   }
 // };
 
-// to avoid connecting Research (high level module) to Relationships (low level), a new abstraction should be created:
+// to avoid connecting Research (high level module) to Relationships (low level), a new abstraction
+// should be created:
 
 struct RelationshipBrowser {
-  [[nodiscard]] virtual std::vector<Person> findAllChildrenOf(const std::string& name) const = 0;
+    [[nodiscard]] virtual std::vector<Person> findAllChildrenOf(const std::string& name) const = 0;
 };
 
-struct Relationships: RelationshipBrowser {    // low-level module
-  std::vector<std::tuple<Person, Relationship, Person>> relations;
+struct Relationships : RelationshipBrowser {  // low-level module
+    std::vector<std::tuple<Person, Relationship, Person>> relations;
 
-  void addParentAndChild(const Person&parent, const Person& child) {
-    relations.emplace_back(parent, Relationship::parent, child);
-    relations.emplace_back(child, Relationship::child, parent);
-  }
-
-  [[nodiscard]] std::vector<Person> findAllChildrenOf(const std::string &name) const override{
-    std::vector<Person> result;
-    for (auto&& [first, rel, second] : relations) {
-      if (first.name == name && rel == Relationship::parent) {
-        result.push_back(second);
-      }
+    void addParentAndChild(const Person& parent, const Person& child) {
+        relations.emplace_back(parent, Relationship::parent, child);
+        relations.emplace_back(child, Relationship::child, parent);
     }
-    return result;
-  }
+
+    [[nodiscard]] std::vector<Person> findAllChildrenOf(const std::string& name) const override {
+        std::vector<Person> result;
+        for (auto&& [first, rel, second] : relations) {
+            if (first.name == name && rel == Relationship::parent) {
+                result.push_back(second);
+            }
+        }
+        return result;
+    }
 };
 
 // solid version
 struct Research {  // high-level
-  explicit Research(const RelationshipBrowser& browser) {  // <<<< this offends the deps inversion principle
-    for (auto&child : browser.findAllChildrenOf("John")) {
-      std::cout << "John has a child called " << child.name << std::endl;
+    explicit Research(
+        const RelationshipBrowser& browser) {  // <<<< this offends the deps inversion principle
+        for (auto& child : browser.findAllChildrenOf("John")) {
+            std::cout << "John has a child called " << child.name << std::endl;
+        }
     }
-  }
 };
 
 /**
@@ -87,10 +86,10 @@ struct Research {  // high-level
  */
 
 static int printTitle() {
-  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
-  std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
-  std::cout << "\e[1mChapter 7:\e[0m Dependency Inversion Principle" << std::endl;
-  return 0;
+    std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+    std::cout << "\e[1mSection 2:\e[0m SOLID Design Principles" << std::endl;
+    std::cout << "\e[1mChapter 7:\e[0m Dependency Inversion Principle" << std::endl;
+    return 0;
 }
 
 /**
@@ -99,19 +98,18 @@ static int printTitle() {
  */
 
 int main() {
-  printTitle();
+    printTitle();
 
-  Person parent{"John"};
-  Person child1{"Chris"}, child2{"Matt"};
+    Person parent{"John"};
+    Person child1{"Chris"}, child2{"Matt"};
 
-  Relationships relationships;
-  relationships.addParentAndChild(parent, child1);
-  relationships.addParentAndChild(parent, child2);
+    Relationships relationships;
+    relationships.addParentAndChild(parent, child1);
+    relationships.addParentAndChild(parent, child2);
 
+    // research class is connected to an abstract class, but it can be implemented using the
+    // concrete class
+    Research _(relationships);
 
-  // research class is connected to an abstract class, but it can be implemented using the concrete class
-  Research _(relationships);
-
-
-  return 0;
+    return 0;
 }

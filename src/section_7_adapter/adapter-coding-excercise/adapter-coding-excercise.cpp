@@ -1,46 +1,50 @@
 /**
  *    @file adapter-coding-excercise .cpp
  *    @brief Singleton Coding Exercise
- *    @brief 
+ *    @brief
  *    @brief Adapter Coding Exercise
  *    @brief Here's a very synthetic example for you to try.
- *    @brief 
- *    @brief You are given a Rectangle protocol and an extension method on it. 
- *    @brief Try to define a SquareToRectangleAdapter that adapts the Square  to the Rectangle  interface.
+ *    @brief
+ *    @brief You are given a Rectangle protocol and an extension method on it.
+ *    @brief Try to define a SquareToRectangleAdapter that adapts the Square  to the Rectangle
+ * interface.
  *    @author rouxfederico@gmail.com
  */
 
-#include <fstream>      // IWYU pragma: keep
+#include <fstream>  // IWYU pragma: keep
 #include <iostream>
-#include <ostream>      // IWYU pragma: keep
-#include <sstream>      // IWYU pragma: keep
+#include <ostream>  // IWYU pragma: keep
+#include <sstream>  // IWYU pragma: keep
 
 struct Square {
-  int side{ 0 };
-  explicit Square(const int side) : side(side) {
-  }
+    int side{0};
+    explicit Square(const int side) : side(side) {}
 };
 
 struct Rectangle {
-  [[nodiscard]] virtual int width() const = 0;
-  [[nodiscard]] virtual int height() const = 0;
+    [[nodiscard]] virtual int width() const = 0;
+    [[nodiscard]] virtual int height() const = 0;
 
-  [[nodiscard]] int area() const {
-    return width() * height();
-  }
+    [[nodiscard]] int area() const {
+        return width() * height();
+    }
 };
 
 struct SquareToRectangleAdapter : Rectangle {
-  explicit SquareToRectangleAdapter(const Square& square) {
-      width_ = square.side;
-      height_ = square.side;
-  }
+    explicit SquareToRectangleAdapter(const Square& square) {
+        width_ = square.side;
+        height_ = square.side;
+    }
 
-  int width_;
-  int height_;
+    int width_;
+    int height_;
 
-  [[nodiscard]] int width() const override { return width_; };
-  [[nodiscard]] int height() const override { return height_; };
+    [[nodiscard]] int width() const override {
+        return width_;
+    };
+    [[nodiscard]] int height() const override {
+        return height_;
+    };
 };
 
 /**
@@ -49,12 +53,12 @@ struct SquareToRectangleAdapter : Rectangle {
  */
 
 static int printTitle() {
-  std::cout << "=========================================" << std::endl;
-  std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
-  std::cout << "\e[1mSection 7:\e[0m Adapter" << std::endl;
-  std::cout << "\e[1mCoding Excercise\e[0m" << std::endl;
-  std::cout << "=========================================" << std::endl;
-  return 0;
+    std::cout << "=========================================" << std::endl;
+    std::cout << "\e[1mDesign Patterns in Modern C++\e[0m" << std::endl;
+    std::cout << "\e[1mSection 7:\e[0m Adapter" << std::endl;
+    std::cout << "\e[1mCoding Excercise\e[0m" << std::endl;
+    std::cout << "=========================================" << std::endl;
+    return 0;
 }
 
 /**
@@ -63,6 +67,6 @@ static int printTitle() {
  */
 
 int main() {
-  printTitle();
-  return 0;
+    printTitle();
+    return 0;
 }

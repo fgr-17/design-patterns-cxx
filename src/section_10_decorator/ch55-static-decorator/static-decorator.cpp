@@ -81,7 +81,7 @@ struct TransparentShape : Shape {
   }
 };
 
-// mixing inheritance
+// mixin inheritance
 // perfect forwarding
 template<typename T>
 concept IsAShape = std::is_base_of<Shape, T>::value;

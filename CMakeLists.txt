@@ -71,3 +71,5 @@ add_subdirectory(src/section_10_decorator/ch54-dynamic-decorator)
 add_subdirectory(src/section_10_decorator/ch55-static-decorator)
 add_subdirectory(src/section_10_decorator/ch56-functional-decorator)
 add_subdirectory(src/section_10_decorator/decorator-excercise)
+
+add_subdirectory(src/section_11_facade/ch59-facade)

@@ -83,3 +83,7 @@ add_subdirectory(src/section_10_decorator/ch56-functional-decorator)
 add_subdirectory(src/section_10_decorator/decorator-excercise)
 
 add_subdirectory(src/section_11_facade/ch59-facade)
+
+add_subdirectory(src/section_12_flyweight/ch62-handmade-flyweight)
+
+

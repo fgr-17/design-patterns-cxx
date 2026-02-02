@@ -28,8 +28,7 @@
 
 // IWYU pragma: no_include <boost/flyweight/flyweight.hpp>
 // IWYU pragma: no_include <boost/operators.hpp>
-#include <boost/flyweight.hpp>                                  // IWYU pragma: keep
-
+#include <boost/flyweight.hpp>  // IWYU pragma: keep
 
 struct User {
     std::string firstName;
@@ -180,8 +179,7 @@ int main() {
     std::cout << "Used memory: " << FlyweightUser::getUsedMemory() << " bytes" << std::endl;
     std::cout << "Reserved memory: " << FlyweightUser::getTotalMemory() << " bytes" << std::endl;
     std::cout << "--------------------------------" << std::endl;
-    
-    
+
     BoostFlyweightUser boostFlyweightUser1("John", "Doe");
     BoostFlyweightUser boostFlyweightUser2("Jane", "Doe");
     BoostFlyweightUser boostFlyweightUser3("John", "Smith");
@@ -194,9 +192,14 @@ int main() {
     std::cout << boostFlyweightUser4 << std::endl;
 
     std::cout << "Checking first and second users storage:" << std::boolalpha << std::endl;
-    std::cout << "First name reuse:" << (&boostFlyweightUser1.firstName.get() == &boostFlyweightUser2.firstName.get()) << std::endl;
-    std::cout << "Last name reuse:" << (&boostFlyweightUser1.lastName.get() == &boostFlyweightUser2.lastName.get()) << std::endl;
-    std::cout << "Boost doesn't provide a way to measure the memory used by the flyweight" << std::endl;
+    std::cout << "First name reuse:"
+              << (&boostFlyweightUser1.firstName.get() == &boostFlyweightUser2.firstName.get())
+              << std::endl;
+    std::cout << "Last name reuse:"
+              << (&boostFlyweightUser1.lastName.get() == &boostFlyweightUser2.lastName.get())
+              << std::endl;
+    std::cout << "Boost doesn't provide a way to measure the memory used by the flyweight"
+              << std::endl;
     std::cout << "--------------------------------" << std::endl;
 
     return 0;

@@ -1,0 +1,4 @@
+#!/bin/sh
+ROOT=$(git rev-parse --show-toplevel)
+cd "$ROOT"
+exec docker compose run --rm -w /workspace -v "$ROOT:/workspace" design-patterns /workspace/scripts/pre-commit-container.sh

@@ -9,13 +9,12 @@
 #include <cstdint>  // IWYU pragma: keep
 #include <fstream>  // IWYU pragma: keep
 #include <iostream>
-#include <ostream>    // IWYU pragma: keep
-#include <sstream>    // IWYU pragma: keep
-#include <string>     // IWYU pragma: keep
-#include <utility>    // IWYU pragma: keep
-#include <vector>     // IWYU pragma: keep|
-#include <memory>     // IWYU pragma: keep
-
+#include <memory>   // IWYU pragma: keep
+#include <ostream>  // IWYU pragma: keep
+#include <sstream>  // IWYU pragma: keep
+#include <string>   // IWYU pragma: keep
+#include <utility>  // IWYU pragma: keep
+#include <vector>   // IWYU pragma: keep|
 
 struct BankAccount {
     virtual ~BankAccount() = default;
@@ -31,7 +30,7 @@ struct BankAccount {
 };
 
 struct CurrentAccount : BankAccount {
- public:
+   public:
     explicit CurrentAccount(const int balance) : balance_(balance) {}
 
     void deposit(int amount) override {
@@ -47,9 +46,8 @@ struct CurrentAccount : BankAccount {
         return os;
     }
 
- private:
+   private:
     int balance_;
-
 };
 /**
  *   @fn printTitle
@@ -90,7 +88,6 @@ int main() {
     b->withdraw(withdrawAmount);
     std::cout << *b << std::endl;
     [[maybe_unused]] BankAccount* b2 = b.get();
-
 
     return 0;
 }

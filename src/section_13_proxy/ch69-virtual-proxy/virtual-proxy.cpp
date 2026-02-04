@@ -5,9 +5,9 @@
  */
 
 #include <iostream>
+#include <memory>
 #include <string>
 #include <utility>
-#include <memory>
 
 struct Image {
     virtual void draw() = 0;
@@ -35,7 +35,7 @@ struct LazyBitmap : Image {
         bitmap_->draw();
     }
 
- private:
+   private:
     std::string filename_;
     std::unique_ptr<Bitmap> bitmap_{nullptr};
 };

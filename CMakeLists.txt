@@ -93,4 +93,5 @@ add_subdirectory(src/section_13_proxy/ch67-smart-pointers)
 add_subdirectory(src/section_13_proxy/ch68-property-proxy)
 add_subdirectory(src/section_13_proxy/ch69-virtual-proxy)
 add_subdirectory(src/section_13_proxy/ch70-communication-proxy)
+add_subdirectory(src/section_13_proxy/proxy-excercise)
 

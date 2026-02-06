@@ -95,3 +95,5 @@ add_subdirectory(src/section_13_proxy/ch69-virtual-proxy)
 add_subdirectory(src/section_13_proxy/ch70-communication-proxy)
 add_subdirectory(src/section_13_proxy/proxy-excercise)
 
+add_subdirectory(src/section_14_chain_of_responsibility/ch74-pointer-chain)
+

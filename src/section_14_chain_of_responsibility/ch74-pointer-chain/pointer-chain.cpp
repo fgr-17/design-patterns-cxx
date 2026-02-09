@@ -98,7 +98,6 @@ class IncreasedDefenseModifier : public CreatureModifier {
     static constexpr int maxDefense = 2;
 };
 
-
 class NoBonusesModifier : public CreatureModifier {
    public:
     NoBonusesModifier(Creature& creature) : CreatureModifier(creature) {}
@@ -141,7 +140,7 @@ int main() {
     root.add(&r1);
     root.add(&r2);
     root.add(&r3);
-    root.handle(); 
+    root.handle();
     root.add(&r4);
     root.handle();
     std::cout << "After r4(increase defense and curse): " << goblin << std::endl;

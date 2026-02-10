@@ -101,4 +101,5 @@ add_subdirectory(src/section_14_chain_of_responsibility/cor-excercise)
 
 add_subdirectory(src/section_15_command/ch78-command)
 add_subdirectory(src/section_15_command/ch79-undo-operations)
+add_subdirectory(src/section_15_command/ch80-composite-command-macro)
 

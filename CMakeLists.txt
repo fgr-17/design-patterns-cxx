@@ -99,3 +99,5 @@ add_subdirectory(src/section_14_chain_of_responsibility/ch74-pointer-chain)
 add_subdirectory(src/section_14_chain_of_responsibility/ch75-broker-chain)
 add_subdirectory(src/section_14_chain_of_responsibility/cor-excercise)
 
+add_subdirectory(src/section_15_command/ch78-command)
+

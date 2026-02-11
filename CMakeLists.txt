@@ -104,3 +104,5 @@ add_subdirectory(src/section_15_command/ch79-undo-operations)
 add_subdirectory(src/section_15_command/ch80-composite-command-macro)
 add_subdirectory(src/section_15_command/command-excercise)
 
+add_subdirectory(src/section_16_interpreter/ch83-handmade-interpreter-lexing)
+

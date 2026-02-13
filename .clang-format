@@ -6,3 +6,4 @@ ColumnLimit: 100             # Maximum line length
 AllowShortFunctionsOnASingleLine: Empty  # Allow only empty functions on a single line
 PointerAlignment: Left       # Align pointer symbols to the left
 SpacesBeforeTrailingComments: 2  # Spaces before trailing comments
+ReflowComments: true

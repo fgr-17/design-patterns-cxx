@@ -110,4 +110,5 @@ add_subdirectory(src/section_16_interpreter/ch85-parser-boost)
 add_subdirectory(src/section_16_interpreter/interpreter-excercise)
 
 add_subdirectory(src/section_17_iterator/ch88-std-iterators)
+add_subdirectory(src/section_17_iterator/ch89-binary-tree-iterator)
 

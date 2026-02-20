@@ -12,6 +12,12 @@
 struct Image {
     virtual void draw() = 0;
     virtual ~Image() = default;
+
+    Image() = default;
+    Image(const Image&) = delete;
+    Image(Image&&) = delete;
+    Image& operator=(const Image&) = delete;
+    Image& operator=(Image&&) = delete;
 };
 
 struct Bitmap : Image {

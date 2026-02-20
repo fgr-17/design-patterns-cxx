@@ -6,7 +6,7 @@ cmake_policy(SET CMP0135 NEW)
 cmake_policy(SET CMP0167 NEW)
 ### C++
 enable_language(CXX)
-set(CMAKE_CXX_STANDARD 20 CACHE STRING "C++ standard required for build")
+set(CMAKE_CXX_STANDARD 23 CACHE STRING "C++ standard required for build")
 set(CMAKE_CXX_STANDARD_REQUIRED ON CACHE BOOL "is C++ stndard a requirement")
 set(CMAKE_CXX_EXTENSIONS OFF CACHE BOOL "enable/disable compiler specific extensions")
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -114,4 +114,5 @@ add_subdirectory(src/section_16_interpreter/interpreter-excercise)
 
 add_subdirectory(src/section_17_iterator/ch88-std-iterators)
 add_subdirectory(src/section_17_iterator/ch89-binary-tree-iterator)
+add_subdirectory(src/section_17_iterator/ch90-tree-iterator-coroutines)
 

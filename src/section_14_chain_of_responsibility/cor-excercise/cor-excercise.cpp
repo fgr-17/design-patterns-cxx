@@ -43,9 +43,7 @@ struct StatQuery {
 };
 
 struct Game {
-    Game()
-        : defenseModifier_(std::make_unique<GoblinDefenseModifier>(*this)),
-          attackModifier_(std::make_unique<GoblinAttackModifier>(*this)) {}
+    Game();
 
     [[nodiscard]] std::vector<Creature*>& getCreatures() {
         return creatures_;
@@ -200,6 +198,10 @@ class GoblinAttackModifier : public CreatureModifier {
     boost::signals2::connection connection_;
     static constexpr int modifier = 1;
 };
+
+Game::Game()
+    : defenseModifier_(std::make_unique<GoblinDefenseModifier>(*this)),
+      attackModifier_(std::make_unique<GoblinAttackModifier>(*this)) {}
 
 static int printTitle() {
     std::cout << "=========================================" << std::endl;

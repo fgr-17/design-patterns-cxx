@@ -12,7 +12,7 @@ class pimpl {
     std::unique_ptr<T> impl;
 
    public:
-    pimpl() : impl(new T{}){};
+    pimpl() : impl(new T{}) {};
 
     template <typename... Args>
     pimpl(Args&&... args) : impl(new T{std::forward<Args>(args)...}) {}

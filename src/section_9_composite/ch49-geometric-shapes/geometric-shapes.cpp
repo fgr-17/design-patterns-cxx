@@ -14,6 +14,12 @@
 
 struct GraphicObject {
     virtual void draw() const = 0;
+    virtual ~GraphicObject() = default;
+    GraphicObject() = default;
+    GraphicObject(const GraphicObject& other) = default;
+    GraphicObject& operator=(const GraphicObject& other) = default;
+    GraphicObject(GraphicObject&& other) = default;
+    GraphicObject& operator=(GraphicObject&& other) = default;
 };
 
 struct Circle : GraphicObject {
@@ -26,7 +32,7 @@ struct Group : GraphicObject {
     std::string name;
     std::vector<GraphicObject*> objects;
 
-    explicit Group(const std::string name) : name(std::move(name)) {}
+    explicit Group(const std::string name) : GraphicObject(), name(std::move(name)) {}
 
     void draw() const override {
         std::cout << "Group " << name.c_str() << " contains: " << std::endl;

@@ -15,13 +15,18 @@
 
 struct Shape {
     [[nodiscard]] virtual std::string str() const = 0;
+    virtual ~Shape() = default;
+    Shape() = default;
+    Shape(const Shape& other) = default;
+    Shape& operator=(const Shape& other) = default;
+    Shape(Shape&& other) = default;
+    Shape& operator=(Shape&& other) = default;
 };
 
 struct Circle : Shape {
     float radius{};
 
-    Circle() = default;
-    explicit Circle(float radius) : radius{radius} {}
+    explicit Circle(float radius) : Shape(), radius{radius} {}
 
     void resize(float factor) {
         radius *= factor;
@@ -37,8 +42,7 @@ struct Circle : Shape {
 struct Square : Shape {
     float side{};
 
-    Square() = default;
-    explicit Square(float side) : side(side) {}
+    explicit Square(float side) : Shape(), side(side) {}
 
     void resize(float factor) {
         side *= factor;
@@ -52,7 +56,7 @@ struct Square : Shape {
 };
 
 struct ColoredShape : Shape {
-    Shape& shape;
+    Shape& shape;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
     std::string color;
 
     ColoredShape(Shape& shape, std::string color) : shape(shape), color(std::move(color)) {}
@@ -65,7 +69,7 @@ struct ColoredShape : Shape {
 };
 
 struct TransparentShape : Shape {
-    Shape& shape;
+    Shape& shape;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
     uint8_t transparency;
 
     static constexpr float maxInt = 255.0f;
@@ -85,7 +89,7 @@ struct TransparentShape : Shape {
 // mixin inheritance
 // perfect forwarding
 template <typename T>
-concept IsAShape = std::is_base_of<Shape, T>::value;
+concept IsAShape = std::is_base_of_v<Shape, T>;
 
 template <IsAShape T>
 struct ColoredShape2 : T {

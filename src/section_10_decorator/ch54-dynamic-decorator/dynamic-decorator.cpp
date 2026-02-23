@@ -14,13 +14,18 @@
 
 struct Shape {
     [[nodiscard]] virtual std::string str() const = 0;
+    virtual ~Shape() = default;
+    Shape() = default;
+    Shape(const Shape& other) = default;
+    Shape& operator=(const Shape& other) = default;
+    Shape(Shape&& other) = default;
+    Shape& operator=(Shape&& other) = default;
 };
 
-struct Circle : Shape {
+struct Circle final : Shape {
     float radius{};
 
-    Circle() = default;
-    explicit Circle(float radius) : radius{radius} {}
+    explicit Circle(float radius) : Shape(), radius{radius} {}
 
     void resize(float factor) {
         radius *= factor;
@@ -33,7 +38,7 @@ struct Circle : Shape {
     }
 };
 
-struct Square : Shape {
+struct Square final : Shape {
     float side{};
 
     Square() = default;
@@ -51,7 +56,7 @@ struct Square : Shape {
 };
 
 struct ColoredShape : Shape {
-    Shape& shape;
+    Shape& shape;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
     std::string color;
 
     ColoredShape(Shape& shape, std::string color) : shape(shape), color(std::move(color)) {}
@@ -64,7 +69,7 @@ struct ColoredShape : Shape {
 };
 
 struct TransparentShape : Shape {
-    Shape& shape;
+    Shape& shape;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
     uint8_t transparency;
     static constexpr float transparencyFactor = 255.0f;
     static constexpr float transparencyPercentage = 100.0f;

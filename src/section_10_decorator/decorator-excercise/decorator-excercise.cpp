@@ -28,6 +28,12 @@
 
 struct Flower {
     [[nodiscard]] virtual std::string str() const = 0;
+    virtual ~Flower() = default;
+    Flower() = default;
+    Flower(const Flower& other) = default;
+    Flower& operator=(const Flower& other) = default;
+    Flower(Flower&& other) = default;
+    Flower& operator=(Flower&& other) = default;
 };
 
 struct Rose : Flower {
@@ -37,7 +43,7 @@ struct Rose : Flower {
 };
 
 struct ColoredRose : Rose {
-    Rose& rose;
+    Rose& rose;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
     std::string color;
     explicit ColoredRose(Rose& rose, const std::string color)
         : rose(rose), color(std::move(color)) {}

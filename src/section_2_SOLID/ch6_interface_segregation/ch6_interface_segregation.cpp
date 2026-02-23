@@ -46,14 +46,32 @@ struct Document;
 
 struct IPrinter {
     virtual void print(const Document& doc) const = 0;
+    virtual ~IPrinter() = default;
+    IPrinter() = default;
+    IPrinter(const IPrinter& other) = default;
+    IPrinter& operator=(const IPrinter& other) = default;
+    IPrinter(IPrinter&& other) = default;
+    IPrinter& operator=(IPrinter&& other) = default;
 };
 
 struct IScanner {
     virtual void scan(const Document& doc) const = 0;
+    virtual ~IScanner() = default;
+    IScanner() = default;
+    IScanner(const IScanner& other) = default;
+    IScanner& operator=(const IScanner& other) = default;
+    IScanner(IScanner&& other) = default;
+    IScanner& operator=(IScanner&& other) = default;
 };
 
 struct IFax {
     virtual void fax(const Document& doc) const = 0;
+    virtual ~IFax() = default;
+    IFax() = default;
+    IFax(const IFax& other) = default;
+    IFax& operator=(const IFax& other) = default;
+    IFax(IFax&& other) = default;
+    IFax& operator=(IFax&& other) = default;
 };
 
 struct Printer : IPrinter {
@@ -70,9 +88,9 @@ struct Scanner : IScanner {
 
 struct IMachine : IPrinter, IScanner {};
 
-struct Machine : IMachine {
-    const IPrinter& printer;
-    const IScanner& scanner;
+struct Machine final : IMachine {
+    const IPrinter& printer;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
+    const IScanner& scanner;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
 
     Machine(const IPrinter& printer, const IScanner& scanner)
         : printer(printer), scanner(scanner) {}

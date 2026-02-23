@@ -65,6 +65,12 @@ struct ProductFilter {
 template <typename T>
 struct Specification {
     virtual bool isSatisfied(T* item) const = 0;
+    virtual ~Specification() = default;
+    Specification() = default;
+    Specification(const Specification& other) = default;
+    Specification& operator=(const Specification& other) = default;
+    Specification(Specification&& other) = default;
+    Specification& operator=(Specification&& other) = default;
 
     // adding this to avoid concatenating many specs: This does not work due to cross dependencies!
     // AndSpecification<T> operator&& (Specification<T>&& other) {
@@ -75,9 +81,15 @@ struct Specification {
 template <typename T>
 struct Filter {
     virtual std::vector<T*> filter(std::vector<T*> items, const Specification<T>& spec) = 0;
+    virtual ~Filter() = default;
+    Filter() = default;
+    Filter(const Filter& other) = default;
+    Filter& operator=(const Filter& other) = default;
+    Filter(Filter&& other) = default;
+    Filter& operator=(Filter&& other) = default;
 };
 
-struct BetterFilter : Filter<Product> {
+struct BetterFilter final : Filter<Product> {
     std::vector<Product*> filter(std::vector<Product*> items,
                                  const Specification<Product>& spec) override {
         std::vector<Product*> result;
@@ -90,9 +102,9 @@ struct BetterFilter : Filter<Product> {
 };
 
 template <typename T>
-struct AndSpecification : Specification<T> {
-    const Specification<T>& first;
-    const Specification<T>& second;
+struct AndSpecification final : Specification<T> {
+    const Specification<T>& first;   // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
+    const Specification<T>& second;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
 
     AndSpecification(const Specification<T>& first, const Specification<T>& second)
         : first(first), second(second) {}
@@ -102,16 +114,16 @@ struct AndSpecification : Specification<T> {
     }
 };
 
-struct ColorSpecification : Specification<Product> {
+struct ColorSpecification final : Specification<Product> {
     Color color;
-    explicit ColorSpecification(Color color) : color(color) {}
+    explicit ColorSpecification(Color color) : Specification<Product>(), color(color) {}
 
     bool isSatisfied(Product* item) const override {
         return (item->color == color);
     }
 };
 
-struct SizeSpecification : Specification<Product> {
+struct SizeSpecification final : Specification<Product> {
     Size size;
     explicit SizeSpecification(Size size) : size(size) {}
 
@@ -140,9 +152,9 @@ static int printTitle() {
 int main() {
     printTitle();
 
-    Product apple{"Apple", Color::green, Size::small};
-    Product tree{"Tree", Color::green, Size::large};
-    Product house{"House", Color::blue, Size::large};
+    Product apple{.name = "Apple", .color = Color::green, .size = Size::small};
+    Product tree{.name = "Tree", .color = Color::green, .size = Size::large};
+    Product house{.name = "House", .color = Color::blue, .size = Size::large};
 
     std::vector<Product*> items{&apple, &tree, &house};
 

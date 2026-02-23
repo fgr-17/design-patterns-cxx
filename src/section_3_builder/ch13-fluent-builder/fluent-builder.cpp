@@ -34,7 +34,7 @@ class HtmlElement {
     friend class HtmlBuilder;
     std::string name_, text_;
     std::vector<HtmlElement> elements_;
-    const size_t indentSize_ = 2;
+    static constexpr size_t identSize = 2;
 
     HtmlElement() = default;
     explicit HtmlElement(const std::string name) : name_(std::move(name)) {}
@@ -44,11 +44,11 @@ class HtmlElement {
    public:
     [[nodiscard]] std::string str(int indent = 0) const {
         std::ostringstream oss;
-        std::string i(indentSize_ * indent, ' ');
+        std::string i(identSize * indent, ' ');
         oss << i << "<" << name_ << ">" << std::endl;
 
         if (text_.size() > 0)
-            oss << std::string(indentSize_ * (indent + 1), ' ') << text_ << std::endl;
+            oss << std::string(identSize * (indent + 1), ' ') << text_ << std::endl;
 
         for (const auto& e : elements_) oss << e.str(indent + 1);
 

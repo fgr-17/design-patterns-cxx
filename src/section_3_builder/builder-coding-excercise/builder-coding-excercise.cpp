@@ -33,7 +33,7 @@ class CodeBuilder {
     explicit CodeBuilder(const std::string className) : className_{std::move(className)} {}
 
     CodeBuilder& addField(const std::string name, const std::string type) {
-        fields_.emplace_back(std::make_pair(type, name));
+        fields_.emplace_back(type, name);
         return *this;
     }
 

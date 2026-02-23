@@ -41,12 +41,18 @@ struct Command {
     Command() = default;
     Command(bool succeeded) : succeeded(succeeded) {}
 
+    virtual ~Command() = default;
+    Command(const Command&) = default;
+    Command(Command&&) = default;
+    Command& operator=(const Command&) = default;
+    Command& operator=(Command&&) = default;
+
     virtual void call() = 0;
     virtual void undo() = 0;
 };
 
 struct BankAccountCommand final : Command {
-    BankAccount& account;
+    BankAccount& account;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
     enum Action { DEPOSIT, WITHDRAW } action;
     unsigned int amount;
 
@@ -90,10 +96,13 @@ struct CompositeBankAccountCommand : std::vector<BankAccountCommand>, Command {
     }
 
     void undo() override {
-        for (auto it = rbegin(); it != rend(); ++it) {
-            it->undo();
+        // for (auto it = rbegin(); it != rend(); ++it) {
+        //     it->undo();
+        // }
+        for (auto& it : *this) {
+            it.undo();
         }
-    };
+    }
 };
 
 struct DependentCompositeCommand : CompositeBankAccountCommand {

@@ -9,5 +9,5 @@
 #include "person-builder.h"
 
 PersonBuilder Person::create() {
-    return PersonBuilder();
+    return {};
 }

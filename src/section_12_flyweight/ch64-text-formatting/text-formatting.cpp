@@ -35,7 +35,7 @@ class FormattedText {
         std::string s;
         for (size_t i = 0; i < text.plainText_.length(); ++i) {
             char c = text.plainText_[i];
-            s += text.caps_[i] ? std::toupper(c) : c;
+            s += text.caps_[i] ? static_cast<char>(std::toupper(static_cast<unsigned char>(c))) : c;
         }
         return os << s;
     }
@@ -55,7 +55,7 @@ class BetterFormattedText {
     BetterFormattedText(std::string plainText) : plainText_(std::move(plainText)) {}
 
     [[nodiscard]] TextRange& getRange(size_t start, size_t end) {
-        formatting_.emplace_back(TextRange{start, end, false});
+        formatting_.emplace_back(TextRange{.start = start, .end = end, .capitalize = false});
         return *formatting_.rbegin();
     }
 
@@ -65,7 +65,9 @@ class BetterFormattedText {
             char c = text.plainText_[i];
             for (auto& range : text.formatting_) {
                 if (range.covers(i)) {
-                    s += range.capitalize ? std::toupper(c) : c;
+                    s += range.capitalize
+                             ? static_cast<char>(std::toupper(static_cast<unsigned char>(c)))
+                             : c;
                 } else {
                     s += c;
                 }

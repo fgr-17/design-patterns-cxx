@@ -28,7 +28,7 @@ struct Game {  // mediator
 
 struct Creature {
    private:
-    Game& game_;
+    Game& game_;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
     std::string name_;
     int attack_;
     int defense_;

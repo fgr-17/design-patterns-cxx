@@ -45,7 +45,7 @@ struct Command {
     virtual void undo() = 0;
 };
 
-struct BankAccountCommand : Command {
+struct BankAccountCommand final : Command {
     BankAccount& account;
     enum Action { DEPOSIT, WITHDRAW } action;
     unsigned int amount;

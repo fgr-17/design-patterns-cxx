@@ -43,14 +43,21 @@ struct StatQuery {
 };
 
 struct Game {
-    std::vector<Creature*> creatures;
-    boost::signals2::signal<void(StatQuery&)> queries;
-
     Game()
         : defenseModifier_(std::make_unique<GoblinDefenseModifier>(*this)),
           attackModifier_(std::make_unique<GoblinAttackModifier>(*this)) {}
 
+    [[nodiscard]] std::vector<Creature*>& getCreatures() {
+        return creatures_;
+    }
+
+    [[nodiscard]] boost::signals2::signal<void(StatQuery&)>& getQueries() {
+        return queries_;
+    }
+
    private:
+    std::vector<Creature*> creatures_;
+    boost::signals2::signal<void(StatQuery&)> queries_;
     std::unique_ptr<GoblinDefenseModifier> defenseModifier_;
     std::unique_ptr<GoblinAttackModifier> attackModifier_;
 };
@@ -86,13 +93,13 @@ class Goblin : public Creature {
 
     [[nodiscard]] int getAttack() const override {
         StatQuery query(StatQuery::Statistic::attack, getBaseAttack());
-        getGame().queries(query);
+        getGame().getQueries()(query);
         return query.result;
     }
 
     [[nodiscard]] int getDefense() const override {
         StatQuery query(StatQuery::Statistic::defense, getBaseDefense());
-        getGame().queries(query);
+        getGame().getQueries()(query);
         return query.result;
     }
 
@@ -130,9 +137,9 @@ class CreatureModifier {
 class GoblinDefenseModifier : public CreatureModifier {
    public:
     GoblinDefenseModifier(Game& game) {
-        connection_ = game.queries.connect([&](StatQuery& query) {
+        connection_ = game.getQueries().connect([&](StatQuery& query) {
             if (query.statistic == StatQuery::Statistic::defense) {
-                query.result += (modifier * static_cast<int>(game.creatures.size() - 1));
+                query.result += (modifier * static_cast<int>(game.getCreatures().size() - 1));
             }
         });
     }
@@ -154,10 +161,10 @@ class GoblinDefenseModifier : public CreatureModifier {
 class GoblinAttackModifier : public CreatureModifier {
    public:
     GoblinAttackModifier(Game& game) {
-        connection_ = game.queries.connect([&](StatQuery& query) {
+        connection_ = game.getQueries().connect([&](StatQuery& query) {
             if (query.statistic == StatQuery::Statistic::attack) {
                 int goblinKingCount = 0;
-                for (Creature* c : game.creatures) {
+                for (Creature* c : game.getCreatures()) {
                     if (dynamic_cast<GoblinKing*>(c) != nullptr) {
                         ++goblinKingCount;
                     }
@@ -195,14 +202,14 @@ TEST(GoblinTest, TestGoblin) {  // NOLINT
 
     std::cout << "creating goblin" << std::endl;
     Goblin goblin(game);
-    game.creatures.push_back(&goblin);
+    game.getCreatures().push_back(&goblin);
     std::cout << "goblin: " << goblin << std::endl;
     ASSERT_EQ(1, goblin.getAttack());
     ASSERT_EQ(1, goblin.getDefense());
 
     std::cout << "creating goblin2" << std::endl;
     Goblin goblin2(game);
-    game.creatures.push_back(&goblin2);
+    game.getCreatures().push_back(&goblin2);
     std::cout << "gobli2: " << goblin << std::endl;
     std::cout << "goblin2: " << goblin2 << std::endl;
     ASSERT_EQ(1, goblin.getAttack());
@@ -212,7 +219,7 @@ TEST(GoblinTest, TestGoblin) {  // NOLINT
 
     std::cout << "creating goblin king" << std::endl;
     GoblinKing goblinKing(game);
-    game.creatures.push_back(&goblinKing);
+    game.getCreatures().push_back(&goblinKing);
     std::cout << "goblin king: " << goblinKing << std::endl;
     ASSERT_EQ(2, goblin.getAttack());
     ASSERT_EQ(3, goblin.getDefense());

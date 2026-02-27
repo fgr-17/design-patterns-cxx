@@ -29,6 +29,12 @@
 
 struct Renderer {
     [[nodiscard]] virtual std::string render(std::string shapeName) const = 0;
+    virtual ~Renderer() = default;
+    Renderer() = default;
+    Renderer(const Renderer& other) = default;
+    Renderer& operator=(const Renderer& other) = default;
+    Renderer(Renderer&& other) = default;
+    Renderer& operator=(Renderer&& other) = default;
 };
 
 struct VectorRenderer : Renderer {
@@ -65,7 +71,7 @@ struct Shape {
 
    private:
     std::string name_;
-    Renderer& renderer_;
+    Renderer& renderer_;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
 };
 
 struct Triangle : Shape {

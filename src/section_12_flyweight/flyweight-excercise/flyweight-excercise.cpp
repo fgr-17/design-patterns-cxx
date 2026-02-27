@@ -41,7 +41,7 @@ class BetterFormattedText {
     BetterFormattedText(std::string plainText) : plainText_(std::move(plainText)) {}
 
     [[nodiscard]] TextRange& getRange(size_t start, size_t end) {
-        formatting_.emplace_back(TextRange{start, end, false});
+        formatting_.emplace_back(TextRange{.start = start, .end = end, .capitalize = false});
         return *formatting_.rbegin();
     }
 

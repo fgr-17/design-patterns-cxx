@@ -33,15 +33,21 @@ struct BankAccount {
 
 struct Command {
     virtual void call() = 0;
+    virtual ~Command() = default;
+    Command() = default;
+    Command(const Command&) = default;
+    Command(Command&&) = default;
+    Command& operator=(const Command&) = default;
+    Command& operator=(Command&&) = default;
 };
 
 struct BankAccountCommand final : Command {
-    BankAccount& account;
+    BankAccount& account;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
     enum Action { DEPOSIT, WITHDRAW } action;
     unsigned int amount;
 
     BankAccountCommand(BankAccount& account, Action action, unsigned int amount)
-        : account(account), action(action), amount(amount) {}
+        : Command(), account(account), action(action), amount(amount) {}
 
     void call() override {
         switch (action) {

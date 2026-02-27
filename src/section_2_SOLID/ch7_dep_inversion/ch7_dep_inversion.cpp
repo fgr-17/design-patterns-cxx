@@ -49,9 +49,15 @@ struct Person {
 
 struct RelationshipBrowser {
     [[nodiscard]] virtual std::vector<Person> findAllChildrenOf(const std::string& name) const = 0;
+    virtual ~RelationshipBrowser() = default;
+    RelationshipBrowser() = default;
+    RelationshipBrowser(const RelationshipBrowser& other) = default;
+    RelationshipBrowser& operator=(const RelationshipBrowser& other) = default;
+    RelationshipBrowser(RelationshipBrowser&& other) = default;
+    RelationshipBrowser& operator=(RelationshipBrowser&& other) = default;
 };
 
-struct Relationships : RelationshipBrowser {  // low-level module
+struct Relationships final : RelationshipBrowser {  // low-level module
     std::vector<std::tuple<Person, Relationship, Person>> relations;
 
     void addParentAndChild(const Person& parent, const Person& child) {

@@ -64,12 +64,19 @@ struct Game {
 
 struct Creature {
    private:
-    Game& game_;
+    Game& game_;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
     int baseAttack_, baseDefense_;
 
    public:
     Creature(Game& game, int baseAttack, int baseDefense)
         : game_(game), baseAttack_(baseAttack), baseDefense_(baseDefense) {}
+
+    virtual ~Creature() = default;
+    Creature(const Creature&) = delete;
+    Creature(Creature&&) = delete;
+    Creature& operator=(const Creature&) = delete;
+    Creature& operator=(Creature&&) = delete;
+
     [[nodiscard]] virtual int getAttack() const = 0;
     [[nodiscard]] virtual int getDefense() const = 0;
 
@@ -91,6 +98,12 @@ class Goblin : public Creature {
     Goblin(Game& game, int baseAttack, int baseDefense) : Creature(game, baseAttack, baseDefense) {}
     Goblin(Game& game) : Creature(game, 1, 1) {}
 
+    ~Goblin() override = default;
+    Goblin(const Goblin&) = delete;
+    Goblin(Goblin&&) = delete;
+    Goblin& operator=(const Goblin&) = delete;
+    Goblin& operator=(Goblin&&) = delete;
+
     [[nodiscard]] int getAttack() const override {
         StatQuery query(StatQuery::Statistic::attack, getBaseAttack());
         getGame().getQueries()(query);
@@ -109,7 +122,7 @@ class Goblin : public Creature {
     }
 };
 
-class GoblinKing : public Goblin {
+class GoblinKing final : public Goblin {
    public:
     GoblinKing(Game& game) : Goblin(game, 3, 3) {}
 

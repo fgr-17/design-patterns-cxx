@@ -64,7 +64,7 @@ struct P : Tag {
 
 struct IMG : Tag {
     explicit IMG(const std::string url) : Tag{"img", ""} {
-        attributes.emplace_back(std::make_pair("src", std::move(url)));
+        attributes.emplace_back("src", std::move(url));
     }
 };
 

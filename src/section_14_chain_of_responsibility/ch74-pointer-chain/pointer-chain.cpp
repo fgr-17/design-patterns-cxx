@@ -50,11 +50,17 @@ struct Creature {
 };
 
 class CreatureModifier {
-    Creature& creature_;
+    Creature& creature_;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
     CreatureModifier* next_{nullptr};
 
    public:
     CreatureModifier(Creature& creature) : creature_(creature) {}
+    virtual ~CreatureModifier() = default;
+
+    CreatureModifier(const CreatureModifier&) = delete;
+    CreatureModifier(CreatureModifier&&) = delete;
+    CreatureModifier& operator=(const CreatureModifier&) = delete;
+    CreatureModifier& operator=(CreatureModifier&&) = delete;
 
     void add(CreatureModifier* modifier) {
         if (next_) {
@@ -73,7 +79,7 @@ class CreatureModifier {
     }
 };
 
-class DoubleAttackModifier : public CreatureModifier {
+class DoubleAttackModifier final : public CreatureModifier {
    public:
     DoubleAttackModifier(Creature& creature) : CreatureModifier(creature) {}
 
@@ -85,7 +91,7 @@ class DoubleAttackModifier : public CreatureModifier {
     static constexpr int multiplier = 2;
 };
 
-class IncreasedDefenseModifier : public CreatureModifier {
+class IncreasedDefenseModifier final : public CreatureModifier {
    public:
     IncreasedDefenseModifier(Creature& creature) : CreatureModifier(creature) {}
 
@@ -98,7 +104,7 @@ class IncreasedDefenseModifier : public CreatureModifier {
     static constexpr int maxDefense = 2;
 };
 
-class NoBonusesModifier : public CreatureModifier {
+class NoBonusesModifier final : public CreatureModifier {
    public:
     NoBonusesModifier(Creature& creature) : CreatureModifier(creature) {}
 

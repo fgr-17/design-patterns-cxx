@@ -21,16 +21,22 @@ struct Point {
 
 struct Renderer {
     virtual void renderCircle(Point center, float radius) = 0;
+    virtual ~Renderer() = default;
+    Renderer() = default;
+    Renderer(const Renderer& other) = default;
+    Renderer& operator=(const Renderer& other) = default;
+    Renderer(Renderer&& other) = default;
+    Renderer& operator=(Renderer&& other) = default;
 };
 
-struct VectorRenderer : Renderer {
+struct VectorRenderer final : Renderer {
     void renderCircle(Point center, float r) override {
         std::cout << "vectorizing circle of r = " << r << " center: {" << center.x << ", "
                   << center.y << "}" << std::endl;
     }
 };
 
-struct RasterRenderer : Renderer {
+struct RasterRenderer final : Renderer {
     void renderCircle(Point center, float r) override {
         std::cout << "rasterizing circle of r = " << r << " center: {" << center.x << ", "
                   << center.y << "}" << std::endl;
@@ -50,11 +56,16 @@ struct Shape {
    public:
     virtual void draw() = 0;
     virtual void resize(float factor) = 0;
+    virtual ~Shape() = default;
+    Shape(const Shape& other) = delete;
+    Shape& operator=(const Shape& other) = delete;
+    Shape(Shape&& other) = delete;
+    Shape& operator=(Shape&& other) = delete;
 };
 
-struct Circle : Shape {
+struct Circle final : Shape {
     Circle(Renderer& renderer, float x, float y, float r)
-        : Shape(renderer), center{x, y}, radius{r} {}
+        : Shape(renderer), center{.x = x, .y = y}, radius{r} {}
 
     Point center;
     float radius;

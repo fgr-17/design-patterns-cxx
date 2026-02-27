@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM debian:bullseye-slim
+FROM debian:trixie-slim
 
 RUN apt-get update
 
@@ -18,7 +18,6 @@ RUN apt install -y iwyu
 RUN apt install -y libboost-all-dev
 
 RUN apt install -y python3 python3-pip
-RUN pip install cpplint
 
 RUN apt install -y libssl-dev
 RUN apt install -y zlib1g-dev

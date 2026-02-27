@@ -33,9 +33,15 @@ class Rectangle {
     [[nodiscard]] int area() const {
         return width_ * height_;
     }
+
+    virtual ~Rectangle() = default;
+    Rectangle(const Rectangle& other) = default;
+    Rectangle& operator=(const Rectangle& other) = default;
+    Rectangle(Rectangle&& other) = default;
+    Rectangle& operator=(Rectangle&& other) = default;
 };
 
-class Square : public Rectangle {
+class Square final : public Rectangle {
    public:
     explicit Square(int size) : Rectangle(size, size) {}
 

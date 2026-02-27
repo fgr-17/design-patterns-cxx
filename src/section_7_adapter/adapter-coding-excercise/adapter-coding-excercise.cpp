@@ -22,6 +22,13 @@ struct Square {
 };
 
 struct Rectangle {
+    virtual ~Rectangle() = default;
+    Rectangle() = default;
+    Rectangle(const Rectangle& other) = default;
+    Rectangle& operator=(const Rectangle& other) = default;
+    Rectangle(Rectangle&& other) = default;
+    Rectangle& operator=(Rectangle&& other) = default;
+
     [[nodiscard]] virtual int width() const = 0;
     [[nodiscard]] virtual int height() const = 0;
 
@@ -30,11 +37,9 @@ struct Rectangle {
     }
 };
 
-struct SquareToRectangleAdapter : Rectangle {
-    explicit SquareToRectangleAdapter(const Square& square) {
-        width_ = square.side;
-        height_ = square.side;
-    }
+struct SquareToRectangleAdapter final : Rectangle {
+    explicit SquareToRectangleAdapter(const Square& square)
+        : width_(square.side), height_(square.side) {}
 
     int width_;
     int height_;

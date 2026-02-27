@@ -35,7 +35,7 @@ class Multiton {
 
    protected:
     Multiton() = default;
-    virtual ~Multiton() = default;
+    ~Multiton() = default;
 
    private:
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)

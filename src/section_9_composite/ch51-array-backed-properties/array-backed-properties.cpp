@@ -50,7 +50,7 @@ class Creature {
     }
 
     [[nodiscard]] int max() const {
-        return std::max(std::max(strength_, agility_), intelligence_);
+        return std::max({strength_, agility_, intelligence_});
     }
 
    private:
@@ -61,7 +61,7 @@ class Creature {
 class BetterCreature {
    public:
     BetterCreature(std::string name, int strength, int agility, int intelligence)
-        : name_{std::move(name)}, abilities_{} {
+        : name_{std::move(name)} {
         setStrength(strength);
         setAgility(agility);
         setIntelligence(intelligence);
@@ -100,7 +100,7 @@ class BetterCreature {
     }
 
     [[nodiscard]] int max() const {
-        return *std::max_element(abilities_.begin(), abilities_.end());
+        return *std::ranges::max_element(abilities_);
     }
 
     friend std::ostream& operator<<(std::ostream& os, const BetterCreature& obj) {
@@ -118,7 +118,7 @@ class BetterCreature {
    private:
     std::string name_;
     enum Abilities { strength, agility, intelligence, count };
-    std::array<int, count> abilities_;
+    std::array<int, count> abilities_{};
 };
 
 /**

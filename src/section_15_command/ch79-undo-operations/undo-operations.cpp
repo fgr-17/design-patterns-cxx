@@ -38,6 +38,11 @@ struct Command {
     bool succeeded{false};
 
     Command() = default;
+    virtual ~Command() = default;
+    Command(const Command&) = default;
+    Command(Command&&) = default;
+    Command& operator=(const Command&) = default;
+    Command& operator=(Command&&) = default;
     Command(bool succeeded) : succeeded(succeeded) {}
 
     virtual void call() = 0;
@@ -45,7 +50,7 @@ struct Command {
 };
 
 struct BankAccountCommand final : Command {
-    BankAccount& account;
+    BankAccount& account;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
     enum Action { DEPOSIT, WITHDRAW } action;
     unsigned int amount;
 
@@ -121,8 +126,12 @@ int main() {
             cmd.call();
         }
 
-        for (auto it = cmds.rbegin(); it != cmds.rend(); ++it) {
-            it->undo();
+        // for (auto it = cmds.rbegin(); it != cmds.rend(); ++it) {
+        //     it->undo();
+        // }
+
+        for (auto cmd : cmds) {
+            cmd.undo();
         }
 
         std::cout << account << std::endl;

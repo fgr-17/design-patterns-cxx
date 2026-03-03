@@ -6,7 +6,7 @@ add_executable(${app_name} ${app_name}.cpp)
 # C++20 coroutines: <coroutine> needs -fcoroutines (GCC 10, Clang)
 # Disable clang-tidy/iwyu: they can fail on coroutine code
 set_target_properties(${app_name} PROPERTIES
-  CXX_STANDARD 20
+  CXX_STANDARD 23
   CXX_CLANG_TIDY ""
   CXX_INCLUDE_WHAT_YOU_USE ""
 )

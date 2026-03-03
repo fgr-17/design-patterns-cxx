@@ -4,6 +4,8 @@
  *    @author rouxfederico@gmail.com
  */
 
+// #include <coroutine>
+#include <generator>
 #include <iostream>
 #include <string>
 #include <utility>
@@ -129,6 +131,37 @@ struct BinaryTree {
 
     iterator end() {
         return iterator{nullptr};
+    }
+
+    class PreOrderTraversal {
+        BinaryTree<T>* tree;  // NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
+
+       public:
+        PreOrderTraversal(BinaryTree<T>* tree) : tree(tree) {}
+
+        iterator begin() {
+            return tree->begin();
+        }
+        iterator end() {
+            return tree->end();
+        }
+    } preOrder;
+
+    std::generator<Node<T>&> postOrder() {
+        return postOrderImpl(root);
+    }
+
+   private:
+    std::generator<Node<T>&> postOrderImpl(Node<T>* node) {
+        if (node) {
+            for (auto& n : postOrderImpl(node->left)) {
+                co_yield n;
+            }
+            for (auto& n : postOrderImpl(node->right)) {
+                co_yield n;
+            }
+            co_yield *node;
+        }
     }
 };
 

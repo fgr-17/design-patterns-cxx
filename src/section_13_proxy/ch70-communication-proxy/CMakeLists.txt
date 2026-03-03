@@ -40,6 +40,8 @@ set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE ${SAVED_IWYU})
 set(CMAKE_CXX_STANDARD ${SAVED_STANDARD})
 
 add_executable(${app_name} ${app_name}.cpp)
-target_compile_options(${app_name} PRIVATE -Wno-deprecated -Wno-dev)
+
+set_target_properties(${app_name} PROPERTIES CXX_CLANG_TIDY "")
+target_compile_options(${app_name} PRIVATE -Wno-deprecated)
 target_include_directories(${app_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(${app_name} PRIVATE cpprest)

@@ -11,14 +11,13 @@
 #include <cstddef>
 #include <iostream>
 #include <locale>
-#include <memory>  // for make_shared
 #include <string>
 
-#include "cpprest/base_uri.h"     // for uri
-#include "cpprest/http_msg.h"     // for http_response, methods, met...
-#include "cpprest/uri_builder.h"  // for uri_builder
-#include "pplx/pplx.h"            // for _Interruption_exception
-#include "pplx/pplxtasks.h"       // for task
+#include "cpprest/base_uri.h"     // NOLINT
+#include "cpprest/http_msg.h"     // NOLINT
+#include "cpprest/uri_builder.h"  // NOLINT
+#include "pplx/pplx.h"            // NOLINT
+#include "pplx/pplxtasks.h"       // NOLINT
 
 static std::string wstringToUtf8(const std::wstring& wstr) {
     std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;

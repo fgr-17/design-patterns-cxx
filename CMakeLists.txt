@@ -116,4 +116,5 @@ add_subdirectory(src/section_17_iterator/ch88-std-iterators)
 add_subdirectory(src/section_17_iterator/ch89-binary-tree-iterator)
 add_subdirectory(src/section_17_iterator/ch90-tree-iterator-coroutines)
 add_subdirectory(src/section_17_iterator/ch91-boost-iterator-facade)
+add_subdirectory(src/section_17_iterator/iterator-excercise)
 

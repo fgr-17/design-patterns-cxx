@@ -22,7 +22,9 @@ RUN apt install -y python3 python3-pip
 RUN apt install -y libssl-dev
 RUN apt install -y zlib1g-dev
 
-RUN printf "\nalias ls='ls --color=auto'\n" >> ~/.bashrc
-RUN printf "\nalias ll='ls -alF'\n" >> ~/.bashrc
+RUN printf "\nalias ls='ls --color=auto'\nalias ll='ls -alF'\n" >> /etc/bash.bashrc
+
+RUN groupadd -g 1000 dev \
+    && useradd -m -u 1000 -g dev -s /bin/bash -c "Dev User" dev
 
 WORKDIR /workspace

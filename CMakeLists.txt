@@ -118,3 +118,5 @@ add_subdirectory(src/section_17_iterator/ch90-tree-iterator-coroutines)
 add_subdirectory(src/section_17_iterator/ch91-boost-iterator-facade)
 add_subdirectory(src/section_17_iterator/iterator-excercise)
 
+add_subdirectory(src/section_18_mediator/ch94-chat-room)
+

@@ -122,3 +122,5 @@ add_subdirectory(src/section_18_mediator/ch94-chat-room)
 add_subdirectory(src/section_18_mediator/ch95-event-broker)
 add_subdirectory(src/section_18_mediator/mediator-excercise)
 
+add_subdirectory(src/section_19_memento/ch98-memento)
+

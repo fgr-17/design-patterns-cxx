@@ -27,8 +27,13 @@ file(GLOB_RECURSE ALL_SOURCE_FILES
 )
 
 add_custom_target(fix
+    COMMAND ${CMAKE_SOURCE_DIR}/scripts/format-modified.sh
+    COMMENT "Running clang-format on modified files..."
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+add_custom_target(fix-all
     COMMAND clang-format -i ${ALL_SOURCE_FILES}
-    COMMENT "Running clang-format to fix formatting..."
+    COMMENT "Running clang-format on all source files..."
 )
 
 add_subdirectory(test)

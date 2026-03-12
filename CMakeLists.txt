@@ -128,4 +128,5 @@ add_subdirectory(src/section_18_mediator/ch95-event-broker)
 add_subdirectory(src/section_18_mediator/mediator-excercise)
 
 add_subdirectory(src/section_19_memento/ch98-memento)
+add_subdirectory(src/section_19_memento/ch99-undo-and-redo)
 

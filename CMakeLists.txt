@@ -130,4 +130,5 @@ add_subdirectory(src/section_18_mediator/mediator-excercise)
 add_subdirectory(src/section_19_memento/ch98-memento)
 add_subdirectory(src/section_19_memento/ch99-undo-and-redo)
 add_subdirectory(src/section_19_memento/ch100-automatic-memento)
+add_subdirectory(src/section_19_memento/memento-excercise)
 

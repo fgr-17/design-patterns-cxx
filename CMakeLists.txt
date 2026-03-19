@@ -135,4 +135,5 @@ add_subdirectory(src/section_19_memento/memento-excercise)
 add_subdirectory(src/section_20_observer/ch103-observer)
 add_subdirectory(src/section_20_observer/ch104-observable)
 add_subdirectory(src/section_20_observer/ch105-observable-boost)
+add_subdirectory(src/section_20_observer/ch106-deps-problem)
 

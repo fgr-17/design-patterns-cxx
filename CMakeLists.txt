@@ -137,4 +137,5 @@ add_subdirectory(src/section_20_observer/ch104-observable)
 add_subdirectory(src/section_20_observer/ch105-observable-boost)
 add_subdirectory(src/section_20_observer/ch106-deps-problem)
 add_subdirectory(src/section_20_observer/ch107-thread-safety-reentrancy)
+add_subdirectory(src/section_20_observer/observer-excercise)
 

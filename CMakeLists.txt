@@ -139,3 +139,5 @@ add_subdirectory(src/section_20_observer/ch106-deps-problem)
 add_subdirectory(src/section_20_observer/ch107-thread-safety-reentrancy)
 add_subdirectory(src/section_20_observer/observer-excercise)
 
+add_subdirectory(src/section_21_state/ch110-classic-state-impl)
+

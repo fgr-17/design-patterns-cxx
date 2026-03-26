@@ -141,4 +141,5 @@ add_subdirectory(src/section_20_observer/observer-excercise)
 
 add_subdirectory(src/section_21_state/ch110-classic-state-impl)
 add_subdirectory(src/section_21_state/ch111-handmade-fsm)
+add_subdirectory(src/section_21_state/ch112-boost-msm)
 

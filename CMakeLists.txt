@@ -144,3 +144,5 @@ add_subdirectory(src/section_21_state/ch111-handmade-fsm)
 add_subdirectory(src/section_21_state/ch112-boost-msm)
 add_subdirectory(src/section_21_state/state-excercise)
 
+add_subdirectory(src/section_22_strategy/ch115-dynamic-strategy)
+

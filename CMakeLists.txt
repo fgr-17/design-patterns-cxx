@@ -146,4 +146,5 @@ add_subdirectory(src/section_21_state/state-excercise)
 
 add_subdirectory(src/section_22_strategy/ch115-dynamic-strategy)
 add_subdirectory(src/section_22_strategy/ch116-static-strategy)
+add_subdirectory(src/section_22_strategy/strategy-excercise)
 

@@ -149,4 +149,5 @@ add_subdirectory(src/section_22_strategy/ch116-static-strategy)
 add_subdirectory(src/section_22_strategy/strategy-excercise)
 
 add_subdirectory(src/section_23_template_method/ch119-template-method)
+add_subdirectory(src/section_23_template_method/template-method-excercise)
 

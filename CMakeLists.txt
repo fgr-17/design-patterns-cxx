@@ -152,4 +152,5 @@ add_subdirectory(src/section_23_template_method/ch119-template-method)
 add_subdirectory(src/section_23_template_method/template-method-excercise)
 
 add_subdirectory(src/section_24_visitor/ch122-intrusive-visitor)
+add_subdirectory(src/section_24_visitor/ch123-reflective-visitor)
 

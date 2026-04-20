@@ -155,4 +155,5 @@ add_subdirectory(src/section_24_visitor/ch122-intrusive-visitor)
 add_subdirectory(src/section_24_visitor/ch123-reflective-visitor)
 add_subdirectory(src/section_24_visitor/ch124-classic-visitor)
 add_subdirectory(src/section_24_visitor/ch125-acyclic-visitor)
-
+add_subdirectory(src/section_24_visitor/ch126-multimethods)
+add_subdirectory(src/section_24_visitor/ch127-variant-stdvisit)

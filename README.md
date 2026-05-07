@@ -1,5 +1,4 @@
-# C++ Repository Template
-
+# Design Patterns in modern C++
 **Author:** 
 
 # Repo information:
